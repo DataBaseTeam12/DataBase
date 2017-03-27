@@ -1,0 +1,105 @@
+header {
+    background-color: #c8102e;
+    clear: left;
+	font-family: sans-serif;
+}
+
+
+footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    padding: 5px;
+    color: white;
+    background-color: #54585A;
+    clear: left;
+    text-align: center;
+}
+
+.main {
+    padding: 15px;
+    color: white;
+    text-align: center;
+}
+
+.subhead {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 20px;
+    color: white;
+    background-color: #960C22;
+    clear: left;
+    text-align: right;
+}
+
+h1 {
+    font-family: sans-serif;
+    text-decoration: underline;
+    margin-bottom: 0;
+}
+
+h2 {
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 100;
+
+}
+h3 {
+    font-size: 1.5em;
+    font-weight: normal;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 0;
+}
+
+button {
+    font-size: 18px;
+    width: 100%;
+    background-color: #c8102e;
+    color: white;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+form {
+    border: 1px solid #f1f1f1;
+    padding-left: 3px;
+    margin: auto;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+input[type=text], input[type=password] {
+width: 100%;
+border: 1px solid #a6a6a0;
+box-sizing: border-box;
+margin-right: 0;
+height: 25px;
+padding: 3px 7px;
+}
+
+body
+{
+    height: 100%;
+}
+
+.mainbox
+{
+    height: 100%;
+    margin:auto;
+    box-sizing: border-box;
+}
+
+.innerbox
+{
+    min-height: 350px;
+    width: 340px;
+    margin:auto;
+    box-sizing: border-box;
+}
+
+label {
+    padding-left: 4px;
+    padding-bottom: 4px;
+}
