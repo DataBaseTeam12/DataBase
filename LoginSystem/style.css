@@ -54,6 +54,7 @@ h3 {
 
 button 
 {
+    box-sizing: border-box;
     font-size: 18px;
     width: 100%;
     background-color: #c8102e;
@@ -64,10 +65,9 @@ button
 
 form 
 {
-    border: 1px solid #f1f1f1;
+    border: 2px solid #f1f1f1;
     padding-left: 3px;
-    margin: auto;
-    margin-top: 20px;
+    margin-top: 10px;
     font-family: Arial, sans-serif;
     box-sizing: border-box;
 }
@@ -82,21 +82,30 @@ height: 25px;
 padding: 3px 7px;
 }
 
+html
+{   
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
 body
 {
+    margin: 0;
+    width: 100%;
     height: 100%;
 }
 
-.mainbox
+.container
 {
+    margin-top: 70px;
     height: 100%;
-    margin:auto;
     box-sizing: border-box;
 }
 
 .innerbox
 {
-    min-height: 350px;
+    min-height: 30px;
     width: 340px;
     margin:auto;
     box-sizing: border-box;
@@ -110,7 +119,14 @@ label
 
 .divider 
 {
+    margin-bottom: 5px;
+    margin-top: 25px;
     text-align: center;
+}
+
+.divider hr
+{
+    width: 30%;
 }
 
 .left
@@ -118,7 +134,22 @@ label
     float: left
 }
 
+.registerbutton
+{
+    box-sizing: border-box;
+    font-size: 16px;
+    width: 90%;
+    background-color: whitesmoke;
+    color: crimson;
+    box-sizing: border-box;
+    cursor: pointer;
+}
 .right
 {
     float: right
+}
+
+.regbox
+{
+    text-align: center;
 }
