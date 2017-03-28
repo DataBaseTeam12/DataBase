@@ -11,23 +11,20 @@ function checkBook(){
 
 
      });
-   
+
         return check;
 }
 
 
 
 function checkDigital(){
+
       var check = true;
      $('#digitalForm .check ').each(function(){
            if(!$(this).val() ){
                check = false;
                $(this).addClass("highLight");}
-
-
-
-
-     });
+           });
 
   return check;
 }

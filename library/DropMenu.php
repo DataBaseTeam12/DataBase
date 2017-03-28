@@ -148,7 +148,7 @@ function MediaAttributes(){
          </div>
          <div class="form-group">
            <label for="published Date">Date Published:</label>
-            <input type=date   class="form-control check" id="date"  name="date" min="1000-01-01"><br>
+            <input type="number"  class="form-control check" id="date"  name="date" min="1500"><br>
          </div>
          <div class="form-group">
            <label for="num copies">number copies:</label>
@@ -161,7 +161,7 @@ function MediaAttributes(){
               <option>Everyone</option>
               <option>Adult</option>
               <option>Teen</option>
-              <option>Kid</option>
+              <option>children</option>
               </select>
          </div>';
        return $var;
