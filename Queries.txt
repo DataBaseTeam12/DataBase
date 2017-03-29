@@ -1,0 +1,123 @@
+*****MEDIA*****
+
+//DISPLAY ALL MEDIA
+SELECT title, first_name, last_name, genre, publisher, 
+	published_date, audience, language
+FROM Author_Media_View;
+
+//SELECT MEDIA BY Author
+SELECT Media.title, Author.first_name, Author.last_name, 
+	Media.genre, Media.publisher, Media.published_date,
+	Media.audience, Media.language
+FROM Media
+RIGHT JOIN Author ON Media.id = Author.media_id
+WHERE Author.first_name = 'first name' 
+AND Author.last_name = 'last name';
+
+
+
+//There are views for each type of media for easier SELECT statements
+//(Full_Book_View, Full_Cassette_View, Full_CD_View, 
+//Full_DVD_View, Full_VHS_View)
+
+*****BOOKS*****
+
+//DISPLAY ALL BOOKS
+SELECT title, first_name, last_name, genre, publisher, 
+	published_date, audience, language, edition, type, num_pages
+FROM Full_Book_View;
+
+//DISPLAY BOOKS BY TITLE
+SELECT title, first_name, last_name, genre, publisher, published_date, audience, language, edition, 
+TYPE , num_pages
+FROM Full_Book_View
+WHERE title =  'title';
+
+//DISPLAY BOOKS BY AUTHOR FIRST AND LAST NAME
+SELECT title, first_name, last_name, genre, publisher, published_date, audience, language, edition, 
+TYPE , num_pages
+FROM Full_Book_View
+WHERE first_name = 'first'
+AND last_name =  'last';
+
+//DISPLAY BOOKS BY PUBLISHER
+SELECT title, first_name, last_name, genre, publisher, published_date, audience, language, edition, 
+TYPE , num_pages
+FROM Full_Book_View
+WHERE publisher = 'publisher';
+
+//DISPLAY BOOKS BY YEAR PUBLISHED
+SELECT title, first_name, last_name, genre, publisher, published_date, audience, language, edition, 
+TYPE , num_pages
+FROM Full_Book_View
+WHERE published_date = 'year';
+
+//DISPLAY BOOKS BY AUDIENCE
+SELECT title, first_name, last_name, genre, publisher, published_date, audience, language, edition, 
+TYPE , num_pages
+FROM Full_Book_View
+WHERE audience = 'audience';
+
+//DISPLAY BOOKS BY LANGUAGE
+SELECT title, first_name, last_name, genre, publisher, published_date, audience, language, edition, 
+TYPE , num_pages
+FROM Full_Book_View
+WHERE language = 'language';
+
+
+//SELECT BY Title
+
+SELECT title, first_name, last_name, genre, publisher, 
+	published_date, audience, language
+FROM Author_Media_View
+WHERE title='title';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
