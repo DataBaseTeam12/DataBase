@@ -32,6 +32,12 @@ TYPE , num_pages
 FROM Full_Book_View
 WHERE title =  'title';
 
+//DISPLAY BOOKS BY GENRE
+SELECT title, first_name, last_name, genre, publisher, published_date, audience, language, edition, 
+TYPE , num_pages
+FROM Full_Book_View
+WHERE genre = 'genre';
+
 //DISPLAY BOOKS BY AUTHOR FIRST AND LAST NAME
 SELECT title, first_name, last_name, genre, publisher, published_date, audience, language, edition, 
 TYPE , num_pages
@@ -69,57 +75,210 @@ WHERE language = 'language';
 //DISPLAY ALL CASSETTES
 SELECT title, first_name, last_name, genre, publisher, published_date, audience, language, num_tracks, 
 producer , total_runtime
-FROM Full_Cassette_view
+FROM Full_Cassette_View;
 
 //DISPLAY CASSETTES BY TITLE
 SELECT title, first_name, last_name, genre, publisher, published_date, audience, language, num_tracks, 
 producer , total_runtime
-FROM Full_Cassette_view
+FROM Full_Cassette_View
 WHERE title =  'title';
+
+//DISPLAY BOOKS BY GENRE
+SELECT title, first_name, last_name, genre, publisher, published_date, audience, language, edition, 
+TYPE , num_pages
+FROM Full_Cassette_View
+WHERE genre = 'genre';
 
 //DISPLAY CASSETTES BY ARTIST/AUTHOR FIRST AND LAST NAME
 SELECT title, first_name, last_name, genre, publisher, published_date, audience, language, num_tracks, 
 producer , total_runtime
-FROM Full_Cassette_view
+FROM Full_Cassette_View
 WHERE first_name = 'first'
 AND last_name =  'last';
 
 //DISPLAY CASSETTES BY ARTIST/BAND NAME
 SELECT title, first_name, genre, publisher, published_date, audience, language, num_tracks, 
 producer , total_runtime
-FROM Full_Cassette_view
+FROM Full_Cassette_View
 WHERE first_name = 'band name’;
 
 //DISPLAY CASSETTES BY PUBLISHER
 SELECT title, first_name, last_name, genre, publisher, published_date, audience, language, num_tracks, 
 producer , total_runtime
-FROM Full_Cassette_view
+FROM Full_Cassette_View
 WHERE publisher = 'publisher';
 
 //DISPLAY CASSETTES BY YEAR PUBLISHED
 SELECT title, first_name, last_name, genre, publisher, published_date, audience, language, num_tracks, 
 producer , total_runtime
-FROM Full_Cassette_view
+FROM Full_Cassette_View
 WHERE published_date = 'year';
 
 //DISPLAY CASSETTES BY AUDIENCE
 SELECT title, first_name, last_name, genre, publisher, published_date, audience, language, num_tracks, 
 producer , total_runtime
-FROM Full_Cassette_view
+FROM Full_Cassette_View
 WHERE audience = 'audience';
 
 //DISPLAY CASSETTES BY LANGUAGE
 SELECT title, first_name, last_name, genre, publisher, published_date, audience, language, num_tracks, 
 producer , total_runtime
-FROM Full_Cassette_view
+FROM Full_Cassette_View
 WHERE language = 'language';
 
-//SELECT BY Title
+//DISPLAY CASSETTES BY PRODUCER
+SELECT title, first_name, last_name, genre, publisher, published_date, audience, language, num_tracks, 
+producer , total_runtime
+FROM Full_Cassette_View
+WHERE producer = 'producer';
 
-SELECT title, first_name, last_name, genre, publisher, 
-	published_date, audience, language
-FROM Author_Media_View
-WHERE title='title';
+
+*****CD’S*****
+
+//DISPLAY ALL CD’S
+SELECT title, first_name, last_name, genre, publisher, published_date, audience, language, num_tracks, 
+producer , total_runtime
+FROM Full_CD_View
+
+//DISPLAY CD’S BY TITLE
+SELECT title, first_name, last_name, genre, publisher, published_date, audience, language, num_tracks, 
+producer , total_runtime
+FROM Full_CD_View
+WHERE title =  'title';
+
+//DISPLAY CD’S BY GENRE
+SELECT title, first_name, last_name, genre, publisher, published_date, audience, language, num_tracks, 
+producer , total_runtime
+FROM Full_CD_View
+WHERE genre = 'genre';
+
+//DISPLAY CD’S BY ARTIST/AUTHOR FIRST AND LAST NAME
+SELECT title, first_name, last_name, genre, publisher, published_date, audience, language, num_tracks, 
+producer , total_runtime
+FROM Full_CD_View
+WHERE first_name = 'first'
+AND last_name =  'last';
+
+//DISPLAY CD’S BY ARTIST/BAND NAME
+SELECT title, first_name, genre, publisher, published_date, audience, language, num_tracks, 
+producer , total_runtime
+FROM Full_CD_View
+WHERE first_name = 'band name’;
+
+//DISPLAY CD’S BY PUBLISHER
+SELECT title, first_name, last_name, genre, publisher, published_date, audience, language, num_tracks, 
+producer , total_runtime
+FROM Full_CD_View
+WHERE publisher = 'publisher';
+
+//DISPLAY CD’S BY YEAR PUBLISHED
+SELECT title, first_name, last_name, genre, publisher, published_date, audience, language, num_tracks, 
+producer , total_runtime
+FROM Full_CD_View
+WHERE published_date = 'year';
+
+//DISPLAY CD’S BY AUDIENCE
+SELECT title, first_name, last_name, genre, publisher, published_date, audience, language, num_tracks, 
+producer , total_runtime
+FROM Full_CD_View
+WHERE audience = 'audience';
+
+//DISPLAY CD’S BY LANGUAGE
+SELECT title, first_name, last_name, genre, publisher, published_date, audience, language, num_tracks, 
+producer , total_runtime
+FROM Full_CD_View
+WHERE language = 'language';
+
+//DISPLAY CD’S BY PRODUCER
+SELECT title, first_name, last_name, genre, publisher, published_date, audience, language, num_tracks, 
+producer , total_runtime
+FROM Full_CD_View
+WHERE producer = 'producer';
+
+
+*****DVD’S*****
+
+//DISPLAY ALL DVD’S
+SELECT title, genre, audience, director, producer, total_runtime, published_date,  language
+FROM Full_DVD_View
+
+//DISPLAY DVD’S BY TITLE
+SELECT title, genre, audience, director, producer, total_runtime, published_date,  language
+FROM Full_DVD_View
+WHERE title = 'title';
+
+//DISPLAY DVD’S BY GENRE
+SELECT title, genre, audience, director, producer, total_runtime, published_date,  language
+FROM Full_DVD_View
+WHERE genre = 'genre';
+
+//DISPLAY DVD’S BY AUDIENCE
+SELECT title, genre, audience, director, producer, total_runtime, published_date,  language
+FROM Full_DVD_View
+WHERE audience = 'audience';
+
+//DISPLAY DVD’S BY DIRECTOR
+SELECT title, genre, audience, director, producer, total_runtime, published_date,  language
+FROM Full_DVD_View
+WHERE director = 'director';
+
+//DISPLAY DVD’S BY PRODUCER
+SELECT title, genre, audience, director, producer, total_runtime, published_date,  language
+FROM Full_DVD_View
+WHERE producer = 'producer';
+
+//DISPLAY DVD’S BY YEAR PUBLISHED
+SELECT title, genre, audience, director, producer, total_runtime, published_date,  language
+FROM Full_DVD_View
+WHERE published_date ='year';
+
+//DISPLAY DVD’S BY LANGUAGE
+SELECT title, genre, audience, director, producer, total_runtime, published_date,  language
+FROM Full_DVD_View
+WHERE language = 'language';
+
+
+*****VHS*****
+
+//DISPLAY ALL VHS
+SELECT title, genre, audience, director, producer, total_runtime, published_date,  language
+FROM Full_VHS_View;
+
+//DISPLAY VHS BY TITLE
+SELECT title, genre, audience, director, producer, total_runtime, published_date,  language
+FROM Full_VHS_View
+WHERE title = 'title';
+
+//DISPLAY VHS BY GENRE
+SELECT title, genre, audience, director, producer, total_runtime, published_date,  language
+FROM Full_VHS_View
+WHERE genre = 'genre';
+
+//DISPLAY VHS BY AUDIENCE
+SELECT title, genre, audience, director, producer, total_runtime, published_date,  language
+FROM Full_VHS_View
+WHERE audience = 'audience';
+
+//DISPLAY VHS BY DIRECTOR
+SELECT title, genre, audience, director, producer, total_runtime, published_date,  language
+FROM Full_VHS_View
+WHERE director = 'director';
+
+//DISPLAY VHS BY PRODUCER
+SELECT title, genre, audience, director, producer, total_runtime, published_date,  language
+FROM Full_VHS_View
+WHERE producer = 'producer';
+
+//DISPLAY VHS BY YEAR PUBLISHED
+SELECT title, genre, audience, director, producer, total_runtime, published_date,  language
+FROM Full_VHS_View
+WHERE published_date ='year';
+
+//DISPLAY VHS BY LANGUAGE
+SELECT title, genre, audience, director, producer, total_runtime, published_date,  language
+FROM Full_VHS_View
+WHERE language = 'language';
+
 
 
 
