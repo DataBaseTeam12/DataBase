@@ -107,10 +107,10 @@ header {
                <label for="type">Digital type:</label>
                 <select class="form-control check" id="digitalType" name="digitalType">
                   <option value=""> </option>
-                 <option value="dvd">DVD</option>
-                 <option value="cd">CD</option>
-                 <option value="cassette">Cassette</option>
-                  <option value="vhs">VHS</option>
+                 <option value="DVD">DVD</option>
+                 <option value="CD">CD</option>
+                 <option value="Cassette">Cassette</option>
+                  <option value="VHS">VHS</option>
 
                </select>
 
@@ -124,7 +124,7 @@ header {
              </div>
              <div class="form-group">
                <label for="genre">genre:</label>
-               <?=genreList()?>
+               <?=genreList2()?>
              </div>
              <div class="form-group">
                <label for="producer">producer:</label>
@@ -156,7 +156,7 @@ header {
 
                     var value =$("#digitalType :selected").attr('value');
 
-                       if(value =="cassette"||value =="cd"){
+                       if(value =="Cassette"||value =="CD"){
 
            $("#digitalForm").append('<div class="form-group" id="tracks"><label for="numtracks">number of tracks:</label><input type="number" min="1" class="form-control num" id="numtracks"  name="track" placeholder="Enter the number of tracks"></div> ');
            $('#addDigitalbtn').insertAfter('#tracks');
@@ -189,6 +189,7 @@ header {
 $('#addBookbtn').click(function() {
      if(checkBook()){
        addBook();
+       $('#bookForm').trigger('reset');
      }
 
 
@@ -198,12 +199,14 @@ $('#addDigitalbtn').click(function() {
     if( checkDigital()){
 
          addDigital();
+           $('#digitalForm').trigger('reset');
     }
 
 });
 $('#addLaptopbtn').click(function() {
     if(checkLaptop()){
        addLaptop();
+         $('#LaptopForm').trigger('reset');
     }
 
 });

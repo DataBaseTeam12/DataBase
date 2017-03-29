@@ -1,4 +1,4 @@
-function addLaptop(){
+ function addLaptop(){
   var data = $('#laptop').val();
   var type = "laptop";
   var xmlhttp = new XMLHttpRequest();
