@@ -215,6 +215,10 @@ $('.check').on('click' ,(function(){
 
     $(this).removeClass("highLight");
 }));
+$('.num').on('click' ,(function(){
+
+    $(this).removeClass("highLight");
+}));
 
 </script>
 </html>

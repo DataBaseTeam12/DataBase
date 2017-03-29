@@ -11,7 +11,7 @@ function languageList(){
   <option value="Bulgarian">Bulgarian</option>
   <option value="Catalan">Catalan</option>
   <option value="Cambodian">Cambodian</option>
-  <option value="Chinese (Mandarin)">Chinese (Mandarin)</option>
+  <option value="Chinese">Chinese (Mandarin)</option>
   <option value="Croation">Croation</option>
   <option value="Czech">Czech</option>
   <option value="Danish">Danish</option>
@@ -181,7 +181,7 @@ function MediaAttributes(){
          </div>
          <div class="form-group">
            <label for="published Date">Publication Year:</label>
-            <input type="number"  class="form-control check" id="date"  name="date" min="1500"><br>
+            <input type="number"  class="form-control check year" id="date"  name="date" min="1500"><br>
          </div>
          <div class="form-group">
            <label for="num copies">number copies:</label>
