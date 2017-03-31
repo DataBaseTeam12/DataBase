@@ -72,6 +72,15 @@ form
     box-sizing: border-box;
 }
 
+.form2
+{
+    border: 2px solid #f1f1f1;
+    padding: 10px;
+    margin-top: 10px;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
 input[type=text], input[type=password] 
 {
 width: 100%;
@@ -109,6 +118,15 @@ body
     width: 340px;
     margin:auto;
     box-sizing: border-box;
+}
+
+.innerboxForgotpassword
+{
+    min-height: 60px;
+    width: 450px;
+    margin:auto;
+    box-sizing: border-box;
+
 }
 
 label 

@@ -41,7 +41,6 @@ requrie 'connectDB.php';
 					<label>Password:</label><br>
 					<input type="password" name="password">
                     <span class="right">
-                    <a href="#">Forgot your Password?</a>
                     </span>
 					<br>
 				</p>
