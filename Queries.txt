@@ -24,6 +24,7 @@ AND Author.last_name = 'last name';
 //(Full_Book_View, Full_Cassette_View, Full_CD_View, 
 //Full_DVD_View, Full_VHS_View)
 
+
 *****BOOKS*****
 
 //DISPLAY ALL BOOKS
@@ -205,7 +206,8 @@ FROM Full_CD_View
 WHERE language = 'language';
 
 //DISPLAY CD’S BY PRODUCER
-
+SELECT title, first_name, genre, publisher, published_date, audience, language, num_tracks, 
+producer , total_runtime
 FROM Full_CD_View
 WHERE producer = 'producer';
 
