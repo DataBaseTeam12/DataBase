@@ -11,7 +11,7 @@ function languageList(){
   <option value="Bulgarian">Bulgarian</option>
   <option value="Catalan">Catalan</option>
   <option value="Cambodian">Cambodian</option>
-  <option value="Chinese (Mandarin)">Chinese (Mandarin)</option>
+  <option value="Chinese">Chinese (Mandarin)</option>
   <option value="Croation">Croation</option>
   <option value="Czech">Czech</option>
   <option value="Danish">Danish</option>
@@ -81,7 +81,8 @@ return $list;
 function alphabetLetter(){
   $list = '
   <select class="form-control" id="initial" name="initial" >
-  <option value="A ">A</option>
+  <option value="">none</option>
+  <option value="A">A</option>
   <option value="B>B</option>
   <option value="C">C</option>
   <option value="D">D</option>
@@ -133,7 +134,39 @@ function genreList(){
      <option>comics</option>
       <option>fantasy</option>
       <option>Law</option>
-          <option>fantasy</option>
+     <option>fantasy</option>
+    <option>Animation</option>
+     <option>other</option>
+     </select>';
+     return $var;
+}
+function genreList2(){
+  $var ='<select class="form-control" id="genre" name="genre">
+     <option>Science fiction</option>
+     <option>Drama</option>
+     <option>Action</option>
+     <option>Romance</option>
+     <option>Mystery</option>
+     <option>Horror</option>
+     <option>Guide</option>
+     <option>Health</option>
+     <option>Travel</option>
+     <option>Science</option>
+     <option>Children</option>
+     <option>Art</option>
+     <option>Religion</option>
+     <option>History</option>
+     <option>Biography</option>
+       <option>Pop</option>
+         <option>Rock</option>
+           <option>Country</option>
+             <option>Jazz</option>
+               <option>classical</option>
+                 <option>Rap</option>
+                   <option>HipHop</option>
+     <option>fantasy</option>
+    <option>Animation</option>
+     <option>other</option>
      </select>';
      return $var;
 }
@@ -143,12 +176,12 @@ function MediaAttributes(){
            <input type="text" class="form-control check  " id="Title" name="title" placeholder="enter title">
          </div>
          <div class="form-group">
-           <label for="publisher">publisher:</label>
+           <label for="publisher">Publisher:</label>
            <input type="text" class="form-control check" id="publisher" name="publisher" placeholder="Enter publisher">
          </div>
          <div class="form-group">
-           <label for="published Date">Date Published:</label>
-            <input type=date   class="form-control check" id="date"  name="date" min="1000-01-01"><br>
+           <label for="published Date">Publication Year:</label>
+            <input type="number"  class="form-control check year" id="date"  name="date" min="1500"><br>
          </div>
          <div class="form-group">
            <label for="num copies">number copies:</label>
@@ -156,12 +189,12 @@ function MediaAttributes(){
 
 
          <div class="form-group">
-           <label for="audience">audience:</label>
+           <label for="audience">Audience:</label>
            <select class="form-control check" id="audience" name="audience">
               <option>Everyone</option>
               <option>Adult</option>
               <option>Teen</option>
-              <option>Kid</option>
+              <option>children</option>
               </select>
          </div>';
        return $var;

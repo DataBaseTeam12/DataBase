@@ -105,7 +105,7 @@ header {
           <form class="form-inline" id ="digitalForm">
              <div class="form-group">
                <label for="type">Digital type:</label>
-                <select class="form-control check" id="digitalType">
+                <select class="form-control check" id="digitalType" name="digitalType">
                   <option value=""> </option>
                  <option value="DVD">DVD</option>
                  <option value="CD">CD</option>
@@ -124,33 +124,47 @@ header {
              </div>
              <div class="form-group">
                <label for="genre">genre:</label>
-               <?=genreList()?>
+               <?=genreList2()?>
              </div>
              <div class="form-group">
                <label for="producer">producer:</label>
-               <input type="text" class="form-control check" id="producer" placeholder="Enter the producer">
+               <input type="text" class="form-control check" id="producer" name="producer" placeholder="Enter the producer">
              </div>
              <div class="form-group">
                <label for="total runtime">total runtime in minutes:</label>
-               <input type="number" class="form-control num" id="Runtime" placeholder=" for example: 60" min="1">
+               <input type="number" class="form-control num" id="Runtime" name="runtime" placeholder=" for example: 60" min="1">
+             </div>
+             <div class="form-group">
+               <label for="author F">Artist FirstName:</label>
+               <input type="text" class="form-control check" id="FirstName" name="firstname" placeholder="Enter author fisrt Name">
+             </div>
+             <div class="form-group">
+               <label for="author F">Middle Initial:</label>
+               <?=alphabetLetter();?>
+             </div>
+             <div class="form-group">
+               <label for="author F">Artist LastName:</label>
+               <input type="text" class="form-control check" id="LastName" name="lastname" placeholder="Enter author Last Name">
              </div>
                  <button type="button" class="btn btn-success" id="addDigitalbtn">ADD</button>
              <script>
              $("#digitalType").change(function () {
 
                           $("#tracks").remove();
-                          $("#addDigitalbtn").remove();
+
                           $("#director").remove();
 
                     var value =$("#digitalType :selected").attr('value');
 
                        if(value =="Cassette"||value =="CD"){
 
-           $("#digitalForm").append('<div class="form-group" id="tracks"><label for="numtracks">number of tracks:</label><input type="number" min="1" class="form-control num" id="numtracks" placeholder="Enter the number of tracks"></div>     ');
+           $("#digitalForm").append('<div class="form-group" id="tracks"><label for="numtracks">number of tracks:</label><input type="number" min="1" class="form-control num" id="numtracks"  name="track" placeholder="Enter the number of tracks"></div> ');
+           $('#addDigitalbtn').insertAfter('#tracks');
          }else{
-                  $("#digitalForm").append('<div class="form-group" id="director"><label for="director">director:</label><input type="text" class="form-control check" id="getdirector" placeholder="Enter the director"></div>     ');
+                  $("#digitalForm").append('<div class="form-group" id="director"><label for="director">director:</label><input type="text" class="form-control check" id="getdirector" name="directors"  placeholder="Enter the director"></div>     ');
+                  $('#addDigitalbtn').insertAfter('#director');
          }
-                        $("#digitalForm").append(' <button type="button" class="btn btn-success" id="addDigitalbtn">ADD</button>');
+
                   });
 
 
@@ -175,24 +189,33 @@ header {
 $('#addBookbtn').click(function() {
      if(checkBook()){
        addBook();
+       $('#bookForm').trigger('reset');
      }
 
 
 });
 $('#addDigitalbtn').click(function() {
+
     if( checkDigital()){
 
+         addDigital();
+           $('#digitalForm').trigger('reset');
     }
 
 });
 $('#addLaptopbtn').click(function() {
     if(checkLaptop()){
        addLaptop();
+         $('#LaptopForm').trigger('reset');
     }
 
 });
 
 $('.check').on('click' ,(function(){
+
+    $(this).removeClass("highLight");
+}));
+$('.num').on('click' ,(function(){
 
     $(this).removeClass("highLight");
 }));
