@@ -41,6 +41,7 @@ requrie 'connectDB.php';
 					<label>Password:</label><br>
 					<input type="password" name="password">
                     <span class="right">
+                    <a href="http://www.databaseteam12.x10host.com/loginSystem/forgotpass.php#">Forgot your Password?</a>
                     </span>
 					<br>
 				</p>
