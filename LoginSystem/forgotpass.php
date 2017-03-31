@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-	<link rel="stylesheet" type="text/css" href="style.css">
-
-	<title>Login Page</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>

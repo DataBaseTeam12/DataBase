@@ -1,9 +1,3 @@
-<?php
-session_start();
-requrie 'connectDB.php';
-?>
-
-
 <!DOCTYPE html>
 <html>
 <head>
