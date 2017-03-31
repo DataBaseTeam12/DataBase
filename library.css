@@ -1,0 +1,202 @@
+/*Container*/
+.container {
+    width: 100%;
+    min-width: 720px;
+    overflow: auto;
+}
+
+/*Header*/
+header {
+    min-width: 720px;
+    background-color: #c8102e;
+	font-family: sans-serif;
+}
+
+/*Main header section*/
+.main {
+    padding: 15px;
+    text-align: center;
+    color: white;
+}
+
+/*Top bar*/
+.subhead {
+    min-width: 690px;
+	height: 35px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 20px;
+    background-color: #960C22;
+    text-align: right;
+    color: white;
+}
+
+/*Footer section*/
+footer {
+    padding: 15px;
+    background-color: #54585A;
+    text-align: center;
+    color: white;
+}
+
+/*Navigation sidebar*/
+nav {
+    float: left;
+    max-width: 175px;
+    padding: 10px;
+    margin: 0;
+}
+
+/*Dropdown container (contains button and dropdown links*/
+.nav-drop {
+    position: relative;
+    display: inline-block;
+	color: #555;
+}
+
+/*Dropdown button*/
+.drop {
+    width: 145px;
+    padding: 10px;
+    border: none;
+    background-color: #ddd;
+    text-align: right;
+    color: #555;
+    font-size: 12px;
+	font-family: sans-serif;
+    cursor: pointer;
+}
+
+/*Dropdown links div*/
+.nav-drop-content {
+    position: absolute;
+    z-index: 1;
+    display: none;
+    min-width: 160px;
+    margin-left: 145px;
+    margin-top: -34px;
+    background-color: #ddd;
+    box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
+    text-align: right;
+    color: #555;
+    font-size: 12px;
+	font-family: sans-serif;
+}
+
+/*When mouse hovers over dropdown container, reveal dropdown links*/
+.nav-drop:hover .nav-drop-content {
+    display: block;
+    color: #555;
+}
+
+/*When mouse hovers over dropdown container, change background color, font color of button*/
+.nav-drop:hover .drop {
+    background-color: #c8102e;
+    color: #fff;
+}
+
+/*Dropdown links*/
+.nav-drop-content a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #555;
+}
+
+/*When mouse hovers over dropdown button, change text color to white*/
+.drop a:hover, .drop:hover {
+	color: #fff;
+}
+
+/*When mouse hovers over dropdown links, change background color, text color of link*/
+.nav-drop-content a:hover {
+	background-color: #c8102e;
+	color: #fff;
+}
+
+/*Navigation list*/
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+/*Navigation list element*/
+nav ul li {
+    margin-bottom: 5px;
+	margin-left: 10px;
+}
+
+/*Navigation list element hover*/
+nav ul li:hover {
+    margin-bottom: 5px;
+	margin-left: 10px;
+}
+
+/*Main body section*/
+main {
+	min-height: 500px;
+    margin-left: 175px;
+    padding: 20px;
+}
+
+/*Interior of main body section*/
+.inner {
+	min-height: 456px;
+	width: 456px;
+	padding: 20px;
+    border: 2px solid #555;
+    background-color: #ddd;
+	font-family: sans-serif;
+}
+
+/*Header 1*/
+h1 {
+    margin-bottom: 0;
+    text-decoration: underline;
+	font-family: sans-serif;
+}
+
+/*Header 2*/
+h2 {
+    margin-top: 0;
+    margin-bottom: .5em;
+	font-family: sans-serif;
+	color: #555;
+}
+
+/*Header 3*/
+h3 {
+    margin-top: 0;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+	font-size: 1.5em;
+    font-weight: normal;
+}
+
+/*Paragraph*/
+p {
+	margin-bottom: 0;
+}
+
+/*Other buttons*/
+button {
+	padding: 10px;
+    border: none;
+    background-color: #c8102e;
+    color: #FFF9D9;
+    text-transform: uppercase;
+	font-family: sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/*Input fields and select*/
+input[type=username], input[type=password], input[type=text], select {
+    width: 100%;
+    display: inline-block;
+    padding: 10px 15px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #555;
+    box-sizing: border-box;
+}
