@@ -1,0 +1,108 @@
+main {
+	/*common*/
+	color: black;
+	background-color: white;
+	margin: 5px;
+	padding: 0px;
+	/*text*/
+	text-align: center;
+}
+
+#sign-in {
+	/*common*/
+	color: black;
+	background-color: white;
+	margin: 0px;
+	padding: 15px;
+	/*view*/
+	display: inline-block;
+	border: 2px solid #555555;
+	width: 340px;
+	/*text*/
+	font-family: sans-serif;
+	text-align: left;
+}
+
+	#sign-in h2 {
+		font-family: Arial, sans-serif;
+		font-size: 20px;
+		font-weight: 100;
+	}
+
+	#sign-in form {
+		/*common*/
+		margin: 10px 0px 0px 0px;
+		padding: 15px;
+		/*view*/
+		border: 2px solid #f1f1f1;
+		/*text*/
+		font-family: Arial, sans-serif;
+	}
+
+		#sign-in form button {
+			box-sizing: border-box;
+			font-size: 18px;
+			width: 100%;
+			background-color: #c8102e;
+			color: white;
+			cursor: pointer;
+		}
+
+
+
+input[type=text], input[type=password] {
+	width: 100%;
+	border: 1px solid #a6a6a0;
+	box-sizing: border-box;
+	margin-right: 0;
+	height: 25px;
+	padding: 3px 7px;
+}
+
+.innerboxForgotpassword {
+	min-height: 60px;
+	width: 450px;
+	margin: auto;
+}
+
+label {
+	padding-left: 4px;
+	padding-bottom: 4px;
+}
+
+.divider {
+	margin-bottom: 5px;
+	margin-top: 25px;
+	text-align: center;
+}
+
+	.divider hr {
+		width: 30%;
+	}
+
+.left {
+	float: left
+}
+
+.registerbutton {
+	box-sizing: border-box;
+	font-size: 16px;
+	width: 90%;
+	background-color: whitesmoke;
+	color: crimson;
+	box-sizing: border-box;
+	cursor: pointer;
+}
+
+.right {
+	float: right
+}
+
+a:link, a:hover, a:active {
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.regbox {
+	text-align: center;
+}
