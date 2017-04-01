@@ -1,0 +1,53 @@
+DELIMITER //
+CREATE TRIGGER is_checked_out
+AFTER INSERT ON Media_Borrows
+FOR EACH ROW 
+BEGIN
+	UPDATE Media SET is_available = 'checked out'
+    WHERE Media.id = NEW.media_id AND Media.copy_num = NEW.copy_num;
+END//
+
+DELIMITER //
+CREATE TRIGGER is_held
+AFTER INSERT ON Media_Holds
+FOR EACH ROW 
+BEGIN
+	UPDATE Media SET is_available = 'on hold'
+    WHERE Media.id = NEW.media_id AND Media.copy_num = NEW.copy_num;
+END//
+
+DELIMITER //
+CREATE TRIGGER is_reserved
+AFTER INSERT ON Media_Reserves
+FOR EACH ROW 
+BEGIN
+	UPDATE Media SET is_available = 'reserved'
+    WHERE Media.id = NEW.media_id AND Media.copy_num = NEW.copy_num;
+END//
+
+DELIMITER //
+CREATE TRIGGER is_available_borrow
+AFTER DELETE ON Media_Borrows
+FOR EACH ROW 
+BEGIN
+	UPDATE Media SET is_available = 'available'
+    WHERE Media.id = OLD.media_id AND Media.copy_num = OLD.copy_num;
+END//
+
+DELIMITER //
+CREATE TRIGGER is_available_hold
+AFTER DELETE ON Media_Holds
+FOR EACH ROW 
+BEGIN
+	UPDATE Media SET is_available = 'available'
+    WHERE Media.id = OLD.media_id AND Media.copy_num = OLD.copy_num;
+END//
+
+DELIMITER //
+CREATE TRIGGER is_available_reserve
+AFTER DELETE ON Media_Reserves
+FOR EACH ROW 
+BEGIN
+	UPDATE Media SET is_available = 'available'
+    WHERE Media.id = OLD.media_id AND Media.copy_num = OLD.copy_num;
+END//
