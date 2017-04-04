@@ -63,27 +63,10 @@ button
     cursor: pointer;
 }
 
-form 
-{
-    border: 2px solid #f1f1f1;
-    padding: 15px;
-    margin-top: 10px;
-    font-family: Arial, sans-serif;
-    box-sizing: border-box;
-}
 
-.form2
-{
-    border: 2px solid #f1f1f1;
-    padding: 10px;
-    margin-top: 10px;
-    font-family: Arial, sans-serif;
-    box-sizing: border-box;
-}
 
-input[type=text], input[type=password] 
+input
 {
-width: 100%;
 border: 1px solid #a6a6a0;
 box-sizing: border-box;
 margin-right: 0;
@@ -91,12 +74,6 @@ height: 25px;
 padding: 3px 7px;
 }
 
-html
-{   
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
 
 body
 {
@@ -112,69 +89,10 @@ body
     box-sizing: border-box;
 }
 
-.innerbox
-{
-    min-height: 30px;
-    width: 340px;
-    margin:auto;
-    box-sizing: border-box;
-}
-
-.innerboxForgotpassword
-{
-    min-height: 60px;
-    width: 450px;
-    margin:auto;
-    box-sizing: border-box;
-
-}
-
 label 
 {
     padding-left: 4px;
     padding-bottom: 4px;
 }
 
-.divider 
-{
-    margin-bottom: 5px;
-    margin-top: 25px;
-    text-align: center;
-}
 
-.divider hr
-{
-    width: 30%;
-}
-
-.left
-{
-    float: left
-}
-
-.registerbutton
-{
-    box-sizing: border-box;
-    font-size: 16px;
-    width: 90%;
-    background-color: whitesmoke;
-    color: crimson;
-    box-sizing: border-box;
-    cursor: pointer;
-}
-
-.right
-{
-    float: right
-}
-
-a:link, a:hover, a:active
-{
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.regbox
-{
-    text-align: center;
-}
