@@ -49,6 +49,8 @@ input[type=text], input[type=password] {
 }
 
 .innerboxForgotpassword {
+    border: 2px solid #f1f1f1;
+    padding: 5px;
 	min-height: 60px;
 	width: 450px;
 	margin: auto;
