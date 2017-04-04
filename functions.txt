@@ -1,0 +1,15 @@
+***FUNCTION TO CALCULATE FINES***
+
+DELIMITER //
+CREATE FUNCTION calc_fines(date_diff int(11)) RETURNS int(11)
+	DETERMINISTIC
+BEGIN
+	DECLARE total int(11);
+    
+    IF date_diff > 0 THEN SET total = (date_diff * 2);
+    ELSE SET total = 0;
+    END IF;
+    
+    RETURN (total);
+END//
+

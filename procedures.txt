@@ -1,0 +1,95 @@
+***SELECT FROM MEMBERS***
+
+DELIMITER //
+CREATE PROCEDURE select_member()
+BEGIN
+	UPDATE media_borrows SET fines = calc_fines(check_in_date - due_date);
+	SELECT member.first_name AS 'First Name', member.last_name AS 'Last Name', 
+	member.num_books AS 'Checked Out Media', member.total_fines AS 'Total Fines'
+	FROM member;
+END//
+
+***CALCULATE FINES***
+
+DELIMITER //
+CREATE PROCEDURE calc_total_fines (IN user_id int(11))
+BEGIN
+	SET @fines_sum = (SELECT SUM(case when member_id = user_id then fines end) 
+				FROM media_borrows);
+	UPDATE member SET total_fines = @fines_sum
+		WHERE id = user_id;
+	SET @fines_sum = 0;
+END//
+
+***CHECK OUT***
+
+DELIMITER //
+CREATE PROCEDURE check_out(IN user_id int(11), book_id int(11), book_num smallint(3))
+BEGIN
+	SET @begin = CURDATE();
+	SET @due = DATE_ADD(@begin, INTERVAL 42 DAY);
+    SET @end = @due;
+    SET @already_out = (SELECT num_books FROM member WHERE member.id = user_id);
+    
+    IF EXISTS (SELECT faculty_id FROM faculty WHERE faculty.faculty_id = user_id) THEN
+		INSERT INTO media_borrows (member_id, media_id, copy_num, check_out_date, check_in_date, 
+			due_date, fines) VALUES (user_id, book_id, book_num, @begin, @end, @due, 0);
+		UPDATE member SET num_books = (num_books + 1) WHERE id = user_id;
+    ELSE 
+		IF (@already_out < 99) THEN
+			INSERT INTO media_borrows (member_id, media_id, check_out_date, check_in_date, 
+				due_date, fines) VALUES (user_id, book_id, @begin, @end, @due, 0);
+			UPDATE member SET num_books = (num_books + 1) WHERE id = user_id;
+		ELSE SELECT 'You have reached the maximum number of checked out media items!'
+				AS '';
+		END IF;
+	END IF;
+END//
+
+***PLACE HOLD***
+
+DELIMITER //
+CREATE PROCEDURE place_hold(IN user_id int(11), book_id int(11), book_num smallint(3))
+BEGIN
+	SET @begin = CURDATE();
+	SET @end = DATE_ADD(@begin, INTERVAL 21 DAY);
+    
+    INSERT INTO media_holds (member_id, media_id, copy_num, start_date, 
+		end_date) VALUES (user_id, book_id, book_num, @begin, @end);
+END//
+
+***PLACE RESERVE***
+
+DELIMITER //
+CREATE PROCEDURE place_reserve(IN user_id int(11), book_id int(11), book_num smallint(3))
+BEGIN
+	SET @begin = CURTIME();
+	SET @end = DATE_ADD(@begin, INTERVAL 6 HOUR);
+    
+    INSERT INTO media_reserves (member_id, media_id, copy_num, start_time, 
+		end_time) VALUES (user_id, book_id, book_num, @begin, @end);
+END//
+
+***CHECK IN***
+
+DELIMITER //
+CREATE PROCEDURE check_in(IN book_id int(11), book_num smallint(3))
+BEGIN
+	DELETE FROM media_borrows WHERE media_id = book_id AND copy_num = book_num;
+END//
+
+***RELEASE HOLD***
+
+DELIMITER //
+CREATE PROCEDURE release_hold(IN book_id int(11), book_num smallint(3))
+BEGIN
+	DELETE FROM media_holds WHERE media_id = book_id AND copy_num = book_num;
+END//
+
+***RELEASE RESERVE***
+
+DELIMITER //
+CREATE PROCEDURE release_reserve(IN book_id int(11), book_num smallint(3))
+BEGIN
+	DELETE FROM media_reserves WHERE media_id = book_id AND copy_num = book_num;
+END//

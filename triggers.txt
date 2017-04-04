@@ -1,3 +1,18 @@
+***SET TOTAL FINES***
+
+DELIMITER //
+CREATE TRIGGER set_total_fines
+AFTER UPDATE ON Media_Borrows
+FOR EACH ROW 
+BEGIN
+	IF NEW.fines > 0 THEN
+		SET @user_id = NEW.member_id;
+        CALL calc_fines(@user_id);
+	END IF;
+END//
+
+***SETS MEDIA AVAILABILITY TO 'CHECKED OUT'***
+
 DELIMITER //
 CREATE TRIGGER is_checked_out
 AFTER INSERT ON Media_Borrows
@@ -6,6 +21,8 @@ BEGIN
 	UPDATE Media SET is_available = 'checked out'
     WHERE Media.id = NEW.media_id AND Media.copy_num = NEW.copy_num;
 END//
+
+***SETS MEDIA AVAILABILITY TO 'ON HOLD'***
 
 DELIMITER //
 CREATE TRIGGER is_held
@@ -16,6 +33,8 @@ BEGIN
     WHERE Media.id = NEW.media_id AND Media.copy_num = NEW.copy_num;
 END//
 
+***SETS MEDIA AVAILABILITY TO 'RESERVED'***
+
 DELIMITER //
 CREATE TRIGGER is_reserved
 AFTER INSERT ON Media_Reserves
@@ -24,6 +43,8 @@ BEGIN
 	UPDATE Media SET is_available = 'reserved'
     WHERE Media.id = NEW.media_id AND Media.copy_num = NEW.copy_num;
 END//
+
+***SETS MEDIA AVAILABILITY TO 'AVAILABLE' AFTER CHECK-IN***
 
 DELIMITER //
 CREATE TRIGGER is_available_borrow
@@ -34,6 +55,8 @@ BEGIN
     WHERE Media.id = OLD.media_id AND Media.copy_num = OLD.copy_num;
 END//
 
+***SETS MEDIA AVAILABILITY TO 'AVAILABLE' AFTER HOLD RELINQUISHED***
+
 DELIMITER //
 CREATE TRIGGER is_available_hold
 AFTER DELETE ON Media_Holds
@@ -42,6 +65,8 @@ BEGIN
 	UPDATE Media SET is_available = 'available'
     WHERE Media.id = OLD.media_id AND Media.copy_num = OLD.copy_num;
 END//
+
+***SETS MEDIA AVAILABILITY TO 'AVAILABLE' AFTER RESERVE RELINQUISHED***
 
 DELIMITER //
 CREATE TRIGGER is_available_reserve
