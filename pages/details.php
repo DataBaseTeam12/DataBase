@@ -79,7 +79,7 @@
 				<a href="http://www.databaseteam12.x10host.com/searchRooms.php">Search Rented Rooms</a>
 			</div>
 		</div>
-		<? } ?>
+		<?php } ?>
 		<div class="item vgap">
 			Search Media
 			<div class="content">
