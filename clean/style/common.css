@@ -1,8 +1,21 @@
-html, body {
-	margin: 0;
-	padding: 0;
+html {
+	height: 100%;
 }
 
+/*the "table" display is how the footer stays at the bottom*/
+body {
+	/*common*/
+	color: inherit;
+	background-color: inherit; /*lighter red*/
+	margin: 0px;
+	padding: 0px;
+	/*view*/
+	display: table;
+	width: 100%;
+	height: 100%;
+}
+
+/*this makes all inks style like their underlying parent*/
 a {
 	/*common*/
 	color: inherit;

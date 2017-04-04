@@ -82,7 +82,7 @@
 				<a href="#">By Member ID</a>
 			</div>
 		</div>
-		<? } ?>
+		<?php } ?>
 		<div class="item vgap">
 			Search Media
 			<div class="content">
