@@ -43,8 +43,7 @@
 		color: #FFF9D9;
 		text-transform: uppercase;
 		text-decoration: none;
-		font-family: sans-serif;
-		font-weight: bold;
+		font: bold 14px sans-serif;
 		cursor: pointer;
 	}
 	</style>
@@ -142,16 +141,16 @@
 				echo "<hr><h2>".$row["title"]."</h2>"
 				.$row["first_name"]." ".$row["last_name"]." "
 				.$row["published_date"]."<br>".$row["publisher"].".<br><br>
-				<a href=\"details.php?id=$book&copy=$copy\">More Details</a>";
+				<a href=\"details.php?id=$book&copy=$copy\">More Details</a><br><br>";
 				
 				// If the book is available
 				if ($row["is_available"] == "available") {
 					echo "<p><i class='fa fa-check-circle' aria-hidden='true' 
 						style='color: #57BC57'></i> Copy #".$row["copy_num"]." is 
-						<b>available</b>.";
+						<b>available</b>. ";
 						
 					// If logged in, provide options to reserve or hold
-					if (isset($_SESSION["username"]) {
+					if (session_status() == PHP_SESSION_ACTIVE) {
 						echo "<a href=\"\">Hold</a>
 						<a href=\"\" style=\"margin-left:5px;\">Reserve</a>
 						</p>";
