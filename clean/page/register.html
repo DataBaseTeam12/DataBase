@@ -1,120 +1,104 @@
 <!DOCTYPE html>
 
-<head>
-	<title>Register Page</title>
-	<link rel="stylesheet" href="style/common.css">
-	<link rel="stylesheet" href="style/register.css">
-	<link rel="stylesheet" href="style/drop-down-menu.css">
-	<script src="site/script/common.js"></script>
-	<script>
-		document.addEventListener("DOMContentLoaded",
-			function (event) {
-				// make stuff happen after page loads
-			}
-		);
-	</script>
-</head>
+<title>Register</title>
 
-<body>
-	<?php include "page/header.html"; ?>
-	<nav>
-		<a href="index.php" style="float:left;">Home</a>
-		<a href="login.php">Login</a>
-	</nav>
+<link rel="stylesheet" href="style/common.css">
+<link rel="stylesheet" href="style/drop-down-menu.css">
 
+<link rel="stylesheet" href="style/login.css">
 
-	<!--<div>
-		<header>
-			<div class="main">
-				<h1><a href="http://www.databaseteam12.x10host.com"><font color="white">University of Houston</font></a></h1>
-				<h3><a href="http://www.databaseteam12.x10host.com"><font color="white">Libraries</font></a></h3>
-			</div>
-			<div class="subhead">
+<script src="script/common.js"></script>
+<script>
+	document.addEventListener("DOMContentLoaded",
+		function (event) {
+			// make stuff happen after page loads
+		}
+	);
+</script>
 
-			</div>
-		</header>
-	</div>-->
+<?php include "page/header.html"; ?>
 
-	<div class="container">
+<nav>
+	<a href="index.php" style="float:left;">Home</a>
+	<a href="login.php">Login</a>
+	<a href="register.php">Register</a>
+</nav>
 
-		<div>
-			<form method="post" action="#" role="form" class="form-horizontal">
-				<fieldset>
-					<div>
-						<h2> Create Account</h2>
+<!-- custom content -->
+<main id="register">
+	<div>
+		<form method="post" action="#" role="form" class="form-horizontal">
+			<fieldset>
+				<div>
+					<h2> Create Account</h2>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="fn">First name</label>
+					<div class="col-md-4">
+						<input id="fn" name="fn" type="text" placeholder="first name" class="form-control input-md" required="">
+
 					</div>
+				</div>
 
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="fn">First name</label>
-						<div class="col-md-4">
-							<input id="fn" name="fn" type="text" placeholder="first name" class="form-control input-md" required="">
-
-						</div>
-					</div>
-
-					<div>
-						<label>Middle Initial</label>
-						<input id="midInitial" type="text" maxlength="1">
-					</div>
+				<div>
+					<label>Middle Initial</label>
+					<input id="midInitial" type="text" maxlength="1">
+				</div>
 
 
-					<div>
-						<label>Last Name</label>
-						<input id="lastName" type="text" maxlength="25">
-					</div>
+				<div>
+					<label>Last Name</label>
+					<input id="lastName" type="text" maxlength="25">
+				</div>
 
-					<div>
-						<label>Password</label>
-						<input id="password" type="password" maxlength="25">
-					</div>
+				<div>
+					<label>Password</label>
+					<input id="password" type="password" maxlength="25">
+				</div>
 
-					<div>
-						<label>Repeat Password</label>
-						<input id="passwordAgain" type="password" maxlength="25">
-					</div>
+				<div>
+					<label>Repeat Password</label>
+					<input id="passwordAgain" type="password" maxlength="25">
+				</div>
 
-					<div>
-						<label>Address</label>
-						<input id="address" type="text" maxlength="254">
-					</div>
+				<div>
+					<label>Address</label>
+					<input id="address" type="text" maxlength="254">
+				</div>
 
-					<div>
-						<label>City</label>
-						<input id="city" type="text" maxlength="25">
-					</div>
+				<div>
+					<label>City</label>
+					<input id="city" type="text" maxlength="25">
+				</div>
 
-					<div>
-						<label>State</label>
-						<input id="state" type="text" maxlength="25">
-					</div>
+				<div>
+					<label>State</label>
+					<input id="state" type="text" maxlength="25">
+				</div>
 
-					<div>
-						<label>Zip Code</label>
-						<input id="password" type="text" maxlength="25">
-					</div>
+				<div>
+					<label>Zip Code</label>
+					<input id="password" type="text" maxlength="25">
+				</div>
 
-					<div>
-						<label>Phone Number</label>
-						<input id="phone" type="text" maxlength="25">
-					</div>
+				<div>
+					<label>Phone Number</label>
+					<input id="phone" type="text" maxlength="25">
+				</div>
 
-					<div>
-						<label>Phone Number</label>
-						<input id="phone" type="text" maxlength="25">
-					</div>
+				<div>
+					<label>Phone Number</label>
+					<input id="phone" type="text" maxlength="25">
+				</div>
 
-					<div>
-						<label>Email</label>
-						<input id="email" type="email" maxlength="25">
-					</div>
-
-				</fieldset>
-
-			</form>
-
-		</div>
-
-
+				<div>
+					<label>Email</label>
+					<input id="email" type="email" maxlength="25">
+				</div>
+			</fieldset>
+		</form>
 	</div>
-	<?php include "page/footer.html"; ?>
-</body>
+</main>
+
+<?php include "page/footer.html"; ?>
