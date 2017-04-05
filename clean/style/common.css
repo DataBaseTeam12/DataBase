@@ -81,7 +81,7 @@ nav {
 .inner {
 }
 
-input[type=username], input[type=password], input[type=text], select {
+input[type=username], input[type=password], input[type=text], input[type=email], select {
 	width: 100%;
 	padding: 10px 15px;
 	margin-top: 5px;

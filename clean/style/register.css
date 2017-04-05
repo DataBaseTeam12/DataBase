@@ -56,22 +56,23 @@ button
 {
     box-sizing: border-box;
     font-size: 18px;
-    width: 100%;
+    width: 40%;
     background-color: #c8102e;
     color: white;
     box-sizing: border-box;
     cursor: pointer;
+    text-align: center;
 }
-
-
 
 input
 {
-border: 1px solid #a6a6a0;
-box-sizing: border-box;
-margin-right: 0;
-height: 25px;
-padding: 3px 7px;
+    border: 1px solid #a6a6a0;
+    box-sizing: border-box;
+    display: inline-block;
+    margin-right: 0;
+    height: 25px;
+    padding: 3px 7px;
+    vertical-align: middle;
 }
 
 
@@ -83,16 +84,34 @@ body
 }
 
 .container
-{
-    margin-top: 70px;
+{   
     height: 100%;
-    box-sizing: border-box;
 }
 
 label 
 {
     padding-left: 4px;
     padding-bottom: 4px;
+    display: inline-block;
 }
 
+form 
+{
+    padding: 10px 580px 10px 580px;
+    margin-top: 10px;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+ .wrapper
+{
+    padding:  5px;
+    text-align: center;
+}
+
+.form-element
+{
+    display: inline-block;
+    width: 150px;
+}
 
