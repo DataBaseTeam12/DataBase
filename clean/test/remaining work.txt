@@ -1,0 +1,3 @@
+All Display pages should be working, likely need to be formatted better.
+Search pages need functionality added.
+The two Display Members pages haven't been created yet, along with Check-Out/Check-In pages.
