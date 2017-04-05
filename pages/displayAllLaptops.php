@@ -112,7 +112,8 @@
 		<!--Content-->
 		<?php
 		// Temporary test connection; will be removed and use connection in another file
-		$servername = "162.253.224.12";
+
+        $servername = "162.253.224.12";
 		$username = "databa39_user";
 		$password = "databa39team12";
 		$dbname = "databa39_library";
@@ -126,7 +127,7 @@
 		} 
 
 		// Call procedure or query for specific page
-		$sql = "SELECT * FROM Laptop ORDER BY id ASC;";
+		$sql = "SELECT * FROM Laptop ORDER BY id ASC";
 		$result = $conn->query($sql);
 		
 		// If result is not empty, display it

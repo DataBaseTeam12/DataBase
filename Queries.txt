@@ -140,8 +140,7 @@ FROM Full_CD_View
 WHERE title =  'title';
 
 //DISPLAY CD’S BY GENRE
-SELECT *
-FROM Full_CD_View
+SELECT * FROM Full_CD_View
 WHERE genre = 'genre';
 
 //DISPLAY CD’S BY ARTIST/AUTHOR FIRST AND LAST NAME

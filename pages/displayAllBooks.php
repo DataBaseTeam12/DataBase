@@ -108,10 +108,11 @@
 		<!--Content-->
 		<?php
 		// Temporary test connection; will be removed and use connection in another file
-		$servername = "162.253.224.12";
-		$username = "databa39_user";
-		$password = "databa39team12";
-		$dbname = "databa39_library";
+        $servername = "162.253.224.12";
+        $username = "databa39_user";
+        $password = "databa39team12";
+        $dbname = "databa39_library";
+
 
 		// Create connection (test)
 		$conn = new mysqli($servername, $username, $password, $dbname);
@@ -122,7 +123,7 @@
 		} 
 
 		// Call procedure or query for specific page
-		$sql = "SELECT * FROM Full_Book_View ORDER BY title;";
+		$sql = "SELECT * FROM Full_Book_View ORDER BY title";
 		$result = $conn->query($sql);
 		
 		// If result is not empty, display it
@@ -131,18 +132,18 @@
 			while($row = $result->fetch_assoc()) {
 				$book = $row["id"];
 				$copy = $row["copy_num"];
-				
+
 				echo "<hr><h2>".$row["title"]."</h2>"
 				.$row["first_name"]." ".$row["last_name"]." "
 				.$row["published_date"]."<br>".$row["publisher"].".<br><br>
 				<a href=\"details.php?id=$book&copy=$copy\">More Details</a><br><br>";
-				
+
 				// If the book is available
 				if ($row["is_available"] == "available") {
 					echo "<p><i class='fa fa-check-circle' aria-hidden='true' 
 						style='color: #57BC57'></i> Copy #".$row["copy_num"]." is 
 						<b>available</b>. ";
-						
+
 					// If logged in, provide options to reserve or hold
 					if (session_status() == PHP_SESSION_ACTIVE) {
 						echo "<a href=\"\">Hold</a>
