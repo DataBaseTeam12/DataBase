@@ -185,7 +185,7 @@ session_start();
                 $sql = "SELECT * FROM Full_CD_View WHERE first_name LIKE '%$value%' OR last_name LIKE '%$value%'";
                 break;
             case "audience":
-                $sql = "SELECT * FROM Full_CD_View WHERE publisher LIKE '%$value%'";
+                $sql = "SELECT * FROM Full_CD_View WHERE audience LIKE '%$value%'";
                 break;
             case "genre":
                 $sql = "SELECT * FROM Full_CD_View WHERE genre LIKE '%$value%'";
@@ -252,7 +252,7 @@ session_start();
                 $sql = "SELECT * FROM Full_Cassette_View WHERE first_name LIKE '%$value%' OR last_name LIKE '%$value%'";
                 break;
             case "audience":
-                $sql = "SELECT * FROM Full_Cassette_View WHERE publisher LIKE '%$value%'";
+                $sql = "SELECT * FROM Full_Cassette_View WHERE audience LIKE '%$value%'";
                 break;
             case "genre":
                 $sql = "SELECT * FROM Full_Cassette_View WHERE genre LIKE '%$value%'";
@@ -319,7 +319,7 @@ session_start();
     } else if ($mtype == "book") {
         switch ($stype) {
             case "audience":
-                $sql = "SELECT * FROM Full_Book_View WHERE publisher LIKE '%$value%'";
+                $sql = "SELECT * FROM Full_Book_View WHERE audience LIKE '%$value%'";
                 break;
             case "author":
                 $sql = "SELECT * FROM Full_Book_View WHERE first_name LIKE '%$value%' OR last_name LIKE '%$value%'";
@@ -392,7 +392,131 @@ session_start();
             echo "0 results";
         }
 
+    } else if($mtype == "dvd"){
+        switch ($stype) {
+            case "audience":
+                $sql = "SELECT * FROM Full_DVD_View WHERE audience LIKE '%$value%'";
+                break;
+            case "director":
+                $sql = "SELECT * FROM Full_DVD_View WHERE director LIKE '%$value%'";
+                break;
+            case "genre":
+                $sql = "SELECT * FROM Full_DVD_View WHERE genre LIKE '%$value%'";
+                break;
+            case "language":
+                $sql = "SELECT * FROM Full_DVD_View WHERE language LIKE '%$value%'";
+                break;
+            case "producer":
+                $sql = "SELECT * FROM Full_DVD_View WHERE producer LIKE '%$value%'";
+                break;
+            case "publisher":
+                $sql = "SELECT * FROM Full_DVD_View WHERE publisher LIKE '%$value%'";
+                break;
+            case "title":
+                $sql = "SELECT * FROM Full_DVD_View WHERE title LIKE '%$value%'";
+                break;
+            case "publish_date":
+                $sql = "SELECT * FROM Full_DVD_View WHERE published_date LIKE $value";
+                break;
+        }
+        $result = $conn->query($sql);
+
+        // If result is not empty, display it
+        if ($result->num_rows > 0) {
+            // Output data from every row
+            while($row = $result->fetch_assoc()) {
+                $book = $row["id"];
+                $copy = $row["copy_num"];
+
+                echo "<hr><h2>".$row["title"]."</h2>"
+                    . $row["director"] . " "
+                    .$row["published_date"]."<br>".$row["publisher"].".<br><br>
+				<a href=\"details.php?id=$book&copy=$copy\">More Details</a><br><br>";
+
+                // If the book is available
+                if ($row["is_available"] == "available") {
+                    echo "<p><i class='fa fa-check-circle' aria-hidden='true' 
+						style='color: #57BC57'></i> Copy #".$row["copy_num"]." is 
+						<b>available</b>. ";
+
+                    // If logged in, provide options to reserve or hold
+                    if (session_status() == PHP_SESSION_ACTIVE) {
+                        echo "<a href=\"\">Hold</a>
+						<a href=\"\" style=\"margin-left:5px;\">Reserve</a>
+						</p>";
+                    }
+                }
+                // Else, display status of the book
+                else {
+                    echo "<p><i class='fa fa-times-circle' aria-hidden='true'
+						style='color: #D25252'></i> Copy #".$row["copy_num"]." is 
+						<b>".$row["is_available"]."</b>.</p>";
+                }
+            }
+        }
+    } else if($mtype == "vhs") {
+        switch ($stype) {
+            case "audience":
+                $sql = "SELECT * FROM Full_VHS_View WHERE audience LIKE '%$value%'";
+                break;
+            case "director":
+                $sql = "SELECT * FROM Full_VHS_View WHERE director LIKE '%$value%'";
+                break;
+            case "genre":
+                $sql = "SELECT * FROM Full_VHS_View WHERE genre LIKE '%$value%'";
+                break;
+            case "language":
+                $sql = "SELECT * FROM Full_VHS_View WHERE language LIKE '%$value%'";
+                break;
+            case "producer":
+                $sql = "SELECT * FROM Full_VHS_View WHERE producer LIKE '%$value%'";
+                break;
+            case "publisher":
+                $sql = "SELECT * FROM Full_VHS_View WHERE publisher LIKE '%$value%'";
+                break;
+            case "title":
+                $sql = "SELECT * FROM Full_VHS_View WHERE title LIKE '%$value%'";
+                break;
+            case "publish_date":
+                $sql = "SELECT * FROM Full_VHS_View WHERE published_date LIKE $value";
+                break;
+        }
+        $result = $conn->query($sql);
+
+        // If result is not empty, display it
+        if ($result->num_rows > 0) {
+            // Output data from every row
+            while ($row = $result->fetch_assoc()) {
+                $book = $row["id"];
+                $copy = $row["copy_num"];
+
+                echo "<hr><h2>" . $row["title"] . "</h2>"
+                    . $row["director"] . " "
+                    . $row["published_date"] . "<br>" . $row["publisher"] . ".<br><br>
+				<a href=\"details.php?id=$book&copy=$copy\">More Details</a><br><br>";
+
+                // If the book is available
+                if ($row["is_available"] == "available") {
+                    echo "<p><i class='fa fa-check-circle' aria-hidden='true' 
+						style='color: #57BC57'></i> Copy #" . $row["copy_num"] . " is 
+						<b>available</b>. ";
+
+                    // If logged in, provide options to reserve or hold
+                    if (session_status() == PHP_SESSION_ACTIVE) {
+                        echo "<a href=\"\">Hold</a>
+						<a href=\"\" style=\"margin-left:5px;\">Reserve</a>
+						</p>";
+                    }
+                } // Else, display status of the book
+                else {
+                    echo "<p><i class='fa fa-times-circle' aria-hidden='true'
+						style='color: #D25252'></i> Copy #" . $row["copy_num"] . " is 
+						<b>" . $row["is_available"] . "</b>.</p>";
+                }
+            }
+        }
     }
+
     $conn->close();
 
     ?>
