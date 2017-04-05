@@ -1,3 +1,3 @@
 <?php
-include "page/login.html";
+include "/page/login.html";
 ?>

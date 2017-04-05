@@ -1,3 +1,3 @@
 <?php
-include "page/resetpass.html";
+include "/page/resetpass.html";
 ?>
