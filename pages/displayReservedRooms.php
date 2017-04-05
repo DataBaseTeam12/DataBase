@@ -79,7 +79,7 @@
 				<a href="http://www.databaseteam12.x10host.com/searchRooms.php">Search Rented Rooms</a>
 			</div>
 		</div>
-		<?php } ?>
+		<? } ?>
 		<div class="item vgap">
 			Search Media
 			<div class="content">
@@ -118,11 +118,11 @@
 
 		// Create connection (test)
 		$conn = new mysqli($servername, $username, $password, $dbname);
-		
+
 		// Check connection
 		if ($conn->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
-		} 
+		}
 
 		// Call procedure or query for specific page
 		$sql = "SELECT * FROM Room_Reserve_View ORDER BY room_num ASC;";
