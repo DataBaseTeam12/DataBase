@@ -274,9 +274,7 @@ session_start();
                 break;
         }
 
-        echo "THIS Value is \n";
-        echo $value;
-        echo "\n";
+
 
         //$sql = "SELECT * FROM Full_Book_View WHERE first_name LIKE '%$value%' OR last_name LIKE '%$value%' ORDER BY title";
         $result = $conn->query($sql);
@@ -350,9 +348,7 @@ session_start();
                 break;
         }
 
-        echo "THIS Value is \n";
-        echo $value;
-        echo "\n";
+
 
         //$sql = "SELECT * FROM Full_Book_View WHERE first_name LIKE '%$value%' OR last_name LIKE '%$value%' ORDER BY title";
         $result = $conn->query($sql);
