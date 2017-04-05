@@ -74,48 +74,48 @@ session_start();
 </nav>
 <!--custom html below-->
 <aside id="drop-down-menu">
-    <!--if logged in member is faculty, display faculty menu-->
-    <?php if (isset($_SESSION["faculty"])) { ?>
-        <div class="item vgap">
-            Faculty Menu
-            <div class="content">
-                <a href="#">Add New Media</a>
-                <a href="#">Check Out Media</a>
-                <a href="#">Check In Media</a>
-                <a href="http://www.databaseteam12.x10host.com/searchMembers.php">Search Members</a>
-                <a href="#">Display All Members By Last Name</a>
-                <a href="#">Display All Members By Fines</a>
-                <a href="http://www.databaseteam12.x10host.com/searchLaptops.php">Search Rented Laptops</a>
-                <a href="http://www.databaseteam12.x10host.com/searchRooms.php">Search Rented Rooms</a>
-            </div>
-        </div>
-    <?php } ?>
-    <div class="item vgap">
-        Search Media
-        <div class="content">
-            <a href="http://www.databaseteam12.x10host.com/search.php">Search</a>
-            <a href="http://www.databaseteam12.x10host.com/displayAll.php">Display All Media</a>
-            <a href="http://www.databaseteam12.x10host.com/displayAllBooks.php">Display All Books</a>
-            <a href="http://www.databaseteam12.x10host.com/displayAllCassettes.php">Display All Cassettes</a>
-            <a href="http://www.databaseteam12.x10host.com/displayAllCds.php">Display All CDs</a>
-            <a href="http://www.databaseteam12.x10host.com/displayAllDvds.php">Display All DVDs</a>
-            <a href="http://www.databaseteam12.x10host.com/displayAllVhs.php">Display All VHS</a>
-
-        </div>
-    </div>
-    <div class="item vgap">
-        Laptop Rentals
-        <div class="content">
-            <a href="http://www.databaseteam12.x10host.com/displayAllLaptops.php">Display All Laptops</a>
-        </div>
-    </div>
-    <div class="item">
-        Room Reservations
-        <div class="content">
-            <a href="http://www.databaseteam12.x10host.com/displayAllRooms.php">Display All Rooms</a>
-        </div>
-    </div>
-</aside>
+		<!--if logged in member is faculty, display faculty menu-->
+		<?php if (isset($_SESSION["faculty"])) { ?>
+		<div class="item vgap">
+			Faculty Menu
+			<div class="content">
+				<a href="#">Add New Media</a>
+				<a href="#">Check Out Media</a>
+				<a href="#">Check In Media</a>
+				<a href="/searchMembers.php">Search Members</a>
+				<a href="#">Display All Members By Last Name</a>
+				<a href="#">Display All Members By Fines</a>
+				<a href="/searchLaptops.php">Search Rented Laptops</a>
+				<a href="/searchRooms.php">Search Rented Rooms</a>
+			</div>
+		</div>
+		<? } ?>
+		<div class="item vgap">
+			Search Media
+			<div class="content">
+				<a href="/search.php">Search</a>
+				<a href="/displayAll.php">Display All Media</a>
+				<a href="/displayAllBooks.php">Display All Books</a>
+				<a href="/displayAllCassettes.php">Display All Cassettes</a>
+				<a href="/displayAllCds.php">Display All CDs</a>
+				<a href="/displayAllDvds.php">Display All DVDs</a>
+				<a href="/displayAllVhs.php">Display All VHS</a>
+				
+			</div>
+		</div>
+		<div class="item vgap">
+			Laptop Rentals
+			<div class="content">
+				<a href="/displayAllLaptops.php">Display All Laptops</a>
+			</div>
+		</div>
+		<div class="item">
+			Room Reservations
+			<div class="content">
+				<a href="/displayAllRooms.php">Display All Rooms</a>
+			</div>
+		</div>
+	</aside>
 <main>
     <form name="form" action="" method="get">
         <label><b>Media Type</b></label>
@@ -178,6 +178,53 @@ session_start();
     if (isset($_GET['search'])) {
         $value = $_GET['search'];
     }
+	
+	if ($mtype == "all") {
+        switch ($stype) {
+            case "author":
+                $sql = "SELECT * FROM Author_Media_View 
+					WHERE first_name LIKE '%$value%' OR last_name LIKE '%$value%'";
+                break;
+        }
+        //$sql = "SELECT * FROM Full_Book_View WHERE first_name LIKE '%$value%' OR last_name LIKE '%$value%' ORDER BY title";
+        $result = $conn->query($sql);
+
+        // If result is not empty, display it
+        if ($result->num_rows > 0) {
+            // Output data from every row
+            while ($row = $result->fetch_assoc()) {
+                $book = $row["id"];
+                $copy = $row["copy_num"];
+
+                echo "<hr><h2>" . $row["title"] . "</h2>"
+                    . $row["first_name"] . " " . $row["last_name"] . " "
+                    . $row["published_date"] . "<br>" . $row["publisher"] . ".<br><br>
+				<a href=\"details.php?id=$book&copy=$copy\">More Details</a><br><br>";
+
+                // If the book is available
+                if ($row["is_available"] == "available") {
+                    echo "<p><i class='fa fa-check-circle' aria-hidden='true' 
+						style='color: #57BC57'></i> Copy #" . $row["copy_num"] . " is 
+						<b>available</b>. ";
+
+                    // If logged in, provide options to reserve or hold
+                    if (session_status() == PHP_SESSION_ACTIVE) {
+                        echo "<a href=\"\">Hold</a>
+						<a href=\"\" style=\"margin-left:5px;\">Reserve</a>
+						</p>";
+                    }
+                } // Else, display status of the book
+                else {
+                    echo "<p><i class='fa fa-times-circle' aria-hidden='true'
+						style='color: #D25252'></i> Copy #" . $row["copy_num"] . " is 
+						<b>" . $row["is_available"] . "</b>.</p>";
+                }
+            }
+
+        } else {
+            echo "0 results";
+        }
+    }
 
     if ($mtype == "cd") {
         switch ($stype) {
@@ -217,7 +264,7 @@ session_start();
                 $copy = $row["copy_num"];
 
                 echo "<hr><h2>" . $row["title"] . "</h2>"
-                    . $row["first_name"] . " "
+                    . $row["first_name"] . " " . $row["last_name"] . " "
                     . $row["published_date"] . "<br>" . $row["publisher"] . ".<br><br>
 				<a href=\"details.php?id=$book&copy=$copy\">More Details</a><br><br>";
 
@@ -287,7 +334,7 @@ session_start();
                 $copy = $row["copy_num"];
 
                 echo "<hr><h2>" . $row["title"] . "</h2>"
-                    . $row["first_name"] . " "
+                    . $row["first_name"] . " " . $row["last_name"] . " "
                     . $row["published_date"] . "<br>" . $row["publisher"] . ".<br><br>
 				<a href=\"details.php?id=$book&copy=$copy\">More Details</a><br><br>";
 
@@ -341,7 +388,7 @@ session_start();
                 $sql = "SELECT * FROM Full_Book_View WHERE publisher LIKE '%$value%'";
                 break;
             case "title": //NOT ALWAYS WORKING... WHY?
-                $sql = "SELECT * FROM Full_Book_View WHERE title LIKE '%$value%'";
+                $sql = "SELECT * FROM Full_Book_View WHERE title LIKE '%$value%' OR title = '$value'";
                 break;
             case "publish_date":
                 $sql = "SELECT * FROM Full_Book_View WHERE published_date LIKE $value";
