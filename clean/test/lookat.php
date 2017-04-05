@@ -1,6 +1,12 @@
 <?php
 try
 {
+    // // Temporary test connection; will be removed and use connection in another file
+    // $servername = "162.253.224.12";
+    // $username = "databa39_user";
+    // $password = "databa39team12";
+    // $dbname = "databa39_library";
+    
     $pdo = new PDO("mysql:host=localhost;dbname=databa39_library", "root", "");
     
     function prep_attr($table) {
@@ -18,7 +24,7 @@ try
     
     function prep_rows($table) {
         global $pdo, $set;
-        $set = $pdo->query("SELECT * FROM {$table}");
+        $set = $pdo->query("SELECT * FROM Author_Media_View ORDER BY title;");
     }
     function next_rows() {
         global $set, $row;
@@ -32,8 +38,7 @@ try
         echo "<td>".$row['last_name']."</td>";
         echo "<td>".$row['media_id']."</td>";
     }
-    
-    include("/test.html");
+    include("page/displayAll.html");
     $pdo = null;
 }
 catch (PDOException $e)

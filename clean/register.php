@@ -1,3 +1,3 @@
 <?php
-include "page/register.html";
+include "/page/register.html";
 ?>
