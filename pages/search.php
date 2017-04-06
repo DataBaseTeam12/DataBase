@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 ?>
 <!DOCTYPE html>
 
@@ -117,10 +118,86 @@ session_start();
 		</div>
 	</aside>
 <main>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script language="javascript" type="text/javascript">
+        function dynamicdropdown(listindex) {
+            document.getElementById("search-type").length = 0;
+            switch(listindex){
+                case "all" :
+                    document.getElementById("search-type").options[0] = new Option("Artist", "artist");
+                    document.getElementById("search-type").options[1] = new Option("Audience", "audience");
+                    document.getElementById("search-type").options[2] = new Option("Author", "author");
+                    document.getElementById("search-type").options[3] = new Option("Director", "director");
+                    document.getElementById("search-type").options[4] = new Option("Genre", "genre");
+                    document.getElementById("search-type").options[5] = new Option("ISBN-10", "isbn10");
+                    document.getElementById("search-type").options[6] = new Option("ISBN-13", "isbn13");
+                    document.getElementById("search-type").options[7] = new Option("Language", "language");
+                    document.getElementById("search-type").options[8] = new Option("Producer", "producer");
+                    document.getElementById("search-type").options[9] = new Option("Publisher", "publisher");
+                    document.getElementById("search-type").options[10] = new Option("Title", "title");
+                    document.getElementById("search-type").options[11] = new Option("Year Published", "publish_date");
+                    break;
+                case "book" :
+                    document.getElementById("search-type").options[0] = new Option("Audience", "audience");
+                    document.getElementById("search-type").options[1] = new Option("Author", "author");
+                    document.getElementById("search-type").options[2] = new Option("Genre", "genre");
+                    document.getElementById("search-type").options[3] = new Option("ISBN-10", "isbn10");
+                    document.getElementById("search-type").options[4] = new Option("ISBN-13", "isbn13");
+                    document.getElementById("search-type").options[5] = new Option("Language", "language");
+                    document.getElementById("search-type").options[6] = new Option("Publisher", "publisher");
+                    document.getElementById("search-type").options[7] = new Option("Title", "title");
+                    document.getElementById("search-type").options[8] = new Option("Year Published", "publish_date");
+                    break;
+                case "cassette" :
+                    document.getElementById("search-type").options[0] = new Option("Artist", "artist");
+                    document.getElementById("search-type").options[1] = new Option("Audience", "audience");
+                    document.getElementById("search-type").options[2] = new Option("Genre", "genre");
+                    document.getElementById("search-type").options[3] = new Option("Language", "language");
+                    document.getElementById("search-type").options[4] = new Option("Producer", "producer");
+                    document.getElementById("search-type").options[5] = new Option("Publisher", "publisher");
+                    document.getElementById("search-type").options[6] = new Option("Title", "title");
+                    document.getElementById("search-type").options[7] = new Option("Year Published", "publish_date");
+                    break;
+                case "cd" :
+                    document.getElementById("search-type").options[0] = new Option("Artist", "artist");
+                    document.getElementById("search-type").options[1] = new Option("Audience", "audience");
+                    document.getElementById("search-type").options[2] = new Option("Genre", "genre");
+                    document.getElementById("search-type").options[3] = new Option("Language", "language");
+                    document.getElementById("search-type").options[4] = new Option("Producer", "producer");
+                    document.getElementById("search-type").options[5] = new Option("Publisher", "publisher");
+                    document.getElementById("search-type").options[6] = new Option("Title", "title");
+                    document.getElementById("search-type").options[7] = new Option("Year Published", "publish_date");
+                    break;
+                case "dvd" :
+                    document.getElementById("search-type").options[0] = new Option("Audience", "audience");
+                    document.getElementById("search-type").options[1] = new Option("Director", "director");
+                    document.getElementById("search-type").options[2] = new Option("Genre", "genre");
+                    document.getElementById("search-type").options[3] = new Option("Language", "language");
+                    document.getElementById("search-type").options[4] = new Option("Producer", "producer");
+                    document.getElementById("search-type").options[5] = new Option("Publisher", "publisher");
+                    document.getElementById("search-type").options[6] = new Option("Title", "title");
+                    document.getElementById("search-type").options[7] = new Option("Year Published", "publish_date");
+                    break;
+                case "vhs" :
+                    document.getElementById("search-type").options[0] = new Option("Audience", "audience");
+                    document.getElementById("search-type").options[1] = new Option("Director", "director");
+                    document.getElementById("search-type").options[2] = new Option("Genre", "genre");
+                    document.getElementById("search-type").options[3] = new Option("Language", "language");
+                    document.getElementById("search-type").options[4] = new Option("Producer", "producer");
+                    document.getElementById("search-type").options[5] = new Option("Publisher", "publisher");
+                    document.getElementById("search-type").options[6] = new Option("Title", "title");
+                    document.getElementById("search-type").options[7] = new Option("Year Published", "publish_date");
+                    break;
+            }
+            return true;
+        }
+    </script>
+
     <form name="form" action="" method="get">
         <label><b>Media Type</b></label>
-        <select id="media-type" name="media-type">
-            <option value="all" selected>All</option>
+        <select id="media-type" name="media-type" onchange="javascript: dynamicdropdown(this.options[this.selectedIndex].value);">
+            <option value="" selected>Please Select Media Type</option>
+            <option value="all" >All</option>
             <option value="book">Book</option>
             <option value="cassette">Cassette</option>
             <option value="cd">CD</option>
@@ -128,26 +205,35 @@ session_start();
             <option value="vhs">VHS</option>
         </select>
 
-        <label><b>Search Type</b></label>
-        <select id="search-type" name="search-type">
-            <option value="artist">Artist</option>
-            <option value="audience">Audience</option>
-            <option value="author">Author</option>
-            <option value="director">Director</option>
-            <option value="genre">Genre</option>
-            <option value="isbn10">ISBN-10</option>
-            <option value="isbn13">ISBN-13</option>
-            <option value="language">Language</option>
-            <option value="producer">Producer</option>
-            <option value="publisher">Publisher</option>
-            <option value="title">Title</option>
-            <option value="publish_date">Year Published</option>
-        </select>
+        <script type="text/javascript" language="JavaScript">
+        document.write('<select name=search-type id="search-type" ><option value="">Please Select Search Type</option></select>')
+        </script>
+        <noscript>
+            <select name=search-type id="search-type"><option value="">Please Select Search Type</option>
+        </noscript>
+<!--        <select id="search-type" name="search-type">-->
+<!--            <option value="artist">Artist</option>-->
+<!--            <option value="audience">Audience</option>-->
+<!--            <option value="author">Author</option>-->
+<!--            <option value="director">Director</option>-->
+<!--            <option value="genre">Genre</option>-->
+<!--            <option value="isbn10">ISBN-10</option>-->
+<!--            <option value="isbn13">ISBN-13</option>-->
+<!--            <option value="language">Language</option>-->
+<!--            <option value="producer">Producer</option>-->
+<!--            <option value="publisher">Publisher</option>-->
+<!--            <option value="title">Title</option>-->
+<!--            <option value="publish_date">Year Published</option>-->
+<!--        </select>-->
+
+
 
         <label><b>Search</b></label>
         <input type="text" placeholder="Search for..." name="search" required>
         <button type="submit">Search</button>
     </form>
+
+
 
     <?php
 
