@@ -89,7 +89,7 @@ session_start();
 				<a href="/searchRooms.php">Search Rented Rooms</a>
 			</div>
 		</div>
-		<? } ?>
+		<?php } ?>
 		<div class="item vgap">
 			Search Media
 			<div class="content">
@@ -185,6 +185,14 @@ session_start();
                 $sql = "SELECT * FROM Author_Media_View 
 					WHERE first_name LIKE '%$value%' OR last_name LIKE '%$value%'";
                 break;
+            case "artist":
+                $sql = "SELECT * FROM Author_Media_View 
+					WHERE first_name LIKE '%$value%'";
+                break;
+            case "title":
+                $sql = "SELECT * FROM Author_Media_View 
+					WHERE title LIKE '%$value%'";
+                break;
         }
         //$sql = "SELECT * FROM Full_Book_View WHERE first_name LIKE '%$value%' OR last_name LIKE '%$value%' ORDER BY title";
         $result = $conn->query($sql);
@@ -224,9 +232,7 @@ session_start();
         } else {
             echo "0 results";
         }
-    }
-
-    if ($mtype == "cd") {
+    } else if ($mtype == "cd") {
         switch ($stype) {
             case "artist":
                 $sql = "SELECT * FROM Full_CD_View WHERE first_name LIKE '%$value%' OR last_name LIKE '%$value%'";

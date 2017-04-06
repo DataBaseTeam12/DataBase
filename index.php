@@ -128,19 +128,18 @@
 			</nav>
 			<!--Main body-->
 			<main>
-				<div class="inner">
-					<!--Header of content-->
-					<h2>Welcome!</h2>
-					<!--Content-->
-					<p>This is Team 12's Database project. Please login if you have an account, or register if you're new here.</p>
-					<p>The search menu is on the right. Use it to search for media in the library's collection.</p>
-					<p>More information will go here.</p>
-				</div>
+<!--				<div class="inner">-->
+<!--					<!--Header of content
+<!--					<h2>Welcome!</h2>-->
+<!--					<!--Content-->
+<!--					<p>This is Team 12's Database project. Please login if you have an account, or register if you're new here.</p>-->
+<!--					<p>The search menu is on the left. Use it to search for media in the library's collection.</p>-->
+<!--				</div>-->
 			</main>
 			<!--Footer section-->
 			<footer>
 				&copy; Spring 2017 COSC 3380 Team 12
-				<br><br>
+				<br>
 				4333 University Drive
 				<br>
 				Houston, TX 77204-2000
