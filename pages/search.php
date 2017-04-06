@@ -205,6 +205,7 @@ session_start();
             <option value="vhs">VHS</option>
         </select>
 
+        <label><b>Search Type</b></label>
         <script type="text/javascript" language="JavaScript">
         document.write('<select name=search-type id="search-type" ><option value="">Please Select Search Type</option></select>')
         </script>
