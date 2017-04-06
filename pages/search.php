@@ -9,6 +9,7 @@ session_start();
     <link rel="stylesheet" href="/style/common.css">
     <link rel="stylesheet" href="/style/home.css">
     <link rel="stylesheet" href="/style/drop-down-menu.css">
+    <link rel="stylesheet" href="/style/footer.css">
     <script src="/site/script/common.js"></script>
     <!--Embedded code for Font Awesome icons-->
     <script src="https://use.fontawesome.com/4f7fcc0d3d.js"></script>
