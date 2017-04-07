@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="/style/common.css">
 	<link rel="stylesheet" href="/style/home.css">
 	<link rel="stylesheet" href="/style/drop-down-menu.css">
+    <link rel="stylesheet" href="/style/footer.css">
 	<script src="/site/script/common.js"></script>
 	<!--Embedded code for Font Awesome icons-->
 	<script src="https://use.fontawesome.com/4f7fcc0d3d.js"></script>
@@ -114,24 +115,93 @@
 		</div>
 	</aside>
 	<main>
-		<form method="post" action="">
+		<form name="from" method="get" action="">
 		<label><b>Search By</b></label>
-			<select id="search-type">
-				<option value="name" selected>Name</option>
+			<select id="search-type" name="search-type">
+                <option value="" >Select Search Field</option>
+				<option value="name" >Name</option>
 				<option value="id">ID</option>
 				<option value="username">Username</option>
+                <option value="email">Email</option>
 			</select>
-			
-			<label><b>Search</b></label>
-			<input type="search" placeholder="Search for..." name="search" required>
-			
-			<button type="submit">Search</button>
-		</form>		
+
+            <label><b>Search</b></label>
+            <input type="text" placeholder="Search for..." name="search" required>
+            <button type="submit">Search</button>
+
+		</form>
+
+        <?php
+        $servername = "162.253.224.12";
+        $username = "databa39_user";
+        $password = "databa39team12";
+        $dbname = "databa39_library";
+
+        $conn = new mysqli($servername, $username, $password, $dbname);
+
+        $sql = "SELECT * FROM Member ORDER BY total_fines DESC";
+
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $stype = '';
+
+        if (isset($_GET['search-type'])) {
+            $stype = $_GET['search-type'];
+        }
+
+        if (isset($_GET['search'])) {
+            $value = $_GET['search'];
+        }
+
+        switch($stype){
+            case "name" :
+                $sql = "SELECT * FROM Member WHERE first_name LIKE '%$value%' OR last_name LIKE '%$value%' ORDER BY last_name ASC";
+                break;
+            case "id" :
+                $sql = "SELECT * FROM Member WHERE id LIKE $value";
+                break;
+            case "username" :
+                $sql = "SELECT * FROM Member WHERE username LIKE '%$value%'";
+                break;
+            case "email" :
+                "SELECT * FROM Member WHERE email LIKE '%$value%'";
+                break;
+        }
+
+        $result = "";
+
+
+        $result = $conn->query($sql);
+
+        // If result is not empty, display it
+        if ($result->num_rows > 0) {
+            // Output data from every row
+            while ($row = $result->fetch_assoc()) {
+
+
+                echo "<hr><h4>" . "Member ID: ". $row["id"] . "<br> " . " Member: ". $row["first_name"] . " " . $row["middle_initial"] . " "
+                    . $row["last_name"] . "<br>" . "Fines: $". $row["total_fines"] . "</h4>"
+                    ."Address: " .$row["street_address"] . " " . $row["city"] . ", ". $row["state"] . " ". $row["zip_code"] . "<br>"
+                    . " Phone Number " .$row["phone_num"] . "<br> SSN:  ". $row["ssn"] . " <br> Email: ". $row["email"] . " <br> Username: ". $row["username"] . "<br>"
+                    . "Number of Books:  ". $row["num_books"] . " ";
+
+            }
+
+        } else {
+            echo "0 results";
+        }
+
+        $conn->close();
+        ?>
 	</main>
 	<!--custom html above-->
+    <br><br>
 	<footer>
 		&copy; Spring 2017 COSC 3380 Team 12
-		<br><br>
+		<br>
 		4333 University Drive
 		<br>
 		Houston, TX 77204-2000
