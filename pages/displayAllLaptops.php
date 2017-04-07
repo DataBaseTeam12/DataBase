@@ -120,6 +120,8 @@
 
 		// Create connection (test)
 		$conn = new mysqli($servername, $username, $password, $dbname);
+
+        $sql = "SELECT * FROM Laptop ORDER BY id ASC";
 		
 		// Check connection
 		if ($conn->connect_error) {
@@ -127,7 +129,7 @@
 		} 
 
 		// Call procedure or query for specific page
-		$sql = "SELECT * FROM Laptop ORDER BY id ASC";
+
 		$result = $conn->query($sql);
 		
 		// If result is not empty, display it

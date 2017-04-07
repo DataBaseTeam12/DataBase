@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="/style/common.css">
 	<link rel="stylesheet" href="/style/home.css">
 	<link rel="stylesheet" href="/style/drop-down-menu.css">
+    <link rel="stylesheet" href="/style/footer.css">
 	<script src="/site/script/common.js"></script>
 	<!--Embedded code for Font Awesome icons-->
 	<script src="https://use.fontawesome.com/4f7fcc0d3d.js"></script>
@@ -114,23 +115,96 @@
 		</div>
 	</aside>
 	<main>
-		<form method="post" action="">
+		<form method="get" action="">
 		<label><b>Search By</b></label>
-			<select id="search-type">
+			<select id="search-type" name="search-type">
 				<option value="serial" selected>Serial Number</option>
-				<option value="id">Member ID</option>
+				<option value="id">Laptop ID</option>
 			</select>
 			
 			<label><b>Search</b></label>
 			<input type="search" placeholder="Search for..." name="search" required>
 			
 			<button type="submit">Search</button>
-		</form>		
+		</form>
+
+        <?php
+        $servername = "162.253.224.12";
+        $username = "databa39_user";
+        $password = "databa39team12";
+        $dbname = "databa39_library";
+
+        $conn = new mysqli($servername, $username, $password, $dbname);
+
+        $sql = "SELECT * FROM Laptop ORDER BY id ASC";
+
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $stype = '';
+
+        if (isset($_GET['search-type'])) {
+            $stype = $_GET['search-type'];
+        }
+
+        if (isset($_GET['search'])) {
+            $value = $_GET['search'];
+        }
+
+
+
+        switch($stype){
+            case "serial" :
+                $sql = "SELECT * FROM Laptop WHERE serial LIKE '%$value%'";
+                break;
+            case "id" :
+                $sql = "SELECT * FROM Laptop WHERE id LIKE $value";
+                break;
+        }
+
+
+		// Call procedure or query for specific page
+
+		$result = $conn->query($sql);
+
+		// If result is not empty, display it
+		if ($result->num_rows > 0) {
+            echo "<table><tr><th width='15%'>Laptop ID</th><th width='25%'>Serial Number</th>
+			<th width='60%'>Availability</th></tr>";
+
+            // Output data from every row
+            while($row = $result->fetch_assoc()) {
+                $id = $row["id"];
+
+                echo "<tr><td>".$row["id"]."</td><td>".$row["serial"]."</td>";
+
+                $sql2 = "SELECT * FROM Laptop_Rents WHERE laptop_id = $id;";
+                $result2 = $conn->query($sql2);
+
+                if ($result2->num_rows > 0) {
+                    echo "<td><i class='fa fa-times-circle' aria-hidden='true'
+						style='color: #D25252'></i> Laptop is rented</td></tr>";
+                }
+                else {
+                    echo "<td><i class='fa fa-check-circle' aria-hidden='true' 
+						style='color: #57BC57'></i> Laptop is available</td></tr>";
+                }
+            }
+
+            echo "</table>";
+        } else {
+            echo "0 results";
+        }
+		$conn->close();
+		?>
 	</main>
 	<!--custom html above-->
+    <br><br>
 	<footer>
 		&copy; Spring 2017 COSC 3380 Team 12
-		<br><br>
+		<br>
 		4333 University Drive
 		<br>
 		Houston, TX 77204-2000
