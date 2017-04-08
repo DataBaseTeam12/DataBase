@@ -28,28 +28,28 @@ if(isset($_POST['register']))
 
     if (!preg_replace("/[^A-Z]+/", "", $first_name)) {
         $error = true;
-        echo "First name can only contain alphabets";
+        $firstName_error = "First name can only contain alphabets";
     }
 
     if (!preg_replace("/[^A-Z]+/", "", $last_name)) {
         $error = true;
-        echo "Last name can only contain alphabets";
+        $lastName_error = "Last name can only contain alphabets";
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = true;
-        echo "Please Enter a Valid Email";
+        $email_error = "Please Enter a Valid Email";
     }
 
     if ($_POST['password'] != $_POST['passwordAgain']) {
         $error = true;
-        echo "Password does not match";
+        $passwordMatch_error = "Password does not match";
     }
 
 
     if (strlen($passAgain) < 6) {
         $error = true;
-        echo "Password should be at least have a length of 6";
+        $shortPassword = "Password should be at least have a length of 6";
     }
 
     $sql = "SELECT * FROM Member WHERE email = '$email'";
@@ -147,6 +147,7 @@ if(isset($_POST['register']))
                 <div>
                     <label>First name</label>
                     <input name="firstName" type="text" placeholder="Enter First Name" class="form-control input-md" required="">
+                    <span class="danger"><?php if(isset($firstName_error)) echo $firstName_error; ?> </span>
                 </div>
 
                 <div>
@@ -158,16 +159,22 @@ if(isset($_POST['register']))
                 <div>
                     <label>Last Name</label>
                     <input name="lastName" type="text" maxlength="25" placeholder="Enter Last Name" required="">
+                    <span class="danger"><?php if(isset($lastName_error)) echo $lastName_error; ?> </span>
+
                 </div>
 
                 <div>
                     <label>Password</label>
                     <input name="password" type="password" maxlength="25" placeholder="Enter Password" required="">
+                    <span class="danger"><?php if(isset($shortPassword)) echo $shortPassword; ?> </span>
+
                 </div>
 
                 <div>
                     <label>Repeat Password</label>
                     <input name="passwordAgain" type="password" maxlength="25" placeholder="Enter Password Again" required="">
+                    <span class="danger"><?php if(isset($passwordMatch_error)) echo $passwordMatch_error; ?> </span>
+
                 </div>
 
                 <div>
@@ -209,6 +216,7 @@ if(isset($_POST['register']))
                 <div>
                     <label>Email</label>
                     <input name="email" type="email" maxlength="254" placeholder="Enter Email" required="">
+                    <span class="danger"><?php if(isset($email_error)) echo $email_error; ?> </span>
                 </div>
 
                 <div class="wrapper">
