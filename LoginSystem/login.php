@@ -5,35 +5,44 @@ include_once 'connectDB.php';
 
 if(isset($_SESSION['logged_in']))
 {
-    header("Location: index.php");
-    exit;
+    header("Location: http://www.databaseteam12.x10host.com/");
 }
 
 $error = false;
 
-if(isset($_POST['sign_up']))
+if(isset($_POST['log_in']))
 {
-    $email = mysqli_real_escape_string($con, $_POST['email']);
     // prevent sql injection.
+    $email = mysqli_real_escape_string($con, $_POST['email']);
 
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $result = $con->query("SELECT * FROM Member WHERE email = '$email'");
+
+    if ($result->num_rows == 0) {
         $error = true;
-        echo "Please Enter a Valid Email";
+        $error_message = "Incorrect Email or Password";
     }
-
-
-
-    $sql = "SELECT * FROM Member WHERE email = '$email'";
-    $result = $con->query($sql);
-
-    if ($result->num_rows > 0) {
-        $error = true;
-        echo "email already in use";
-    }
-
-    if(!$error) // if there is no error, continue to logging in.
+    else
     {
+        $user = $result->fetch_assoc();
 
+        if(password_verify($_POST['password'], $user['password']))
+        {
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['first_name'] = $user['first_name'];
+            $_SESSION['last_name'] = $user['last_name'];
+            $_SESSION['active'] = $user['active'];
+            $_SESSION['userAccount'] = $user['userAccount'];
+            $_SESSION['logged_in'] = $user['logged_in'];
+
+            header("Location: http://www.databaseteam12.x10host.com/");
+
+
+        }
+        else
+        {
+            $error = true;
+            $error_message = "Incorrect Email or Password";
+        }
     }
 }
 
@@ -44,64 +53,57 @@ if(isset($_POST['sign_up']))
 <!DOCTYPE html>
 <html>
 <title>Login</title>
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="common.css">
+<link rel="stylesheet" href="login.css">
 <link rel="stylesheet" href="drop-down-menu.css">
 
-<link rel="stylesheet" href="login.css">
 
-<script src="script/common.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded",
-        function (event) {
-            // make stuff happen after page loads
-        }
-    );
-</script>
 <body>
 <header>
     <div class="main">
         <h1><a href="http://www.databaseteam12.x10host.com"><font color="white">University of Houston</font></a></h1>
         <h3><a href="http://www.databaseteam12.x10host.com"><font color="white">Libraries</font></a></h3>
     </div>
-    <div class="subhead">
-
-    </div>
 </header>
 
 <nav>
-    <a href="index.php" style="float:left;">Home</a>
-    <a href="register.php">Register</a>
+
 </nav>
 
 <!-- custom content -->
 <main id="login">
     <section id="sign-in">
+        <div class="wrapper">
+        <span class="text-danger"><?php if(isset($error_message)) echo $error_message; ?> </span>
+        </div>
         <h2 style="text-align:center;">Sign in</h2>
-        <form action="processData.php" method="POST">
-            <!--action="processData" sends the data that was inputed in the form to the. POST method is used for sensetive data.-->
+        <form action="" method="POST">
+            <!--action="processData" sends the data that was inputed in the form to the. POST method is used for sensitive data.-->
             <p>
                 <label>Email:</label><br>
-                <input type="text" name="email" required="">
+                <input type="email" name="email" required="" class="form-control input-md">
                 <br>
             </p>
             <p>
                 <label>Password:</label><br>
-                <input type="password" name="password" required="">
+                <input type="password" name="password" required="" class="form-control input-md">
                 <a href="resetpass.php" style="float:right;">
                     Forgot your Password?
                 </a>
                 <br><br>
             </p>
+            <div class="wrapper">
             <p>
-                <button type="submit">Sign in</button>
+                <input type="submit" name="log_in" value="Sign In" class="btn btn-danger btn-block">
             </p>
+            </div>
             <div class="divider">
-                <hr style="float:left;"> <small>Need an account?</small> <hr style="float:right;">
+                <hr class="hr" style="float:left;"> <small>Need an account?</small> <hr class="hr" style="float:right;">
             </div>
             <div class="regbox">
                 <p>
-                    <button class="registerbutton" type="submit">Create an account</button>
+                    <a href="http://www.databaseteam12.x10host.com" class="btn btn-default btn-block">Create an account</a>
                 </p>
             </div>
         </form>
