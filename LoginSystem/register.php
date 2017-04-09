@@ -31,6 +31,20 @@ if(isset($_POST['register']))
         $firstName_error = "First name can only contain alphabets";
     }
 
+    if(isset($_POST['midInitial']) && $middle_initial != "")
+    {
+        if (!preg_replace("/[^A-Z]+/", "", $middle_initial)) {
+            $error = true;
+            $middle_initial_error = "Middle initial can only contain alphabets";
+        }
+    }
+
+    if(!isset($_POST["gender"]))
+    {
+        $error = true;
+        $gender_error = "Please select a gender.";
+    }
+
     if (!preg_replace("/[^A-Z]+/", "", $last_name)) {
         $error = true;
         $lastName_error = "Last name can only contain alphabets";
@@ -38,7 +52,7 @@ if(isset($_POST['register']))
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = true;
-        $email_error = "Please Enter a Valid Email";
+        $eml_error = "Please Enter a Valid Email";
     }
 
     if ($_POST['password'] != $_POST['passwordAgain']) {
@@ -46,10 +60,29 @@ if(isset($_POST['register']))
         $passwordMatch_error = "Password does not match";
     }
 
+    if (preg_match('#[^0-9]#',$phone) && strlen($phone) != 10)
+    {
+        $error = true;
+        $phone_error = "Phone number can only contain digits and must be 10 digits long.";
+    }
+    else
+    {
+        $formatted_phone = preg_replace("/^(\d{3})(\d{3})(\d{4})$/", "$1-$2-$3", $phone);
+    }
+
+    if (preg_match('#[^0-9]#',$ssn) && strlen($phone) != 9)
+    {
+        $error = true;
+        $snn_error = "SSN number can only contain digits and must be 9 digits long.";
+    }
+    else
+    {
+        $formatted_ssn = preg_replace("/^(\d{3})(\d{2})(\d{4})$/", "$1-$2-$3", $ssn);
+    }
 
     if (strlen($passAgain) < 6) {
         $error = true;
-        $shortPassword = "Password should be at least have a length of 6";
+        $shortPassword = "Password needs to be at least have a length of 6";
     }
 
     $sql = "SELECT * FROM Member WHERE email = '$email'";
@@ -57,7 +90,7 @@ if(isset($_POST['register']))
 
     if ($result->num_rows > 0) {
         $error = true;
-        echo "email already in use";
+        $email_error = "Email already in use";
     }
 
     if (!($error)) // if there are no errors, then proceed to add the data to the database.
@@ -87,24 +120,23 @@ if(isset($_POST['register']))
                 '$city',
                 '$state',
                 '$zip',
-                '$phone',
-                '$ssn',
+                '$formatted_phone',
+                '$formatted_ssn',
                 '$email',
                 '$gender',
                 '$pass'
             )";
-       if($con->query($sql))
-       {
-           echo "user created";
-           $_SESSION['logged_in'] = true;
-       }
-       else
-       {
-           echo "registration failed";
-       }
+        if($con->query($sql))
+        {
+            $successReg = "Successfully Registered!";
+            $_SESSION['logged_in'] = true;
+        }
+        else
+        {
+            $errorReg = "Registration failed, try again later!";
+        }
 
     }
-    echo $error;
 }
 ?>
 
@@ -115,6 +147,9 @@ if(isset($_POST['register']))
     <link rel="stylesheet" href="common.css">
     <link rel="stylesheet" href="register.css">
     <link rel="stylesheet" href="drop-down-menu.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
 
@@ -135,92 +170,97 @@ if(isset($_POST['register']))
     <a href="../../Documents/GitHub/DataBase/LoginSystem/login.php">Login</a>
 </nav>
 
-
 <div class="container">
     <div>
         <form method="post" action="" role="form" class="form-horizontal">
             <fieldset>
+                <div class="text-success"><?php if (isset($successReg)) { echo $successReg; } ?></div>
+                <div class="text-danger"><?php if (isset($errorReg)) { echo $errorReg; } ?></div>
                 <div>
                     <h2 class="wrapper"> Create Account</h2>
                 </div>
 
                 <div>
                     <label>First name</label>
-                    <input name="firstName" type="text" placeholder="Enter First Name" class="form-control input-md" required="">
-                    <span class="danger"><?php if(isset($firstName_error)) echo $firstName_error; ?> </span>
+                    <input name="firstName" type="text" placeholder="Enter First Name" class="form-control input-md" required value="<?php if($error) echo $first_name; ?>">
+                    <span class="text-danger"><?php if(isset($firstName_error)) echo $firstName_error; ?> </span>
                 </div>
 
                 <div>
                     <label>Middle Initial</label>
-                    <input name="midInitial" type="text" placeholder="Enter Middle Initial" maxlength="1">
+                    <input name="midInitial" type="text" placeholder="Enter Middle Initial" class="form-control input-md" maxlength="1">
+                    <span class="text-danger"><?php if(isset($middle_initial_error)) echo $middle_initial_error; ?> </span>
                 </div>
 
 
                 <div>
                     <label>Last Name</label>
-                    <input name="lastName" type="text" maxlength="25" placeholder="Enter Last Name" required="">
-                    <span class="danger"><?php if(isset($lastName_error)) echo $lastName_error; ?> </span>
+                    <input name="lastName" type="text" maxlength="25" placeholder="Enter Last Name" class="form-control input-md" required value="<?php if($error) echo $last_name; ?>">
+                    <span class="text-danger"><?php if(isset($lastName_error)) echo $lastName_error; ?> </span>
 
                 </div>
 
                 <div>
                     <label>Password</label>
-                    <input name="password" type="password" maxlength="25" placeholder="Enter Password" required="">
-                    <span class="danger"><?php if(isset($shortPassword)) echo $shortPassword; ?> </span>
+                    <input name="password" type="password" maxlength="25" placeholder="Enter Password" class="form-control input-md" required>
+                    <span class="text-danger"><?php if(isset($shortPassword)) echo $shortPassword; ?> </span>
 
                 </div>
 
                 <div>
                     <label>Repeat Password</label>
-                    <input name="passwordAgain" type="password" maxlength="25" placeholder="Enter Password Again" required="">
-                    <span class="danger"><?php if(isset($passwordMatch_error)) echo $passwordMatch_error; ?> </span>
+                    <input name="passwordAgain" type="password" maxlength="25" placeholder="Enter Password Again" class="form-control input-md" required>
+                    <span class="text-danger"><?php if(isset($passwordMatch_error)) echo $passwordMatch_error; ?> </span>
 
                 </div>
 
                 <div>
                     <label>Address</label>
-                    <input name="address" type="text" maxlength="30" placeholder="Enter Address" required="">
+                    <input name="address" type="text" maxlength="30" placeholder="Enter Address" class="form-control input-md" required value="<?php if($error) echo $address; ?>">
                 </div>
 
                 <div>
                     <label>City</label>
-                    <input name="city" type="text" maxlength="25" placeholder="Enter City" required="">
+                    <input name="city" type="text" maxlength="25" placeholder="Enter City" class="form-control input-md" required value="<?php if($error) echo $city; ?>">
                 </div>
 
                 <div>
                     <label>State</label>
-                    <input name="state" type="text" maxlength="25" placeholder="Enter State" required="">
+                    <input name="state" type="text" maxlength="25" placeholder="Enter State" class="form-control input-md" required value="<?php if($error) echo $state; ?>">
                 </div>
 
                 <div>
                     <label>Zip Code</label>
-                    <input name="zip" type="text" maxlength="5" placeholder="Enter Zip Code" required="">
+                    <input name="zip" type="text" maxlength="5" placeholder="Enter Zip Code" class="form-control input-md" required value="<?php if($error) echo $state; ?>">
                 </div>
 
                 <div>
                     <label>Phone Number</label>
-                    <input name="phone" type="text" maxlength="25" placeholder="Enter Phone Number" required="">
+                    <input name="phone" type="text" maxlength="10" placeholder="Enter Phone Number" class="form-control input-md" required value="<?php if($error) echo $phone; ?>">
+                    <span class="text-danger"><?php if(isset($phone_error)) echo $phone_error; ?> </span>
                 </div>
 
                 <div>
                     <label>SSN</label>
-                    <input name="ssn" type="text" maxlength="25" placeholder="Enter SSN" required="">
+                    <input name="ssn" type="text" maxlength="9" placeholder="Enter SSN" class="form-control input-md" required value="<?php if($error) echo $ssn; ?>">
+                    <span class="text-danger"><?php if(isset($snn_error)) echo $snn_error; ?> </span>
                 </div>
 
                 <div>
                     <label>Sex</label>
-                    <input type="radio" name="gender" id="gender" tabindex="2" > Male
-                    <input type="radio" name="gender" id="gender" tabindex="2" > Female
+                    <input type="radio" name="gender" id="gender" tabindex="4" > Male
+                    <input type="radio" name="gender" id="gender" tabindex="4" > Female
+                    <span class="text-danger"><?php if(isset($gender_error)) echo $gender_error; ?> </span>
                 </div>
                 <br>
                 <div>
                     <label>Email</label>
-                    <input name="email" type="email" maxlength="254" placeholder="Enter Email" required="">
-                    <span class="danger"><?php if(isset($email_error)) echo $email_error; ?> </span>
+                    <input name="email" type="email" maxlength="254" placeholder="Enter Email" class="form-control input-md" required value="<?php if($error) echo $email; ?>">
+                    <span class="text-danger"><?php if(isset($email_error)) echo $email_error; ?> </span>
                 </div>
 
                 <div class="wrapper">
-                    <input type="submit" name="register" value="Register">
+                    <input type="submit" name="register" value="Register" class="btn btn-primary">
                 </div>
             </fieldset>
         </form>
