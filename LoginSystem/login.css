@@ -180,3 +180,15 @@ label {
     width: 450px;
     margin: auto;
 }
+
+footer {
+    width: 100%;
+    padding: 5px;
+    color: white;
+    background-color: #54585A;
+    text-align: center;
+
+    position:fixed;
+    bottom:0;
+    left:0;
+}

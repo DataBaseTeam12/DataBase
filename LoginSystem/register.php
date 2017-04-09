@@ -166,8 +166,6 @@ if(isset($_POST['register']))
 </header>
 
 <nav>
-    <a href="index.php" style="float:left;">Home</a>
-    <a href="../../Documents/GitHub/DataBase/LoginSystem/login.php">Login</a>
 </nav>
 
 <div class="container">
