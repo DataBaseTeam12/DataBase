@@ -3,6 +3,10 @@ session_start();
 
 include_once 'connectDB.php';
 
+if(isset($_SESSION['logged_in']))
+{
+    header("Location: http://www.databaseteam12.x10host.com/");
+}
 
 if(isset($_POST['register']))
 {
