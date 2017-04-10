@@ -1,6 +1,8 @@
-<?php 
-
-$conn = mysql_connect("localhost", "root", "", "") or die("Failed to connect");
-mysqli_select_db("databa39_library")
-
+<?php
+$servername = "162.253.224.12";
+$username = "databa39_user";
+$password = "databa39team12";
+$dbname = "databa39_library";
+$con = mysqli_connect("$servername", "$username", "$password", "$dbname") or
+die("Failed to connect");
 ?>

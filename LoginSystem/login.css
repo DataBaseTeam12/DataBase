@@ -1,3 +1,63 @@
+
+header {
+	background-color: #c8102e;
+	clear: left;
+	font-family: sans-serif;
+}
+
+
+
+
+.main {
+	padding: 15px;
+	color: white;
+	text-align: center;
+}
+
+.subhead {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-right: 20px;
+	color: white;
+	background-color: #960C22;
+	clear: left;
+	text-align: right;
+}
+
+h1 {
+	font-family: sans-serif;
+	text-decoration: underline;
+	margin-bottom: 0;
+}
+
+h2 {
+	font-family: Arial, sans-serif;
+	font-size: 20px;
+	font-weight: 100;
+
+}
+h3 {
+	font-size: 1.5em;
+	font-weight: normal;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+	margin-top: 0;
+}
+
+/* login/register/reset*/
+
+form {
+	border: 2px solid #f1f1f1;
+	padding: 15px;
+	margin-top: 10px;
+	font-family: Arial, sans-serif;
+	box-sizing: border-box;
+}
+
+
+
+/* page login */
+
 main {
 	/*common*/
 	color: black;
@@ -48,14 +108,6 @@ input[type=text], input[type=password] {
 	padding: 3px 7px;
 }
 
-.innerboxForgotpassword {
-    border: 2px solid #f1f1f1;
-    padding: 5px;
-	min-height: 60px;
-	width: 450px;
-	margin: auto;
-}
-
 label {
 	padding-left: 4px;
 	padding-bottom: 4px;
@@ -71,10 +123,6 @@ label {
 		width: 30%;
 	}
 
-.left {
-	float: left
-}
-
 .registerbutton {
 	box-sizing: border-box;
 	font-size: 16px;
@@ -84,26 +132,64 @@ label {
 	cursor: pointer;
 }
 
-.right {
-	float: right
-}
-
-a:link, a:hover, a:active {
-	text-decoration: none;
+button {
+	box-sizing: border-box;
+	font-size: 18px;
+	width: 100%;
+	background-color: #c8102e;
+	color: white;
+	box-sizing: border-box;
 	cursor: pointer;
-}
-
-button 
-{
-    box-sizing: border-box;
-    font-size: 18px;
-    width: 100%;
-    background-color: #c8102e;
-    color: white;
-    box-sizing: border-box;
-    cursor: pointer;
 }
 
 .regbox {
 	text-align: center;
+}
+
+
+
+/* page register */
+h2 {
+	font-family: Arial, sans-serif;
+	font-size: 20px;
+	font-weight: 100;
+}
+
+.register form {
+	border: 2px solid #f1f1f1;
+	padding: 15px;
+	margin-top: 10px;
+	font-family: Arial, sans-serif;
+	box-sizing: border-box;
+}
+
+.container {
+	margin-top: 70px;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+label {
+	padding-left: 4px;
+	padding-bottom: 4px;
+}
+
+
+
+/* page forgot */
+
+.reset form {
+	border: 2px solid #f1f1f1;
+	padding: 10px;
+	margin-top: 10px;
+	font-family: Arial, sans-serif;
+	box-sizing: border-box;
+}
+
+.innerboxForgotpassword {
+	border: 2px solid #f1f1f1;
+	padding: 5px;
+	min-height: 60px;
+	width: 450px;
+	margin: auto;
 }

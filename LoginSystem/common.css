@@ -1,40 +1,30 @@
-html, body {
-	margin: 0;
-	padding: 0;
+html {
+	height: 100%;
 }
 
-header {
+/*the "table" display is how the footer stays at the bottom*/
+body {
 	/*common*/
-	color: white;
-	background-color: #c8102e; /*lighter red*/
+	color: inherit;
+	background-color: inherit; /*lighter red*/
 	margin: 0px;
-	padding: 50px 0px; /*vertical horizontal*/
-	/*text*/
-	text-align: center;
+	padding: 0px;
+	/*view*/
+	display: table;
+	width: 100%;
+	height: 100%;
 }
 
-	header h1 {
-		/*common*/
-		color: inherit;
-		background-color: inherit; /*lighter red*/
-		margin: 0px;
-		padding: 0px;
-		/*text*/
-		font: bold 2em sans-serif;
-		text-decoration: underline;
-	}
-
-	header h3 {
-		/*common*/
-		color: inherit;
-		background-color: inherit; /*lighter red*/
-		margin: 0px;
-		padding: 0px;
-		/*text*/
-		font: normal 1.5em sans-serif;
-		letter-spacing: 3px;
-		text-transform: uppercase;
-	}
+/*this makes all inks style like their underlying parent*/
+a {
+	/*common*/
+	color: inherit;
+	background-color: inherit; /*lighter red*/
+	margin: 0px;
+	padding: 0px;
+	/*text*/
+	text-decoration: inherit;
+}
 
 nav {
 	/*common*/
@@ -50,29 +40,14 @@ nav {
 
 	nav a {
 		/*common*/
-		color: white;
 		background-color: #c8102e; /*lighter red*/
-		margin: 0px;
 		padding: 10px;
 		/*view*/
 		display: inline-block;
 		/*text*/
 		font: bold 14px sans-serif;
-		text-decoration: none;
 		text-transform: uppercase;
 	}
-
-footer
-{
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    padding: 5px;
-    color: white;
-    background-color: #54585A;
-    clear: left;
-    text-align: center;
-}
 
 
 .current li {
@@ -96,7 +71,7 @@ footer
 .inner {
 }
 
-input[type=username], input[type=password], input[type=text], select {
+input[type=username], input[type=password], input[type=text], input[type=email], select {
 	width: 100%;
 	padding: 10px 15px;
 	margin-top: 5px;
@@ -112,6 +87,17 @@ span.incorrect {
 	padding-top: 10px;
 	color: #c8102e; /*lighter red*/
 }
+
+footer {
+	width: 100%;
+    height : 90px;
+    padding: 5px;
+	color: white;
+	background-color: #54585A;
+	clear: left;
+	text-align: center;
+}
+
 
 span.forgot {
 	float: right;
