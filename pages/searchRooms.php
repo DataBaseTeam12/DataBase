@@ -114,18 +114,97 @@
 		</div>
 	</aside>
 	<main>
-		<form method="post" action="">
+		<form method="get" action="">
 		<label><b>Search By</b></label>
-			<select id="search-type">
+			<select id="search-type" name="search-type">
 				<option value="room" selected>Room Number</option>
-				<option value="id">Member ID</option>
+				<option value="floor">Floor</option>
 			</select>
 			
 			<label><b>Search</b></label>
 			<input type="search" placeholder="Search for..." name="search" required>
 			
 			<button type="submit">Search</button>
-		</form>		
+		</form>
+
+        <?php
+        $servername = "162.253.224.12";
+        $username = "databa39_user";
+        $password = "databa39team12";
+        $dbname = "databa39_library";
+
+        $conn = new mysqli($servername, $username, $password, $dbname);
+
+        $sql = "SELECT * FROM Rooms ORDER BY room_num ASC;";
+
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $stype = '';
+
+        if (isset($_GET['search-type'])) {
+            $stype = $_GET['search-type'];
+        }
+
+        if (isset($_GET['search'])) {
+            $value = $_GET['search'];
+        }
+
+
+
+        switch($stype){
+            case "room" :
+                $sql = "SELECT * FROM Rooms WHERE room_num LIKE '%$value%'";
+                break;
+            case "floor" :
+                $sql = "SELECT * FROM Rooms WHERE floor LIKE $value";
+                break;
+        }
+
+		$result = $conn->query($sql);
+
+		// If result is not empty, display it
+		if ($result->num_rows > 0) {
+            // Output data from every row
+            while($row = $result->fetch_assoc()) {
+                $room = $row["room_num"];
+
+                echo "<hr><table>
+				<tr><td width='30%'><b>Room Number</b></td>
+				<td width='70%'>".$row["room_num"]."</td></tr>
+				<tr><td><b>Floor Number</b></td>
+				<td>".$row["floor"]."</td></tr>
+				<tr><td><b>Room Type</b></td>
+				<td>".$row["room_type"]."</td></tr>
+				<tr><td><b>Capacity</b></td>
+				<td>".$row["capacity"]."</td></tr>
+				</table>";
+
+
+                $sql2 = "SELECT * FROM Room_Reserve_View WHERE room_num = '$room';";
+                $result2 = $conn->query($sql2);
+
+                if ($result2->num_rows > 0) {
+                    $row2 = $result2->fetch_assoc();
+
+                    echo "<p><i class='fa fa-times-circle' aria-hidden='true'
+						style='color: #D25252'></i> Room is <b>unavailable</b> until "
+                        .$row2["end_time"]."</p>";
+                }
+                else {
+                    echo "<p><i class='fa fa-check-circle' aria-hidden='true' 
+						style='color: #57BC57'></i> Room is <b>available</b> from ".$row["avail_start"].
+                        " to ".$row["avail_end"]."</p>";
+                }
+            }
+        } else {
+            echo "0 results";
+        }
+		$conn->close();
+		?>
+
 	</main>
 	<!--custom html above-->
 	<footer>
