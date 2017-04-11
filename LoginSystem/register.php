@@ -98,6 +98,7 @@ if(isset($_POST['register']))
         $email_error = "Email already in use";
     }
 
+    $sql = "SELECT * FROM Member WHERE username = '$username'";
     $result = $con->query($sql);
 
     if ($result->num_rows > 0) {
