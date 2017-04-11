@@ -32,10 +32,9 @@ if(isset($_POST['log_in']))
             $_SESSION['last_name'] = $user['last_name'];
             $_SESSION['active'] = $user['active'];
             $_SESSION['userAccount'] = $user['userAccount'];
-            $_SESSION['logged_in'] = $user['logged_in'];
+            $_SESSION['logged_in'] = true;
 
             header("Location: http://www.databaseteam12.x10host.com/");
-
 
         }
         else
@@ -82,12 +81,12 @@ if(isset($_POST['log_in']))
             <!--action="processData" sends the data that was inputed in the form to the. POST method is used for sensitive data.-->
             <p>
                 <label>Email:</label><br>
-                <input type="email" name="email" required="" class="form-control input-md">
+                <input type="email" name="email" required="" class="form-control input-md" maxlength="30">
                 <br>
             </p>
             <p>
                 <label>Password:</label><br>
-                <input type="password" name="password" required="" class="form-control input-md">
+                <input type="password" name="password" required="" class="form-control input-md" maxlength="25">
                 <a href="resetpass.php" style="float:right;">
                     Forgot your Password?
                 </a>

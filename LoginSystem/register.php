@@ -257,7 +257,7 @@ if(isset($_POST['register']))
                 <br>
                 <div>
                     <label>Email</label>
-                    <input name="email" type="email" maxlength="254" placeholder="Enter Email" class="form-control input-md" required value="<?php if($error) echo $email; ?>">
+                    <input name="email" type="email" maxlength="30" placeholder="Enter Email" class="form-control input-md" required value="<?php if($error) echo $email; ?>">
                     <span class="text-danger"><?php if(isset($email_error)) echo $email_error; ?> </span>
                 </div>
 

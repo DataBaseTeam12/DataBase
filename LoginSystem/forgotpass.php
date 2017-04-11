@@ -3,6 +3,7 @@
 <head>
 	<link rel="stylesheet" href="common.css">
 	<link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
 
@@ -17,26 +18,22 @@
 			</div>
 		</header>
 	</div>
-	<br>
-    <br>
-    <br>
 	<div class="container">
-		
 		<div class="innerboxForgotpassword">
             <h2>Enter your email</h2>
-			<form class="form2" action="processData.php" method="POST" >   <!-- action="processData" sends the data that was inputed in the form to the. POST method is used for sensetive data. --> 
+			<form class="form2" action="" method="POST" >   <!-- action="processData" sends the data that was inputed in the form to the. POST method is used for sensetive data. -->
+                <p>
                 Enter your email associated with your account and we will send you the password reset link.
+                </p>
 				<p>
-					<label>Email:</label><br>
-					<input type="text" name="email">
-					<br>
+					<label>Email:</label>
+					<input class="form-control input-md" type="text" name="email" maxlength="30">
 				</p>
 				<p>
-					<button type="submit">Send Verification Code</button>
+					<button class="btn btn-primary btn-block" type="submit">Send Verification Code</button>
 				</p>
 			</form>
 		</div>
-		
 	</div>
 
 	<footer>
