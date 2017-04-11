@@ -7,7 +7,10 @@
 	<title>Display All</title>
 	<link rel="stylesheet" href="/style/common.css">
 	<link rel="stylesheet" href="/style/home.css">
+	<link rel="stylesheet" href="/style/header.css">
+	<link rel="stylesheet" href="/style/footer.css">
 	<link rel="stylesheet" href="/style/drop-down-menu.css">
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="/site/script/common.js"></script>
 	<!--Embedded code for Font Awesome icons-->
 	<script src="https://use.fontawesome.com/4f7fcc0d3d.js"></script>
@@ -46,6 +49,16 @@
 		font: bold 14px sans-serif;
 		cursor: pointer;
 	}
+		main a, input[type=submit] {
+		padding: 10px;
+		border: none;
+		background-color: #c8102e;
+		color: #FFF9D9;
+		text-transform: uppercase;
+		text-decoration: none;
+		font: bold 14px sans-serif;
+		cursor: pointer;
+	}
 	</style>
 </head>
 
@@ -69,37 +82,37 @@
 				<a href="#">Add New Media</a>
 				<a href="#">Check Out Media</a>
 				<a href="#">Check In Media</a>
-				<a href="http://www.databaseteam12.x10host.com/searchMembers.php">Search Members</a>
+				<a href="/searchMembers.php">Search Members</a>
 				<a href="#">Display All Members By Last Name</a>
 				<a href="#">Display All Members By Fines</a>
-				<a href="http://www.databaseteam12.x10host.com/searchLaptops.php">Search Rented Laptops</a>
-				<a href="http://www.databaseteam12.x10host.com/searchRooms.php">Search Rented Rooms</a>
+				<a href="/searchLaptops.php">Search Rented Laptops</a>
+				<a href="/searchRooms.php">Search Rented Rooms</a>
 			</div>
 		</div>
 		<?php } ?>
 		<div class="item vgap">
 			Search Media
 			<div class="content">
-				<a href="http://www.databaseteam12.x10host.com/search.php">Search</a>
-				<a href="http://www.databaseteam12.x10host.com/displayAll.php">Display All Media</a>
-				<a href="http://www.databaseteam12.x10host.com/displayAllBooks.php">Display All Books</a>
-				<a href="http://www.databaseteam12.x10host.com/displayAllCassettes.php">Display All Cassettes</a>
-				<a href="http://www.databaseteam12.x10host.com/displayAllCds.php">Display All CDs</a>
-				<a href="http://www.databaseteam12.x10host.com/displayAllDvds.php">Display All DVDs</a>
-				<a href="http://www.databaseteam12.x10host.com/displayAllVhs.php">Display All VHS</a>
+				<a href="/search.php">Search</a>
+				<a href="/displayAll.php">Display All Media</a>
+				<a href="/displayAllBooks.php">Display All Books</a>
+				<a href="/displayAllCassettes.php">Display All Cassettes</a>
+				<a href="/displayAllCds.php">Display All CDs</a>
+				<a href="/displayAllDvds.php">Display All DVDs</a>
+				<a href="/displayAllVhs.php">Display All VHS</a>
 				
 			</div>
 		</div>
 		<div class="item vgap">
 			Laptop Rentals
 			<div class="content">
-				<a href="http://www.databaseteam12.x10host.com/displayAllLaptops.php">Display All Laptops</a>
+				<a href="/displayAllLaptops.php">Display All Laptops</a>
 			</div>
 		</div>
 		<div class="item">
 			Room Reservations
 			<div class="content">
-				<a href="http://www.databaseteam12.x10host.com/displayAllRooms.php">Display All Rooms</a>
+				<a href="/displayAllRooms.php">Display All Rooms</a>
 			</div>
 		</div>
 	</aside>
@@ -131,7 +144,7 @@
 			while($row = $result->fetch_assoc()) {
 				$book = $row["id"];
 				$copy = $row["copy_num"];
-				
+				$member_id =4; // get id from session
 				echo "<hr><h2>".$row["title"]."</h2>"
 				.$row["first_name"]." ".$row["last_name"]." "
 				.$row["published_date"]."<br>".$row["publisher"].".<br><br>
@@ -145,8 +158,14 @@
 						
 					// If logged in, provide options to reserve or hold
 					if (session_status() == PHP_SESSION_ACTIVE) {
-						echo "<a href=\"\">Hold</a>
-						<a href=\"\" style=\"margin-left:5px;\">Reserve</a>
+					 echo "<form >
+						<input type='submit' class = 'hold' name='hold-$book-$copy' value='Hold'>
+						<input type='submit' class ='reserve' name='reserve-$book-$copy' value='Reserve'>
+						<input type='hidden' name='memberId' value = $member_id>
+						<input type='hidden' name='id' value=$book>
+                        <input type='hidden' name='copy' value=$copy>
+                         
+						</form>
 						</p>";
 					}
 				}
@@ -172,3 +191,39 @@
 		Houston, TX 77204-2000
 	</footer>
 </body>
+<script>
+$('.hold').click( function(){
+   
+      $('form').submit(function(){
+         // alert("enter form");
+         var data = $(this).serializeArray();
+          data = JSON.stringify(data);
+          var xmlhttp = new XMLHttpRequest();
+         xmlhttp.onreadystatechange = function() {
+             if (this.readyState == 4 && this.status == 200) {
+                 alert(this.responseText);
+
+             }
+         };
+          xmlhttp.open("GET", "hold_reserve.php"+"?t="+"hold"+"&data="+data , true);
+         xmlhttp.send();
+    });
+});
+  $('.reserve').click( function(){
+       // alert("enter reserve");
+      $('form').submit(function(){
+         var data = $(this).serializeArray();
+          data = JSON.stringify(data);
+          var xmlhttp = new XMLHttpRequest();
+         xmlhttp.onreadystatechange = function() {
+             if (this.readyState == 4 && this.status == 200) {
+                 alert(this.responseText);
+
+             }
+         };
+          xmlhttp.open("GET", "hold_reserve.php"+"?t="+"reserve"+"&data="+data , true);
+         xmlhttp.send();
+    });
+});
+</script>
+</html>
