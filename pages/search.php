@@ -10,6 +10,7 @@ session_start();
     <link rel="stylesheet" href="/style/home.css">
     <link rel="stylesheet" href="/style/drop-down-menu.css">
     <link rel="stylesheet" href="/style/footer.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="/site/script/common.js"></script>
     <!--Embedded code for Font Awesome icons-->
     <script src="https://use.fontawesome.com/4f7fcc0d3d.js"></script>
@@ -61,6 +62,17 @@ session_start();
             border: 1px solid #555;
             box-sizing: border-box;
         }
+        	main a, input[type=submit] {
+		padding: 10px;
+		border: none;
+		background-color: #c8102e;
+		color: #FFF9D9;
+		text-transform: uppercase;
+		text-decoration: none;
+		font: bold 14px sans-serif;
+		cursor: pointer;
+	}
+	</style>
     </style>
 </head>
 
@@ -291,7 +303,7 @@ session_start();
             while ($row = $result->fetch_assoc()) {
                 $book = $row["id"];
                 $copy = $row["copy_num"];
-
+                $member_id =2; // get the id from session from login
                 echo "<hr><h2>" . $row["title"] . "</h2>"
                     . $row["first_name"] . " " . $row["last_name"] . " "
                     . $row["published_date"] . "<br>" . $row["publisher"] . ".<br><br>
@@ -305,8 +317,14 @@ session_start();
 
                     // If logged in, provide options to reserve or hold
                     if (session_status() == PHP_SESSION_ACTIVE) {
-                        echo "<a href=\"\">Hold</a>
-						<a href=\"\" style=\"margin-left:5px;\">Reserve</a>
+                        echo "<form >
+						<input type='submit' class = 'hold' name='hold-$book-$copy' value='Hold'>
+						<input type='submit' class ='reserve' name='reserve-$book-$copy' value='Reserve'>
+						<input type='hidden' name='memberId' value = $member_id>
+						<input type='hidden' name='id' value=$book>
+                        <input type='hidden' name='copy' value=$copy>
+                         
+						</form>
 						</p>";
                     }
                 } // Else, display status of the book
@@ -356,7 +374,7 @@ session_start();
             while ($row = $result->fetch_assoc()) {
                 $book = $row["id"];
                 $copy = $row["copy_num"];
-
+                $member_id =2; // get the id from session from login
                 echo "<hr><h2>" . $row["title"] . "</h2>"
                     . $row["first_name"] . " " . $row["last_name"] . " "
                     . $row["published_date"] . "<br>" . $row["publisher"] . ".<br><br>
@@ -370,8 +388,14 @@ session_start();
 
                     // If logged in, provide options to reserve or hold
                     if (session_status() == PHP_SESSION_ACTIVE) {
-                        echo "<a href=\"\">Hold</a>
-						<a href=\"\" style=\"margin-left:5px;\">Reserve</a>
+                       echo "<form >
+						<input type='submit' class = 'hold' name='hold-$book-$copy' value='Hold'>
+						<input type='submit' class ='reserve' name='reserve-$book-$copy' value='Reserve'>
+						<input type='hidden' name='memberId' value = $member_id>
+						<input type='hidden' name='id' value=$book>
+                        <input type='hidden' name='copy' value=$copy>
+                         
+						</form>
 						</p>";
                     }
                 } // Else, display status of the book
@@ -426,7 +450,7 @@ session_start();
             while ($row = $result->fetch_assoc()) {
                 $book = $row["id"];
                 $copy = $row["copy_num"];
-
+                      $member_id =2; // get the id from session from login
                 echo "<hr><h2>" . $row["title"] . "</h2>"
                     . $row["first_name"] . " " . $row["last_name"] . " "
                     . $row["published_date"] . "<br>" . $row["publisher"] . ".<br><br>
@@ -440,8 +464,14 @@ session_start();
 
                     // If logged in, provide options to reserve or hold
                     if (session_status() == PHP_SESSION_ACTIVE) {
-                        echo "<a href=\"\">Hold</a>
-						<a href=\"\" style=\"margin-left:5px;\">Reserve</a>
+                       echo "<form >
+						<input type='submit' class = 'hold' name='hold-$book-$copy' value='Hold'>
+						<input type='submit' class ='reserve' name='reserve-$book-$copy' value='Reserve'>
+						<input type='hidden' name='memberId' value = $member_id>
+						<input type='hidden' name='id' value=$book>
+                        <input type='hidden' name='copy' value=$copy>
+                         
+						</form>
 						</p>";
                     }
                 } // Else, display status of the book
@@ -500,7 +530,7 @@ session_start();
             while ($row = $result->fetch_assoc()) {
                 $book = $row["id"];
                 $copy = $row["copy_num"];
-
+                 $member_id =2; // get the id from session from login
                 echo "<hr><h2>" . $row["title"] . "</h2>"
                     . $row["first_name"] . " " . $row["last_name"] . " "
                     . $row["published_date"] . "<br>" . $row["publisher"] . ".<br><br>
@@ -514,8 +544,14 @@ session_start();
 
                     // If logged in, provide options to reserve or hold
                     if (session_status() == PHP_SESSION_ACTIVE) {
-                        echo "<a href=\"\">Hold</a>
-						<a href=\"\" style=\"margin-left:5px;\">Reserve</a>
+                       echo "<form >
+						<input type='submit' class = 'hold' name='hold-$book-$copy' value='Hold'>
+						<input type='submit' class ='reserve' name='reserve-$book-$copy' value='Reserve'>
+						<input type='hidden' name='memberId' value = $member_id>
+						<input type='hidden' name='id' value=$book>
+                        <input type='hidden' name='copy' value=$copy>
+                         
+						</form>
 						</p>";
                     }
                 } // Else, display status of the book
@@ -564,7 +600,7 @@ session_start();
             while($row = $result->fetch_assoc()) {
                 $book = $row["id"];
                 $copy = $row["copy_num"];
-
+                      $member_id =2; // get the id from session from login
                 echo "<hr><h2>".$row["title"]."</h2>"
                     . $row["director"] . " "
                     .$row["published_date"]."<br>".$row["publisher"].".<br><br>
@@ -578,8 +614,14 @@ session_start();
 
                     // If logged in, provide options to reserve or hold
                     if (session_status() == PHP_SESSION_ACTIVE) {
-                        echo "<a href=\"\">Hold</a>
-						<a href=\"\" style=\"margin-left:5px;\">Reserve</a>
+                        echo "<form >
+						<input type='submit' class = 'hold' name='hold-$book-$copy' value='Hold'>
+						<input type='submit' class ='reserve' name='reserve-$book-$copy' value='Reserve'>
+						<input type='hidden' name='memberId' value = $member_id>
+						<input type='hidden' name='id' value=$book>
+                        <input type='hidden' name='copy' value=$copy>
+                         
+						</form>
 						</p>";
                     }
                 }
@@ -626,7 +668,7 @@ session_start();
             while ($row = $result->fetch_assoc()) {
                 $book = $row["id"];
                 $copy = $row["copy_num"];
-
+                $member_id =2; // get the id from session from login
                 echo "<hr><h2>" . $row["title"] . "</h2>"
                     . $row["director"] . " "
                     . $row["published_date"] . "<br>" . $row["publisher"] . ".<br><br>
@@ -640,8 +682,14 @@ session_start();
 
                     // If logged in, provide options to reserve or hold
                     if (session_status() == PHP_SESSION_ACTIVE) {
-                        echo "<a href=\"\">Hold</a>
-						<a href=\"\" style=\"margin-left:5px;\">Reserve</a>
+                       echo "<form >
+						<input type='submit' class = 'hold' name='hold-$book-$copy' value='Hold'>
+						<input type='submit' class ='reserve' name='reserve-$book-$copy' value='Reserve'>
+						<input type='hidden' name='memberId' value = $member_id>
+						<input type='hidden' name='id' value=$book>
+                        <input type='hidden' name='copy' value=$copy>
+                         
+						</form>
 						</p>";
                     }
                 } // Else, display status of the book
@@ -670,3 +718,39 @@ session_start();
     Houston, TX 77204-2000
 </footer>
 </body>
+<script>
+$('.hold').click( function(){
+   
+      $('form').submit(function(){
+         // alert("enter form");
+         var data = $(this).serializeArray();
+          data = JSON.stringify(data);
+          var xmlhttp = new XMLHttpRequest();
+         xmlhttp.onreadystatechange = function() {
+             if (this.readyState == 4 && this.status == 200) {
+                 alert(this.responseText);
+
+             }
+         };
+          xmlhttp.open("GET", "hold_reserve.php"+"?t="+"hold"+"&data="+data , true);
+         xmlhttp.send();
+    });
+});
+  $('.reserve').click( function(){
+       // alert("enter reserve");
+      $('form').submit(function(){
+         var data = $(this).serializeArray();
+          data = JSON.stringify(data);
+          var xmlhttp = new XMLHttpRequest();
+         xmlhttp.onreadystatechange = function() {
+             if (this.readyState == 4 && this.status == 200) {
+                 alert(this.responseText);
+
+             }
+         };
+          xmlhttp.open("GET", "hold_reserve.php"+"?t="+"reserve"+"&data="+data , true);
+         xmlhttp.send();
+    });
+});
+</script>
+</html>
