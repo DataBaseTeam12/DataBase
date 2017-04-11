@@ -9,11 +9,11 @@ $error = false;
 if(isset($_POST['log_in']))
 {
     // prevent sql injection.
-    $email = mysqli_real_escape_string($con, $_POST['email']);
-    $result = $con->query("SELECT * FROM Member WHERE email = '$email'");
+    $username = mysqli_real_escape_string($con, $_POST['username']);
+    $result = $con->query("SELECT * FROM Member WHERE username = '$username'");
     if ($result->num_rows == 0) {
         $error = true;
-        $error_message = "Incorrect Email or Password";
+        $error_message = "Incorrect Username or Password";
     }
     else
     {
@@ -24,6 +24,7 @@ if(isset($_POST['log_in']))
             $_SESSION['email'] = $user['email'];
             $_SESSION['first_name'] = $user['first_name'];
             $_SESSION['last_name'] = $user['last_name'];
+            $_SESSION['username'] = $user['username'];
             $_SESSION['active'] = $user['active'];
             $_SESSION['userAccount'] = $user['userAccount'];
             $_SESSION['logged_in'] = true;
@@ -32,7 +33,7 @@ if(isset($_POST['log_in']))
         else
         {
             $error = true;
-            $error_message = "Incorrect Email or Password";
+            $error_message = "Incorrect Username or Password";
         }
     }
 }
@@ -71,8 +72,8 @@ if(isset($_POST['log_in']))
         <form action="" method="POST">
             <!--action="processData" sends the data that was inputed in the form to the. POST method is used for sensitive data.-->
             <p>
-                <label>Email:</label><br>
-                <input type="email" name="email" required="" class="form-control input-md" maxlength="30">
+                <label>Username:</label><br>
+                <input type="text" name="username" required="" class="form-control input-md" maxlength="30">
                 <br>
             </p>
             <p>

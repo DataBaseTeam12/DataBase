@@ -15,6 +15,7 @@ if(isset($_POST['register']))
     $first_name = mysqli_real_escape_string($con, $_POST['firstName']);
     $middle_initial = mysqli_real_escape_string($con, $_POST['midInitial']);
     $last_name = mysqli_real_escape_string($con, $_POST['lastName']);
+    $username = mysqli_real_escape_string($con, $_POST['username']);
     $pass = mysqli_real_escape_string($con, password_hash($_POST['password'], PASSWORD_BCRYPT));
     $passAgain = mysqli_real_escape_string($con, $_POST['passwordAgain']);
     $address = mysqli_real_escape_string($con, $_POST['address']);
@@ -97,6 +98,14 @@ if(isset($_POST['register']))
         $email_error = "Email already in use";
     }
 
+    $sql = "SELECT * FROM Member WHERE username = '$username'";
+    $result = $con->query($sql);
+
+    if ($result->num_rows > 0) {
+        $error = true;
+        $username_error = "Username already in use";
+    }
+
     if (!($error)) // if there are no errors, then proceed to add the data to the database.
     {
         echo "creating user";
@@ -105,6 +114,7 @@ if(isset($_POST['register']))
         first_name,
         middle_initial,
         last_name,
+        username
         street_address,
         city,
         state,
@@ -120,6 +130,7 @@ if(isset($_POST['register']))
                 '$first_name',
                 '$middle_initial',
                 '$last_name',
+                '$username',
                 '$address',
                 '$city',
                 '$state',
@@ -199,6 +210,13 @@ if(isset($_POST['register']))
                     <label>Last Name</label>
                     <input name="lastName" type="text" maxlength="25" placeholder="Enter Last Name" class="form-control input-md" required value="<?php if($error) echo $last_name; ?>">
                     <span class="text-danger"><?php if(isset($lastName_error)) echo $lastName_error; ?> </span>
+
+                </div>
+
+                <div>
+                    <label>Username</label>
+                    <input name="username" type="text" maxlength="25" placeholder="Enter Username" class="form-control input-md" required value="<?php if($error) echo $last_name; ?>">
+                    <span class="text-danger"><?php if(isset($username_error)) echo $username_error; ?> </span>
 
                 </div>
 
