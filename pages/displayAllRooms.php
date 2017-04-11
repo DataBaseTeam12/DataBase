@@ -7,6 +7,8 @@
 	<title>Display All Rooms</title>
 	<link rel="stylesheet" href="/style/common.css">
 	<link rel="stylesheet" href="/style/home.css">
+	<link rel="stylesheet" href="/style/header.css">
+	<link rel="stylesheet" href="/style/footer.css">
 	<link rel="stylesheet" href="/style/drop-down-menu.css">
 	<script src="/site/script/common.js"></script>
 	<!--Embedded code for Font Awesome icons-->
@@ -72,37 +74,37 @@
 				<a href="#">Add New Media</a>
 				<a href="#">Check Out Media</a>
 				<a href="#">Check In Media</a>
-				<a href="http://www.databaseteam12.x10host.com/searchMembers.php">Search Members</a>
+				<a href="/searchMembers.php">Search Members</a>
 				<a href="#">Display All Members By Last Name</a>
 				<a href="#">Display All Members By Fines</a>
-				<a href="http://www.databaseteam12.x10host.com/searchLaptops.php">Search Rented Laptops</a>
-				<a href="http://www.databaseteam12.x10host.com/searchRooms.php">Search Rented Rooms</a>
+				<a href="/searchLaptops.php">Search Rented Laptops</a>
+				<a href="/searchRooms.php">Search Rented Rooms</a>
 			</div>
 		</div>
 		<?php } ?>
 		<div class="item vgap">
 			Search Media
 			<div class="content">
-				<a href="http://www.databaseteam12.x10host.com/search.php">Search</a>
-				<a href="http://www.databaseteam12.x10host.com/displayAll.php">Display All Media</a>
-				<a href="http://www.databaseteam12.x10host.com/displayAllBooks.php">Display All Books</a>
-				<a href="http://www.databaseteam12.x10host.com/displayAllCassettes.php">Display All Cassettes</a>
-				<a href="http://www.databaseteam12.x10host.com/displayAllCds.php">Display All CDs</a>
-				<a href="http://www.databaseteam12.x10host.com/displayAllDvds.php">Display All DVDs</a>
-				<a href="http://www.databaseteam12.x10host.com/displayAllVhs.php">Display All VHS</a>
+				<a href="/search.php">Search</a>
+				<a href="/displayAll.php">Display All Media</a>
+				<a href="/displayAllBooks.php">Display All Books</a>
+				<a href="/displayAllCassettes.php">Display All Cassettes</a>
+				<a href="/displayAllCds.php">Display All CDs</a>
+				<a href="/displayAllDvds.php">Display All DVDs</a>
+				<a href="/displayAllVhs.php">Display All VHS</a>
 				
 			</div>
 		</div>
 		<div class="item vgap">
 			Laptop Rentals
 			<div class="content">
-				<a href="http://www.databaseteam12.x10host.com/displayAllLaptops.php">Display All Laptops</a>
+				<a href="/displayAllLaptops.php">Display All Laptops</a>
 			</div>
 		</div>
 		<div class="item">
 			Room Reservations
 			<div class="content">
-				<a href="http://www.databaseteam12.x10host.com/displayAllRooms.php">Display All Rooms</a>
+				<a href="/displayAllRooms.php">Display All Rooms</a>
 			</div>
 		</div>
 	</aside>
@@ -151,9 +153,19 @@
 				if ($result2->num_rows > 0) {
 					$row2 = $result2->fetch_assoc();
 					
-					echo "<p><i class='fa fa-times-circle' aria-hidden='true'
-						style='color: #D25252'></i> Room is <b>unavailable</b> until "
-						.$row2["end_time"]."</p>";
+					$sql3 = "SELECT * FROM Room_Reserves WHERE room_num = '$room' AND end_time >= NOW();";
+					$result3 = $conn->query($sql3);
+					
+					if ($result3->num_rows > 0) {
+						echo "<p><i class='fa fa-times-circle' aria-hidden='true'
+							style='color: #D25252'></i> Room is <b>unavailable</b> until "
+							.$row2["end_time"]."</p>";
+					}
+					else {
+						echo "<p><i class='fa fa-check-circle' aria-hidden='true' 
+							style='color: #57BC57'></i> Room is <b>available</b> from ".$row["avail_start"].
+							" to ".$row["avail_end"]."</p>";
+					}
 				}
 				else {
 					echo "<p><i class='fa fa-check-circle' aria-hidden='true' 

@@ -7,6 +7,8 @@
 	<title>Rooms by End Time</title>
 	<link rel="stylesheet" href="/style/common.css">
 	<link rel="stylesheet" href="/style/home.css">
+	<link rel="stylesheet" href="/style/header.css">
+	<link rel="stylesheet" href="/style/footer.css">
 	<link rel="stylesheet" href="/style/drop-down-menu.css">
 	<script src="/site/script/common.js"></script>
 	<!--Embedded code for Font Awesome icons-->
@@ -72,37 +74,37 @@
 				<a href="#">Add New Media</a>
 				<a href="#">Check Out Media</a>
 				<a href="#">Check In Media</a>
-				<a href="http://www.databaseteam12.x10host.com/searchMembers.php">Search Members</a>
+				<a href="/searchMembers.php">Search Members</a>
 				<a href="#">Display All Members By Last Name</a>
 				<a href="#">Display All Members By Fines</a>
-				<a href="http://www.databaseteam12.x10host.com/searchLaptops.php">Search Rented Laptops</a>
-				<a href="http://www.databaseteam12.x10host.com/searchRooms.php">Search Rented Rooms</a>
+				<a href="/searchLaptops.php">Search Rented Laptops</a>
+				<a href="/searchRooms.php">Search Rented Rooms</a>
 			</div>
 		</div>
 		<? } ?>
 		<div class="item vgap">
 			Search Media
 			<div class="content">
-				<a href="http://www.databaseteam12.x10host.com/search.php">Search</a>
-				<a href="http://www.databaseteam12.x10host.com/displayAll.php">Display All Media</a>
-				<a href="http://www.databaseteam12.x10host.com/displayAllBooks.php">Display All Books</a>
-				<a href="http://www.databaseteam12.x10host.com/displayAllCassettes.php">Display All Cassettes</a>
-				<a href="http://www.databaseteam12.x10host.com/displayAllCds.php">Display All CDs</a>
-				<a href="http://www.databaseteam12.x10host.com/displayAllDvds.php">Display All DVDs</a>
-				<a href="http://www.databaseteam12.x10host.com/displayAllVhs.php">Display All VHS</a>
+				<a href="/search.php">Search</a>
+				<a href="/displayAll.php">Display All Media</a>
+				<a href="/displayAllBooks.php">Display All Books</a>
+				<a href="/displayAllCassettes.php">Display All Cassettes</a>
+				<a href="/displayAllCds.php">Display All CDs</a>
+				<a href="/displayAllDvds.php">Display All DVDs</a>
+				<a href="/displayAllVhs.php">Display All VHS</a>
 				
 			</div>
 		</div>
 		<div class="item vgap">
 			Laptop Rentals
 			<div class="content">
-				<a href="http://www.databaseteam12.x10host.com/displayAllLaptops.php">Display All Laptops</a>
+				<a href="/displayAllLaptops.php">Display All Laptops</a>
 			</div>
 		</div>
 		<div class="item">
 			Room Reservations
 			<div class="content">
-				<a href="http://www.databaseteam12.x10host.com/displayAllRooms.php">Display All Rooms</a>
+				<a href="/displayAllRooms.php">Display All Rooms</a>
 			</div>
 		</div>
 	</aside>
@@ -118,14 +120,14 @@
 
 		// Create connection (test)
 		$conn = new mysqli($servername, $username, $password, $dbname);
-
+		
 		// Check connection
 		if ($conn->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
-		}
+		} 
 
 		// Call procedure or query for specific page
-		$sql = "SELECT * FROM Room_Reserve_View ORDER BY room_num ASC;";
+		$sql = "SELECT * FROM Room_Reserve_View WHERE end_time >= NOW() ORDER BY room_num ASC;";
 		$result = $conn->query($sql);
 		
 		// If result is not empty, display it
