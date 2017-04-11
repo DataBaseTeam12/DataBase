@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="/style/common.css">
 	<link rel="stylesheet" href="/style/home.css">
 	<link rel="stylesheet" href="/style/drop-down-menu.css">
+    <link rel="stylesheet" href="/style/footer.css">
 	<script src="/site/script/common.js"></script>
 	<!--Embedded code for Font Awesome icons-->
 	<script src="https://use.fontawesome.com/4f7fcc0d3d.js"></script>
@@ -117,12 +118,13 @@
 		<form method="get" action="">
 		<label><b>Search By</b></label>
 			<select id="search-type" name="search-type">
-				<option value="room" selected>Room Number</option>
+                <option value="available" selected>Available</option>
+				<option value="room" >Room Number</option>
 				<option value="floor">Floor</option>
 			</select>
 			
 			<label><b>Search</b></label>
-			<input type="search" placeholder="Search for..." name="search" required>
+			<input type="search" placeholder="Search for..." name="search" >
 			
 			<button type="submit">Search</button>
 		</form>
@@ -152,14 +154,15 @@
             $value = $_GET['search'];
         }
 
-
-
         switch($stype){
             case "room" :
                 $sql = "SELECT * FROM Rooms WHERE room_num LIKE '%$value%'";
                 break;
             case "floor" :
                 $sql = "SELECT * FROM Rooms WHERE floor LIKE $value";
+                break;
+            case "available" :
+                $sql = "SELECT * FROM Rooms WHERE room_num != (SELECT room_num FROM Room_Reserves WHERE end_time >= NOW())";
                 break;
         }
 
@@ -184,6 +187,7 @@
 
 
                 $sql2 = "SELECT * FROM Room_Reserve_View WHERE room_num = '$room';";
+
                 $result2 = $conn->query($sql2);
 
                 if ($result2->num_rows > 0) {
@@ -209,7 +213,7 @@
 	<!--custom html above-->
 	<footer>
 		&copy; Spring 2017 COSC 3380 Team 12
-		<br><br>
+		<br>
 		4333 University Drive
 		<br>
 		Houston, TX 77204-2000
