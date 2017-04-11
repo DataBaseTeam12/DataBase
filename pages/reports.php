@@ -10,6 +10,8 @@ session_start();
 	<link rel="stylesheet" href="/style/header.css">
 	<link rel="stylesheet" href="/style/footer.css">
     <link rel="stylesheet" href="/style/drop-down-menu.css">
+
+
     <script src="/site/script/common.js"></script>
     <!--Embedded code for Font Awesome icons-->
     <script src="https://use.fontawesome.com/4f7fcc0d3d.js"></script>
@@ -149,6 +151,16 @@ session_start();
 		</div>
 	</aside>
 	<main>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>jQuery UI Datepicker - Default functionality</title>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
 		<form name="form" action="" method="get">
 			<label><b>Report Type</b></label>
 			<select id="report-type" name="report-type">
@@ -168,17 +180,28 @@ session_start();
 				<option value="month">Month</option>
 				<option value="year">Year</option>
 			</select>
-				
-			<div class="day box">
-				<label>Date:</label>
-				<input type="date" name="one-day">
+
+            <script>
+                $( function() {
+                    $( "#datepicker" ).datepicker({dateFormat: 'yy-mm-dd'});
+                    $( "#start" ).datepicker({dateFormat: 'yy-mm-dd'});
+                    $( "#end" ).datepicker({dateFormat: 'yy-mm-dd'});
+                } );
+            </script>
+
+
+            <div class="day box">
+				<label><b>Date: </b></label>
+				<input type="date" id="datepicker" name="one-day">
 			</div>
+
 			<div class="days box">
 				<label>Start Date:</label>
-				<input type="date" name="start-day">
+				<input type="date" id="start" name="start-day">
 				<label>End Date:</label>
-				<input type="date" name="end-day">
+				<input type="date" id="end" name="end-day">
 			</div>
+
 			<div class="month box">
 				<label>Month:</label>
 				<select id="month-choice" name="month-choice">
