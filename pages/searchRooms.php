@@ -118,7 +118,8 @@
 		<form method="get" action="">
 		<label><b>Search By</b></label>
 			<select id="search-type" name="search-type">
-                <option value="available" selected>Available</option>
+                <option value="available" selected>Select Search Type</option>
+                <option value="available" >Availability</option>
 				<option value="room" >Room Number</option>
 				<option value="floor">Floor</option>
 			</select>
