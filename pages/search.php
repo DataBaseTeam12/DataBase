@@ -126,12 +126,12 @@ session_start();
             switch(listindex){
                 case "all" :
                     document.getElementById("search-type").options[0] = new Option("Artist", "artist");
-                    document.getElementById("search-type").options[1] = new Option("Author", "author");
+                    document.getElementById("search-type").options[1] = new Option("Author Last Name", "author");
                     document.getElementById("search-type").options[2] = new Option("Title", "title");
                     break;
                 case "book" :
                     document.getElementById("search-type").options[0] = new Option("Audience", "audience");
-                    document.getElementById("search-type").options[1] = new Option("Author", "author");
+                    document.getElementById("search-type").options[1] = new Option("Author Last Name", "author");
                     document.getElementById("search-type").options[2] = new Option("Genre", "genre");
                     document.getElementById("search-type").options[3] = new Option("ISBN-10", "isbn10");
                     document.getElementById("search-type").options[4] = new Option("ISBN-13", "isbn13");
@@ -264,7 +264,7 @@ session_start();
                 $sql = "SELECT * FROM Author_Media_View WHERE first_name LIKE '%$value%'";
                 break;
             case "author":
-                $sql = "SELECT * FROM Author_Media_View WHERE first_name LIKE '%$value%' OR last_name LIKE '%$value%'";
+                $sql = "SELECT * FROM Author_Media_View WHERE last_name LIKE '%$value%'";
                 break;
             case "title":
                 $sql = "SELECT * FROM Media WHERE title LIKE '%$value%'";
@@ -464,7 +464,7 @@ session_start();
                 $sql = "SELECT * FROM Full_Book_View WHERE audience LIKE '%$value%'";
                 break;
             case "author":
-                $sql = "SELECT * FROM Full_Book_View WHERE first_name LIKE '%$value%' OR last_name LIKE '%$value%'";
+                $sql = "SELECT * FROM Full_Book_View WHERE last_name LIKE '%$value%'";
                 break;
             case "genre":
                 $sql = "SELECT * FROM Full_Book_View WHERE genre LIKE '%$value%'";

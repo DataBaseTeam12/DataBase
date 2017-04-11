@@ -660,7 +660,6 @@ session_start();
 	</main>
 	<!--custom html above-->
 	<footer>
-		<br>
 		&copy; Spring 2017 COSC 3380 Team 12
 		<br>
 		4333 University Drive
