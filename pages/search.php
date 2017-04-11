@@ -10,7 +10,6 @@ session_start();
     <link rel="stylesheet" href="/style/home.css">
     <link rel="stylesheet" href="/style/drop-down-menu.css">
     <link rel="stylesheet" href="/style/footer.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="/site/script/common.js"></script>
     <!--Embedded code for Font Awesome icons-->
     <script src="https://use.fontawesome.com/4f7fcc0d3d.js"></script>
@@ -62,17 +61,6 @@ session_start();
             border: 1px solid #555;
             box-sizing: border-box;
         }
-        	main a, input[type=submit] {
-		padding: 10px;
-		border: none;
-		background-color: #c8102e;
-		color: #FFF9D9;
-		text-transform: uppercase;
-		text-decoration: none;
-		font: bold 14px sans-serif;
-		cursor: pointer;
-	}
-	</style>
     </style>
 </head>
 
@@ -138,17 +126,8 @@ session_start();
             switch(listindex){
                 case "all" :
                     document.getElementById("search-type").options[0] = new Option("Artist", "artist");
-                    document.getElementById("search-type").options[1] = new Option("Audience", "audience");
-                    document.getElementById("search-type").options[2] = new Option("Author", "author");
-                    document.getElementById("search-type").options[3] = new Option("Director", "director");
-                    document.getElementById("search-type").options[4] = new Option("Genre", "genre");
-                    document.getElementById("search-type").options[5] = new Option("ISBN-10", "isbn10");
-                    document.getElementById("search-type").options[6] = new Option("ISBN-13", "isbn13");
-                    document.getElementById("search-type").options[7] = new Option("Language", "language");
-                    document.getElementById("search-type").options[8] = new Option("Producer", "producer");
-                    document.getElementById("search-type").options[9] = new Option("Publisher", "publisher");
-                    document.getElementById("search-type").options[10] = new Option("Title", "title");
-                    document.getElementById("search-type").options[11] = new Option("Year Published", "publish_date");
+                    document.getElementById("search-type").options[1] = new Option("Author", "author");
+                    document.getElementById("search-type").options[2] = new Option("Title", "title");
                     break;
                 case "book" :
                     document.getElementById("search-type").options[0] = new Option("Audience", "audience");
@@ -209,7 +188,7 @@ session_start();
     <form name="form" action="" method="get">
         <label><b>Media Type</b></label>
         <select id="media-type" name="media-type" onchange="javascript: dynamicdropdown(this.options[this.selectedIndex].value);">
-            <option value="" selected>Please Select Media Type</option>
+            <option value="">Please Select Media Type</option>
             <option value="all" >All</option>
             <option value="book">Book</option>
             <option value="cassette">Cassette</option>
@@ -247,8 +226,6 @@ session_start();
         <button type="submit">Search</button>
     </form>
 
-
-
     <?php
 
     $servername = "162.253.224.12";
@@ -278,63 +255,71 @@ session_start();
     if (isset($_GET['search'])) {
         $value = $_GET['search'];
     }
-	
+
+    $sql = "SELECT * FROM Media ORDER BY title;";
+
 	if ($mtype == "all") {
         switch ($stype) {
-            case "author":
-                $sql = "SELECT * FROM Author_Media_View 
-					WHERE first_name LIKE '%$value%' OR last_name LIKE '%$value%'";
-                break;
             case "artist":
-                $sql = "SELECT * FROM Author_Media_View 
-					WHERE first_name LIKE '%$value%'";
+                $sql = "SELECT * FROM Media WHERE first_name LIKE '%$value%'";
+                break;
+            case "author":
+                $sql = "SELECT * FROM Author_Media_View WHERE first_name LIKE '%$value%' OR last_name LIKE '%$value%'";
                 break;
             case "title":
-                $sql = "SELECT * FROM Author_Media_View 
-					WHERE title LIKE '%$value%'";
+                $sql = "SELECT * FROM Media WHERE title LIKE '%$value%'";
                 break;
         }
-        //$sql = "SELECT * FROM Full_Book_View WHERE first_name LIKE '%$value%' OR last_name LIKE '%$value%' ORDER BY title";
-        $result = $conn->query($sql);
+		// Call procedure or query for specific page
 
-        // If result is not empty, display it
+		$result = $conn->query($sql);
+
+		// If result is not empty, display it
         if ($result->num_rows > 0) {
             // Output data from every row
-            while ($row = $result->fetch_assoc()) {
+            while($row = $result->fetch_assoc()) {
                 $book = $row["id"];
                 $copy = $row["copy_num"];
-                $member_id =2; // get the id from session from login
-                echo "<hr><h2>" . $row["title"] . "</h2>"
-                    . $row["first_name"] . " " . $row["last_name"] . " "
-                    . $row["published_date"] . "<br>" . $row["publisher"] . ".<br><br>
+
+                echo "<hr><h2>".$row["title"]."</h2>";
+
+                $sql_a = "SELECT * FROM Author_Media_View WHERE id=$book AND copy_num=$copy;";
+                $result_a = $conn->query($sql_a);
+
+                if ($result_a->num_rows > 0){
+                    $row2 = $result_a->fetch_assoc();
+                    echo $row2["first_name"]." ".$row2["last_name"]." ";
+                }
+
+                echo $row["published_date"]."<br>".$row["publisher"].".<br><br>
 				<a href=\"details.php?id=$book&copy=$copy\">More Details</a><br><br>";
 
                 // If the book is available
                 if ($row["is_available"] == "available") {
                     echo "<p><i class='fa fa-check-circle' aria-hidden='true' 
-						style='color: #57BC57'></i> Copy #" . $row["copy_num"] . " is 
+						style='color: #57BC57'></i> Copy #".$row["copy_num"]." is 
 						<b>available</b>. ";
 
                     // If logged in, provide options to reserve or hold
                     if (session_status() == PHP_SESSION_ACTIVE) {
-                        echo "<form >
-						<input type='submit' class = 'hold' name='hold-$book-$copy' value='Hold'>
-						<input type='submit' class ='reserve' name='reserve-$book-$copy' value='Reserve'>
-						<input type='hidden' name='memberId' value = $member_id>
-						<input type='hidden' name='id' value=$book>
-                        <input type='hidden' name='copy' value=$copy>
-                         
-						</form>
-						</p>";
+                        echo "<form method='POST' action='displayAll.php'>
+						<input type='submit' name='hold-$book-$copy' value='Hold'>
+						<input type='submit' name='reserve-$book-$copy' value='Reserve'>
+						</form>";
+
+                        if (isset($_POST['hold-$book-$copy'])) {
+                            $sqlh = "CALL place_hold(1,$book,$copy);";
+                            $resulth = $conn->query($sqlh);
+                        }
                     }
-                } // Else, display status of the book
+                }
+                // Else, display status of the book
                 else {
                     echo "<p><i class='fa fa-times-circle' aria-hidden='true'
-						style='color: #D25252'></i> Copy #" . $row["copy_num"] . " is 
-						<b>" . $row["is_available"] . "</b>.</p>";
+						style='color: #D25252'></i> Copy #".$row["copy_num"]." is 
+						<b>".$row["is_available"]."</b>.</p>";
                 }
             }
-
         } else {
             echo "0 results";
         }
@@ -374,7 +359,7 @@ session_start();
             while ($row = $result->fetch_assoc()) {
                 $book = $row["id"];
                 $copy = $row["copy_num"];
-                $member_id =2; // get the id from session from login
+
                 echo "<hr><h2>" . $row["title"] . "</h2>"
                     . $row["first_name"] . " " . $row["last_name"] . " "
                     . $row["published_date"] . "<br>" . $row["publisher"] . ".<br><br>
@@ -388,14 +373,8 @@ session_start();
 
                     // If logged in, provide options to reserve or hold
                     if (session_status() == PHP_SESSION_ACTIVE) {
-                       echo "<form >
-						<input type='submit' class = 'hold' name='hold-$book-$copy' value='Hold'>
-						<input type='submit' class ='reserve' name='reserve-$book-$copy' value='Reserve'>
-						<input type='hidden' name='memberId' value = $member_id>
-						<input type='hidden' name='id' value=$book>
-                        <input type='hidden' name='copy' value=$copy>
-                         
-						</form>
+                        echo "<a href=\"\">Hold</a>
+						<a href=\"\" style=\"margin-left:5px;\">Reserve</a>
 						</p>";
                     }
                 } // Else, display status of the book
@@ -450,7 +429,7 @@ session_start();
             while ($row = $result->fetch_assoc()) {
                 $book = $row["id"];
                 $copy = $row["copy_num"];
-                      $member_id =2; // get the id from session from login
+
                 echo "<hr><h2>" . $row["title"] . "</h2>"
                     . $row["first_name"] . " " . $row["last_name"] . " "
                     . $row["published_date"] . "<br>" . $row["publisher"] . ".<br><br>
@@ -464,14 +443,8 @@ session_start();
 
                     // If logged in, provide options to reserve or hold
                     if (session_status() == PHP_SESSION_ACTIVE) {
-                       echo "<form >
-						<input type='submit' class = 'hold' name='hold-$book-$copy' value='Hold'>
-						<input type='submit' class ='reserve' name='reserve-$book-$copy' value='Reserve'>
-						<input type='hidden' name='memberId' value = $member_id>
-						<input type='hidden' name='id' value=$book>
-                        <input type='hidden' name='copy' value=$copy>
-                         
-						</form>
+                        echo "<a href=\"\">Hold</a>
+						<a href=\"\" style=\"margin-left:5px;\">Reserve</a>
 						</p>";
                     }
                 } // Else, display status of the book
@@ -530,7 +503,7 @@ session_start();
             while ($row = $result->fetch_assoc()) {
                 $book = $row["id"];
                 $copy = $row["copy_num"];
-                 $member_id =2; // get the id from session from login
+
                 echo "<hr><h2>" . $row["title"] . "</h2>"
                     . $row["first_name"] . " " . $row["last_name"] . " "
                     . $row["published_date"] . "<br>" . $row["publisher"] . ".<br><br>
@@ -544,14 +517,8 @@ session_start();
 
                     // If logged in, provide options to reserve or hold
                     if (session_status() == PHP_SESSION_ACTIVE) {
-                       echo "<form >
-						<input type='submit' class = 'hold' name='hold-$book-$copy' value='Hold'>
-						<input type='submit' class ='reserve' name='reserve-$book-$copy' value='Reserve'>
-						<input type='hidden' name='memberId' value = $member_id>
-						<input type='hidden' name='id' value=$book>
-                        <input type='hidden' name='copy' value=$copy>
-                         
-						</form>
+                        echo "<a href=\"\">Hold</a>
+						<a href=\"\" style=\"margin-left:5px;\">Reserve</a>
 						</p>";
                     }
                 } // Else, display status of the book
@@ -600,7 +567,7 @@ session_start();
             while($row = $result->fetch_assoc()) {
                 $book = $row["id"];
                 $copy = $row["copy_num"];
-                      $member_id =2; // get the id from session from login
+
                 echo "<hr><h2>".$row["title"]."</h2>"
                     . $row["director"] . " "
                     .$row["published_date"]."<br>".$row["publisher"].".<br><br>
@@ -614,14 +581,8 @@ session_start();
 
                     // If logged in, provide options to reserve or hold
                     if (session_status() == PHP_SESSION_ACTIVE) {
-                        echo "<form >
-						<input type='submit' class = 'hold' name='hold-$book-$copy' value='Hold'>
-						<input type='submit' class ='reserve' name='reserve-$book-$copy' value='Reserve'>
-						<input type='hidden' name='memberId' value = $member_id>
-						<input type='hidden' name='id' value=$book>
-                        <input type='hidden' name='copy' value=$copy>
-                         
-						</form>
+                        echo "<a href=\"\">Hold</a>
+						<a href=\"\" style=\"margin-left:5px;\">Reserve</a>
 						</p>";
                     }
                 }
@@ -668,7 +629,7 @@ session_start();
             while ($row = $result->fetch_assoc()) {
                 $book = $row["id"];
                 $copy = $row["copy_num"];
-                $member_id =2; // get the id from session from login
+
                 echo "<hr><h2>" . $row["title"] . "</h2>"
                     . $row["director"] . " "
                     . $row["published_date"] . "<br>" . $row["publisher"] . ".<br><br>
@@ -682,14 +643,8 @@ session_start();
 
                     // If logged in, provide options to reserve or hold
                     if (session_status() == PHP_SESSION_ACTIVE) {
-                       echo "<form >
-						<input type='submit' class = 'hold' name='hold-$book-$copy' value='Hold'>
-						<input type='submit' class ='reserve' name='reserve-$book-$copy' value='Reserve'>
-						<input type='hidden' name='memberId' value = $member_id>
-						<input type='hidden' name='id' value=$book>
-                        <input type='hidden' name='copy' value=$copy>
-                         
-						</form>
+                        echo "<a href=\"\">Hold</a>
+						<a href=\"\" style=\"margin-left:5px;\">Reserve</a>
 						</p>";
                     }
                 } // Else, display status of the book
@@ -718,39 +673,3 @@ session_start();
     Houston, TX 77204-2000
 </footer>
 </body>
-<script>
-$('.hold').click( function(){
-   
-      $('form').submit(function(){
-         // alert("enter form");
-         var data = $(this).serializeArray();
-          data = JSON.stringify(data);
-          var xmlhttp = new XMLHttpRequest();
-         xmlhttp.onreadystatechange = function() {
-             if (this.readyState == 4 && this.status == 200) {
-                 alert(this.responseText);
-
-             }
-         };
-          xmlhttp.open("GET", "hold_reserve.php"+"?t="+"hold"+"&data="+data , true);
-         xmlhttp.send();
-    });
-});
-  $('.reserve').click( function(){
-       // alert("enter reserve");
-      $('form').submit(function(){
-         var data = $(this).serializeArray();
-          data = JSON.stringify(data);
-          var xmlhttp = new XMLHttpRequest();
-         xmlhttp.onreadystatechange = function() {
-             if (this.readyState == 4 && this.status == 200) {
-                 alert(this.responseText);
-
-             }
-         };
-          xmlhttp.open("GET", "hold_reserve.php"+"?t="+"reserve"+"&data="+data , true);
-         xmlhttp.send();
-    });
-});
-</script>
-</html>
