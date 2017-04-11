@@ -261,7 +261,7 @@ session_start();
 	if ($mtype == "all") {
         switch ($stype) {
             case "artist":
-                $sql = "SELECT * FROM Media WHERE first_name LIKE '%$value%'";
+                $sql = "SELECT * FROM Author_Media_View WHERE first_name LIKE '%$value%'";
                 break;
             case "author":
                 $sql = "SELECT * FROM Author_Media_View WHERE first_name LIKE '%$value%' OR last_name LIKE '%$value%'";
