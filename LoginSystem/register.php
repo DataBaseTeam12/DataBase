@@ -108,7 +108,6 @@ if(isset($_POST['register']))
 
     if (!($error)) // if there are no errors, then proceed to add the data to the database.
     {
-        echo "creating user";
         $sql = "INSERT INTO Member
     (
         first_name,
