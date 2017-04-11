@@ -10,7 +10,6 @@
 	<link rel="stylesheet" href="/style/header.css">
 	<link rel="stylesheet" href="/style/footer.css">
 	<link rel="stylesheet" href="/style/drop-down-menu.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="/site/script/common.js"></script>
 	<!--Embedded code for Font Awesome icons-->
 	<script src="https://use.fontawesome.com/4f7fcc0d3d.js"></script>
@@ -134,14 +133,15 @@
 			while($row = $result->fetch_assoc()) {
 				$book = $row["id"];
 				$copy = $row["copy_num"];
-				$member_id = 1; // change this later
+				
 				echo "<hr><h2>".$row["title"]."</h2>";
 				
 				$sql_a = "SELECT * FROM Author_Media_View WHERE id=$book AND copy_num=$copy;";
 				$result_a = $conn->query($sql_a);
 				
 				if ($result_a->num_rows > 0){
-					echo $row["first_name"]." ".$row["last_name"]." ";
+					$row2 = $result_a->fetch_assoc();
+					echo $row2["first_name"]." ".$row2["last_name"]." ";
 				}
 				
 				echo $row["published_date"]."<br>".$row["publisher"].".<br><br>
@@ -155,20 +155,15 @@
 						
 					// If logged in, provide options to reserve or hold
 					if (session_status() == PHP_SESSION_ACTIVE) {
-						echo "<form >
-						<input type='submit' class = 'hold' name='hold-$book-$copy' value='Hold'>
-						<input type='submit' class ='reserve' name='reserve-$book-$copy' value='Reserve'>
-						<input type='hidden' name='memberId' value = $member_id>
-						<input type='hidden' name='id' value=$book>
-                        <input type='hidden' name='copy' value=$copy>
-                         
+						echo "<form method='POST' action='displayAll.php'>
+						<input type='submit' name='hold-$book-$copy' value='Hold'>
+						<input type='submit' name='reserve-$book-$copy' value='Reserve'>
 						</form>";
-					
-					 /*	if (isset($_POST['hold-$book-$copy'])) {
-						    echo "enter here";
+						
+						if (isset($_POST['hold-$book-$copy'])) {
 							$sqlh = "CALL place_hold(1,$book,$copy);";
 							$resulth = $conn->query($sqlh);
-						} */
+						}
 					}
 				}
 				// Else, display status of the book
@@ -193,39 +188,3 @@
 		Houston, TX 77204-2000
 	</footer>
 </body>
-<script>
-$('.hold').click( function(){
-   
-      $('form').submit(function(){
-         // alert("enter form");
-         var data = $(this).serializeArray();
-          data = JSON.stringify(data);
-          var xmlhttp = new XMLHttpRequest();
-         xmlhttp.onreadystatechange = function() {
-             if (this.readyState == 4 && this.status == 200) {
-                 alert(this.responseText);
-
-             }
-         };
-          xmlhttp.open("GET", "hold_reserve.php"+"?t="+"hold"+"&data="+data , true);
-         xmlhttp.send();
-    });
-});
-  $('.reserve').click( function(){
-       // alert("enter reserve");
-      $('form').submit(function(){
-         var data = $(this).serializeArray();
-          data = JSON.stringify(data);
-          var xmlhttp = new XMLHttpRequest();
-         xmlhttp.onreadystatechange = function() {
-             if (this.readyState == 4 && this.status == 200) {
-                 alert(this.responseText);
-
-             }
-         };
-          xmlhttp.open("GET", "hold_reserve.php"+"?t="+"reserve"+"&data="+data , true);
-         xmlhttp.send();
-    });
-});
-</script>
- </html>
