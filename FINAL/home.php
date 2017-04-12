@@ -1,6 +1,6 @@
 <?php session_start(); ?>
 
-<!DOCTYPE html>
+<!DOCTYPE html> 
 
 <title>Home</title>
 
@@ -14,11 +14,11 @@
 	<nav class="frow fill">
 		<a href="/index.php" class="fl">Home</a>
 		
-		<?php if($_SESSION['logged_in']) == false) {
+		<?php if($_SESSION['logged_in'] == false) {
 			echo "<a href='/login.php' style='margin:0px 5px;'>Login</a>
 			<a href='/register.php'>Register</a>";
 			}
-			else if($_SESSION['logged_in']) == true) {
+			else if($_SESSION['logged_in'] == true) {
 			echo "<a href='/login.php' style='margin:0px 5px;'>Login</a>
 			<a href='/logout.php'>Logout</a>";
 			}
