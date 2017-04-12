@@ -13,14 +13,15 @@ if(isset($_POST['log_in']))
     $result = $con->query("SELECT * FROM Member WHERE username = '$username'");
     if ($result->num_rows == 0) {
         $error = true;
-        $error_message = "Incorrect Username or Password";
+        $error_message = "Incorrect Username or Password 1";
+
     }
     else
     {
         $user = $result->fetch_assoc();
         if(password_verify($_POST['password'], $user['password']))
         {
-			$_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_id'] = $user['id'];
             $_SESSION['email'] = $user['email'];
             $_SESSION['first_name'] = $user['first_name'];
             $_SESSION['last_name'] = $user['last_name'];
@@ -66,7 +67,7 @@ if(isset($_POST['log_in']))
 <main id="login">
     <section id="sign-in">
         <div class="wrapper">
-        <span class="text-danger"><?php if(isset($error_message)) echo $error_message; ?> </span>
+            <span class="text-danger"><?php if(isset($error_message)) echo $error_message; ?> </span>
         </div>
         <h2 style="text-align:center;">Sign in</h2>
         <form action="" method="POST">
@@ -85,9 +86,9 @@ if(isset($_POST['log_in']))
                 <br><br>
             </p>
             <div class="wrapper">
-            <p>
-                <input type="submit" name="log_in" value="Sign In" class="btn btn-danger btn-block">
-            </p>
+                <p>
+                    <input type="submit" name="log_in" value="Sign In" class="btn btn-danger btn-block">
+                </p>
             </div>
             <div class="divider">
                 <hr class="hr" style="float:left;"> <small>Need an account?</small> <hr class="hr" style="float:right;">

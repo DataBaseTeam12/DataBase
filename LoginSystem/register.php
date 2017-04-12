@@ -38,7 +38,7 @@ if(isset($_POST['register']))
 
     if(isset($_POST['midInitial']) && $middle_initial != "")
     {
-        if (!preg_replace("/[^A-Z]+/", "", $middle_initial)) {
+        if (!preg_match("/^[a-zA-Z]$/", $middle_initial)) {
             $error = true;
             $middle_initial_error = "Middle initial can only contain alphabets";
         }
@@ -113,7 +113,7 @@ if(isset($_POST['register']))
         first_name,
         middle_initial,
         last_name,
-        username
+        username,
         street_address,
         city,
         state,
@@ -144,6 +144,8 @@ if(isset($_POST['register']))
         {
             $successReg = "Successfully Registered!";
             $_SESSION['logged_in'] = true;
+            header("Location: http://www.databaseteam12.x10host.com/");
+
         }
         else
         {
