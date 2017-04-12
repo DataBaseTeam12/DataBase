@@ -1,0 +1,51 @@
+<?php session_start(); ?>
+
+<!DOCTYPE html>
+
+<title>Forgot Password</title>
+
+<link rel="stylesheet" href="style/common.css">
+<link rel="stylesheet" href="style/drop-down-menu.css">
+
+<link rel="stylesheet" href="style/login-forgot.css">
+
+<script>
+	document.addEventListener("DOMContentLoaded",
+		function (event) {
+			// make stuff happen after page loads
+		}
+	);
+</script>
+
+<?php include "page/common-header.html"; ?>
+
+<div class="flex">
+	<nav class="frow fill">
+		<a href="index.php" class="fl">Home</a>
+		<a href="login.php" style="margin:0px 5px;">Login</a>
+		<a href="login-register.php">Register</a>
+	</nav>
+</div>
+
+<div class="frow" style="flex: 1 0 auto;">
+	<main class="grow-row fill-col">
+		<section>
+			<h2>Enter your email</h2>
+			<form action="processData.php" method="POST">
+				<!-- action="processData" sends the data that was inputed in the form to the. POST method is used for sensetive data. -->
+				<p>
+					Enter your email associated with your account and we will send you the password reset link.
+				</p>
+				<p>
+					<label>Email:</label><br>
+					<input type="text" name="email">
+				</p>
+				<div class="forgot">
+					<button type="submit">Send Verification Code</button>
+				</div>
+			</form>
+		</section>
+	</main>
+</div>
+
+<?php include "page/common-footer.html"; ?>

@@ -1,0 +1,62 @@
+aside {
+	/*common*/
+	color: black;
+	background-color: white;
+	margin: 5px 0px 0px 5px;
+	padding: 0px;
+}
+
+main {
+	/*common*/
+	color: black;
+	background-color: white;
+	margin: 5px;
+	padding: 5px;
+	/*view*/
+	border: 2px solid #555555;
+	font-family: sans-serif;
+}
+
+	main a, button {
+		padding: 10px;
+		border: none;
+		background-color: #c8102e;
+		color: #FFF9D9;
+		text-transform: uppercase;
+		text-decoration: none;
+		font: bold 14px sans-serif;
+		cursor: pointer;
+	}
+
+	main .item {
+		/*common*/
+		margin: 0px 5px 5px 0px;
+		padding: 0px;
+		/*view*/
+		border: 1px solid black;
+	}
+
+input[type=search], select {
+	width: 100%;
+	display: inline-block;
+	padding: 10px 15px;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	border: 1px solid #555;
+	box-sizing: border-box;
+}
+
+/* not needed */
+/*.detail_label {
+	width: 90px;
+	padding: 10px;
+	background-color: #c8102e;
+	color: #FFF9D9;
+}*/
+/*.details {
+	width: 95%;
+	margin-top: 5px;
+	padding: 10px;
+	background-color: #eee;
+	border: 1px solid #555;
+}*/

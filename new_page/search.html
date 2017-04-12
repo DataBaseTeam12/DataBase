@@ -1,0 +1,72 @@
+<?php session_start(); ?>
+
+<!DOCTYPE html>
+
+<title>Search Media</title>
+
+<link rel="stylesheet" href="style/common.css">
+<link rel="stylesheet" href="style/drop-down-menu.css">
+
+<link rel="stylesheet" href="style/search.css">
+
+<!--Embedded code for Font Awesome icons-->
+<script src="https://use.fontawesome.com/4f7fcc0d3d.js"></script>
+
+<script>
+	document.addEventListener("DOMContentLoaded",
+		function (event) {
+			// make stuff happen after page loads
+		}
+	);
+</script>
+
+<?php include "page/common-header.html"; ?>
+
+<div class="flex">
+	<nav class="frow fill">
+		<a href="index.php" class="fl">Home</a>
+		<a href="login.php" style="margin:0px 5px;">Login</a>
+		<a href="login-register.php">Register</a>
+	</nav>
+</div>
+
+<div class="frow" style="flex: 1 0 auto;">
+	<aside>
+		<?php if(isset($_SESSION["faculty"])) include "page/menu-faculty.html"; ?>
+		<?php include "page/menu-user.html"; ?>
+	</aside>
+	<main class="grow-row fill-col">
+		<form name="form" action="" method="get">
+			<label><b>Media Type</b></label>
+			<select id="media-type" name="media-type">
+				<option value="all" selected>All</option>
+				<option value="book">Book</option>
+				<option value="cassette">Cassette</option>
+				<option value="cd">CD</option>
+				<option value="dvd">DVD</option>
+				<option value="vhs">VHS</option>
+			</select>
+			<label><b>Search Type</b></label>
+			<select id="search-type" name="search-type">
+				<option value="artist">Artist</option>
+				<option value="audience">Audience</option>
+				<option value="author">Author</option>
+				<option value="director">Director</option>
+				<option value="genre">Genre</option>
+				<option value="isbn10">ISBN-10</option>
+				<option value="isbn13">ISBN-13</option>
+				<option value="language">Language</option>
+				<option value="producer">Producer</option>
+				<option value="publisher">Publisher</option>
+				<option value="title">Title</option>
+				<option value="publish_date">Year Published</option>
+			</select>
+			<label><b>Search</b></label>
+			<input type="text" placeholder="Search for..." name="search" required>
+			<button type="submit">Search</button>
+		</form>
+		<?php include "php/search-stash.php"; ?>
+	</main>
+</div>
+
+<?php include "page/common-footer.html"; ?>

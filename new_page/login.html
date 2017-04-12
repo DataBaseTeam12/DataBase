@@ -1,0 +1,64 @@
+<?php include "php/login.php"; ?>
+
+<!DOCTYPE html>
+
+<title>Login</title>
+
+<link rel="stylesheet" href="/style/custom-bootstrap.css">
+<link rel="stylesheet" href="/style/common.css">
+<link rel="stylesheet" href="/style/drop-down-menu.css">
+
+<link rel="stylesheet" href="/style/login.css">
+
+<?php include "page/common-header.html"; ?>
+
+<div class="flex">
+	<nav class="frow fill">
+		<a href="index.php" class="fl">Home</a>
+		<a href="login-register.php">Register</a>
+	</nav>
+</div>
+
+<div class="frow" style="flex: 1 0 auto;">
+	<main class="grow-row fill-col">
+		<div id="bootstrap">
+			<section id="sign-in">
+				<div class="wrapper">
+					<span class="text-danger"><?php if(isset($error_message)) echo $error_message; ?> </span>
+				</div>
+				<h2 style="text-align:center;">Sign in</h2>
+				<form action="" method="POST">
+					<!--action="processData" sends the data that was inputed in the form to the. POST method is used for sensitive data.-->
+					<p>
+						<label>Email:</label><br>
+						<input type="email" name="email" required="" class="form-control input-md">
+						<br>
+					</p>
+					<p>
+						<label>Password:</label><br>
+						<input type="password" name="password" required="" class="form-control input-md">
+						<a href="resetpass.php" style="float:right;">
+							Forgot your Password?
+						</a>
+						<br><br>
+					</p>
+					<div class="wrapper">
+						<p>
+							<input type="submit" name="log_in" value="Sign In" class="btn btn-danger btn-block">
+						</p>
+					</div>
+					<div class="divider">
+						<hr class="hr" style="float:left;"> <small>Need an account?</small> <hr class="hr" style="float:right;">
+					</div>
+					<div class="regbox">
+						<p>
+							<a href="http://www.databaseteam12.x10host.com" class="btn btn-default btn-block">Create an account</a>
+						</p>
+					</div>
+				</form>
+			</section>
+		</div>
+	</main>
+</div>
+
+<?php include "page/common-footer.html"; ?>

@@ -1,0 +1,116 @@
+/* sizing is just much more obedient when this is
+	set. */
+* {
+	box-sizing: border-box;
+}
+
+
+/* html height must be 100% so that we can fill the
+	entire screen */
+html {
+	height: 100%;
+}
+
+/* body min-height must be 100% so that it can fill
+	the heighy when needed so that we can fill the
+	entire screen. setting height to 100% will fill
+	the screen, but items will also squish together
+	when the browser shrinks. */
+body {
+	/*common*/
+	color: inherit;
+	background-color: inherit; /*lighter red*/
+	margin: 0px;
+	padding: 0px;
+	/*view*/
+	min-height: 100%;
+}
+
+nav {
+	/*common*/
+	color: white;
+	background-color: #960C22; /*darker red*/
+	margin: 0px;
+	padding: 5px; /*all*/
+	/*text*/
+	text-align: right;
+}
+
+	nav a {
+		/*common*/
+		color: inherit;
+		background-color: #c8102e; /*lighter red*/
+		margin: 0px;
+		padding: 10px;
+		/*text*/
+		font: bold 14px sans-serif;
+		text-transform: uppercase;
+		text-decoration: inherit;
+	}
+
+
+
+/*FILL*/
+
+.grow {
+	width: 100%;
+	height: 100%;
+}
+
+.grow-row {
+	width: 100%;
+}
+
+.grow-col {
+	height: 100%;
+}
+
+.fill {
+	min-width: 100%;
+	min-height: 100%;
+}
+
+.fill-row {
+	min-width: 100%;
+}
+
+.fill-col {
+	min-height: 100%;
+	height: auto;
+}
+
+
+
+/*FLEX*/
+
+.flex {
+	display: flex;
+}
+
+.frow {
+	display: flex;
+	flex-flow: row nowrap;
+}
+
+.frow-wrap {
+	display: flex;
+	flex-flow: row wrap;
+}
+
+.fcol, body {
+	display: flex;
+	flex-flow: column nowrap;
+}
+
+.fcol-wrap {
+	display: flex;
+	flex-flow: column wrap;
+}
+
+.fl {
+	margin-right: auto;
+}
+
+.fr {
+	margin-left: auto;
+}

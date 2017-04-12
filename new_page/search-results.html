@@ -1,0 +1,45 @@
+<?php session_start(); ?>
+
+<!DOCTYPE html>
+
+<title>Search Results</title>
+
+<link rel="stylesheet" href="style/common.css">
+<link rel="stylesheet" href="style/drop-down-menu.css">
+
+<link rel="stylesheet" href="style/search-results.css">
+
+<!--Embedded code for Font Awesome icons-->
+<script src="https://use.fontawesome.com/4f7fcc0d3d.js"></script>
+
+<script>
+	document.addEventListener("DOMContentLoaded",
+		function (event) {
+			// make stuff happen after page loads
+		}
+	);
+</script>
+
+<?php include "page/common-header.html"; ?>
+
+<div class="flex">
+	<nav class="frow fill">
+		<a href="index.php" class="fl">Home</a>
+		<a href="login.php" style="margin:0px 5px;">Login</a>
+		<a href="login-register.php">Register</a>
+	</nav>
+</div>
+
+<div class="frow" style="flex: 1 0 auto;">
+	<aside>
+		<?php if(isset($_SESSION["faculty"])) include "page/menu-faculty.html"; ?>
+		<?php include "page/menu-user.html"; ?>
+	</aside>
+	<main class="grow-row fill-col">
+		<div class="frow-wrap">
+			<?php include "php/search-results.php"; ?>
+		</div>
+	</main>
+</div>
+
+<?php include "page/common-footer.html"; ?>
