@@ -16,12 +16,10 @@ if(isset($_POST['send'])){
 
         mail($user['email'], $subject, $message, $header);
         echo "<script>alert('Email was sent')</script>";
-        header("Location: http://www.databaseteam12.x10host.com/");
     }
     else
     {
         echo "<script>alert('Email was sent')</script>";
-        header("Location: http://www.databaseteam12.x10host.com/");
     }
 }
 ?>

@@ -75,7 +75,7 @@ if(isset($_POST['log_in']))
             <p>
                 <label>Username:</label><br>
                 <input type="text" name="username" required="" class="form-control input-md" maxlength="30">
-                <a href="#" style="float:right;">
+                <a href="http://www.databaseteam12.x10host.com/login/forgotUsername.php#" style="float:right;">
                     Forgot your Username?
                 </a>
                 <br>
@@ -98,7 +98,7 @@ if(isset($_POST['log_in']))
             </div>
             <div class="regbox">
                 <p>
-                    <a href="http://www.databaseteam12.x10host.com" class="btn btn-default btn-block">Create an account</a>
+                    <a href="http://www.databaseteam12.x10host.com/login/register.php" class="btn btn-default btn-block">Create an account</a>
                 </p>
             </div>
         </form>
