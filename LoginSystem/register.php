@@ -68,26 +68,32 @@ if(isset($_POST['register']))
     if (preg_match('#[^0-9]#',$phone) && strlen($phone) != 10)
     {
         $error = true;
-        $phone_error = "Phone number can only contain digits and must be 10 digits long.";
+        $phone_error = "Phone number must be 10 digits long.";
     }
     else
     {
         $formatted_phone = preg_replace("/^(\d{3})(\d{3})(\d{4})$/", "$1-$2-$3", $phone);
     }
 
-    if (preg_match('#[^0-9]#',$ssn) && strlen($phone) != 9)
+    if (preg_match('#[^0-9]#',$ssn) && strlen($ssn) != 9)
     {
         $error = true;
-        $snn_error = "SSN number can only contain digits and must be 9 digits long.";
+        $snn_error = "SSN number must be 9 digits long.";
     }
     else
     {
         $formatted_ssn = preg_replace("/^(\d{3})(\d{2})(\d{4})$/", "$1-$2-$3", $ssn);
     }
 
+    if(strlen($zip) != 5 && preg_match('#[^0-9]#',$zip) )
+    {
+        $error = true;
+        $zip_error = "Zip code must have 5 digits.";
+    }
+
     if (strlen($passAgain) < 6) {
         $error = true;
-        $shortPassword = "Password needs to be at least have a length of 6";
+        $shortPassword = "Password needs to at least have a length of 6";
     }
 
     $sql = "SELECT * FROM Member WHERE email = '$email'";
@@ -208,28 +214,24 @@ if(isset($_POST['register']))
                     <label>Last Name</label>
                     <input name="lastName" type="text" maxlength="25" placeholder="Enter Last Name" class="form-control input-md" required value="<?php if($error) echo $last_name; ?>">
                     <span class="text-danger"><?php if(isset($lastName_error)) echo $lastName_error; ?> </span>
-
                 </div>
 
                 <div>
                     <label>Username</label>
                     <input name="username" type="text" maxlength="25" placeholder="Enter Username" class="form-control input-md" required value="<?php if($error) echo $last_name; ?>">
                     <span class="text-danger"><?php if(isset($username_error)) echo $username_error; ?> </span>
-
                 </div>
 
                 <div>
                     <label>Password</label>
                     <input name="password" type="password" maxlength="25" placeholder="Enter Password" class="form-control input-md" required>
                     <span class="text-danger"><?php if(isset($shortPassword)) echo $shortPassword; ?> </span>
-
                 </div>
 
                 <div>
                     <label>Repeat Password</label>
                     <input name="passwordAgain" type="password" maxlength="25" placeholder="Enter Password Again" class="form-control input-md" required>
                     <span class="text-danger"><?php if(isset($passwordMatch_error)) echo $passwordMatch_error; ?> </span>
-
                 </div>
 
                 <div>
@@ -250,6 +252,7 @@ if(isset($_POST['register']))
                 <div>
                     <label>Zip Code</label>
                     <input name="zip" type="text" maxlength="5" placeholder="Enter Zip Code" class="form-control input-md" required value="<?php if($error) echo $zip; ?>">
+                    <span class="text-danger"><?php if(isset($zip_error)) echo $zip_error; ?> </span>
                 </div>
 
                 <div>
