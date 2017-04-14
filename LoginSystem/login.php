@@ -13,7 +13,7 @@ if(isset($_POST['log_in']))
     $result = $con->query("SELECT * FROM Member WHERE username = '$username'");
     if ($result->num_rows == 0) {
         $error = true;
-        $error_message = "Incorrect Username or Password 1";
+        $error_message = "Incorrect Username or Password";
 
     }
     else
@@ -75,12 +75,15 @@ if(isset($_POST['log_in']))
             <p>
                 <label>Username:</label><br>
                 <input type="text" name="username" required="" class="form-control input-md" maxlength="30">
+                <a href="#" style="float:right;">
+                    Forgot your Username?
+                </a>
                 <br>
             </p>
             <p>
                 <label>Password:</label><br>
                 <input type="password" name="password" required="" class="form-control input-md" maxlength="25">
-                <a href="resetpass.php" style="float:right;">
+                <a href="#" style="float:right;">
                     Forgot your Password?
                 </a>
                 <br><br>

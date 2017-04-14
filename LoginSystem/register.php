@@ -164,9 +164,6 @@ if(isset($_POST['register']))
     <link rel="stylesheet" href="register.css">
     <link rel="stylesheet" href="drop-down-menu.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 </head>
 
 <body>
@@ -252,7 +249,7 @@ if(isset($_POST['register']))
 
                 <div>
                     <label>Zip Code</label>
-                    <input name="zip" type="text" maxlength="5" placeholder="Enter Zip Code" class="form-control input-md" required value="<?php if($error) echo $state; ?>">
+                    <input name="zip" type="text" maxlength="5" placeholder="Enter Zip Code" class="form-control input-md" required value="<?php if($error) echo $zip; ?>">
                 </div>
 
                 <div>
