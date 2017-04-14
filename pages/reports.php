@@ -228,6 +228,7 @@ session_start();
 		</form>
 
 		<?php
+        $count = 0;
 		$servername = "162.253.224.12";
 		$username = "databa39_user";
 		$password = "databa39team12";
@@ -333,13 +334,16 @@ session_start();
 				<th>Check-In Date</th><th>Due Date</th></tr>";
 				// Output data from every row
 				while ($row = $result->fetch_assoc()) {
+				    $count++;
 					echo "<tr><td>".$row["member_id"]."</td><td>"
 						.$row["media_id"]."-".$row["copy_num"]."</td><td>"
 						.$row["check_out_date"]."</td><td>"
 						.$row["check_in_date"]."</td><td>"
 						.$row["due_date"]."</td></tr>";
 				}
-				echo "</table>";
+                echo " <b> " . "Total Checked-Out Media: " .  $count . " <b> ". "<br>";
+                echo "</table>" ." <br>";
+
 			} 
 			else {
 				echo "<br>0 results";
@@ -411,12 +415,14 @@ session_start();
 				<th>End Date</th></tr>";
 				// Output data from every row
 				while ($row = $result->fetch_assoc()) {
+				    $count++;
 					echo "<tr><td>".$row["member_id"]."</td><td>"
 						.$row["media_id"]."-".$row["copy_num"]."</td><td>"
 						.$row["start_date"]."</td><td>"
 						.$row["end_date"]."</td></tr>";
 				}
-				echo "</table>";
+                echo " <b> " . "Total Held Media: " .  $count . " <b> ". "<br>";
+                echo "</table>" ." <br>";
 			} 
 			else {
 				echo "<br>0 results";
@@ -488,12 +494,14 @@ session_start();
 				<th>Start Time</th><th>End Time</th></tr>";
 				// Output data from every row
 				while ($row = $result->fetch_assoc()) {
+				    $count++;
 					echo "<tr><td>".$row["member_id"]."</td><td>"
 						.$row["media_id"]."-".$row["copy_num"]."</td><td>"
 						.$row["start_time"]."</td><td>"
 						.$row["end_time"]."</td></tr>";
 				}
-				echo "</table>";
+                echo " <b> " . "Total Reserved Media: " .  $count . " <b> ". "<br>";
+                echo "</table>" ." <br>";
 			} 
 			else {
 				echo "<br>0 results";
@@ -565,13 +573,15 @@ session_start();
 				<th>End Date</th><th>Returned Date</th></tr>";
 				// Output data from every row
 				while ($row = $result->fetch_assoc()) {
+				    $count++;
 					echo "<tr><td>".$row["member_id"]."</td><td>"
 						.$row["laptop_id"]."</td><td>"
 						.$row["start_date"]."</td><td>"
 						.$row["end_date"]."</td></tr>"
 						.$row["returned_date"]."</td></tr>";
 				}
-				echo "</table>";
+                echo " <b> " . "Total Rented Laptops: " .  $count . " <b> ". "<br>";
+                echo "</table>" ." <br>";
 			} 
 			else {
 				echo "<br>0 results";
@@ -643,12 +653,14 @@ session_start();
 				<th>Start Time</th><th>End Time</th></tr>";
 				// Output data from every row
 				while ($row = $result->fetch_assoc()) {
+				    $count++;
 					echo "<tr><td>".$row["member_id"]."</td><td>"
 						.$row["room_num"]."</td><td>"
 						.$row["start_time"]."</td><td>"
 						.$row["end_time"]."</td></tr>";
 				}
-				echo "</table>";
+                echo " <b> " . "Total Reserved Rooms: " .  $count . " <b> ". "<br>";
+                echo "</table>" ." <br>";
 			} 
 			else {
 				echo "<br>0 results";

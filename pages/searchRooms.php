@@ -163,7 +163,9 @@
                 $sql = "SELECT * FROM Rooms WHERE floor LIKE $value";
                 break;
             case "available" :
-                $sql = "SELECT * FROM Rooms WHERE room_num != (SELECT room_num FROM Room_Reserves WHERE end_time >= NOW())";
+                $sql = "SELECT * FROM Rooms WHERE NOT EXISTS 
+                    (SELECT room_num FROM Room_Reserves WHERE end_time >= NOW() 
+                    AND Rooms.room_num = Room_Reserves.room_num)";
                 break;
         }
 

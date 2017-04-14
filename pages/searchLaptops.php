@@ -118,12 +118,14 @@
 		<form method="get" action="">
 		<label><b>Search By</b></label>
 			<select id="search-type" name="search-type">
-				<option value="serial" selected>Serial Number</option>
+                <option value="" selected>Select Search Type</option>
+                <option value="available" >Availability</option>
+				<option value="serial" >Serial Number</option>
 				<option value="id">Laptop ID</option>
 			</select>
 			
 			<label><b>Search</b></label>
-			<input type="search" placeholder="Search for..." name="search" required>
+			<input type="search" placeholder="Search for..." name="search" >
 			
 			<button type="submit">Search</button>
 		</form>
@@ -161,6 +163,11 @@
                 break;
             case "id" :
                 $sql = "SELECT * FROM Laptop WHERE id LIKE $value";
+                break;
+            case "available" :
+                $sql = "SELECT * FROM Laptop WHERE NOT EXISTS 
+                    (SELECT laptop_id FROM Laptop_Rents WHERE end_date >= CURDATE() 
+                    AND Laptop.id = Laptop_Rents.laptop_id)";
                 break;
         }
 
