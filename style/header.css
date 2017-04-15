@@ -1,0 +1,33 @@
+header {
+	/*common*/
+	color: white;
+	background-color: #c8102e; /*lighter red*/
+	margin: 0px;
+	padding: 50px 0px; /*vertical horizontal*/
+	/*text*/
+	text-align: center;
+}
+
+	header h1 {
+		/*common*/
+		color: inherit;
+		background-color: inherit; /*lighter red*/
+		margin: 0px;
+		padding: 0px;
+		/*text*/
+		font: bold 2em sans-serif;
+		text-decoration: underline;
+	}
+
+	header h3 {
+		/*common*/
+		color: inherit;
+		background-color: inherit; /*lighter red*/
+		margin: 0px;
+		padding: 0px;
+		/*text*/
+		text-decoration: inherit;
+		font: normal 1.5em sans-serif;
+		letter-spacing: 3px;
+		text-transform: uppercase;
+	}

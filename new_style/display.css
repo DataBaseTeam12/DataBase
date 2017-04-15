@@ -1,0 +1,76 @@
+aside {
+	/*common*/
+	color: white;
+	background-color: white;
+	margin: 0px;
+	padding: 5px;
+	/*view*/
+	float: left;
+}
+
+main {
+	/*common*/
+	color: black;
+	background-color: #DDDDDD;
+	margin: 5px;
+	padding: 15px;
+	/*view*/
+	overflow: hidden;
+	/*other*/
+	border: 2px solid #555555;
+	font-family: sans-serif;
+	/*margin-left: 175px;*/
+}
+
+	main a {
+		/*common*/
+		color: #FFF9D9;
+		background-color: #c8102e;
+		margin: 0px;
+		padding: 10px;
+		/*view*/
+		border: none;
+		cursor: pointer;
+		/*text*/
+		font: bold 14px sans-serif;
+		text-decoration: none;
+		text-transform: uppercase;
+	}
+
+h2 {
+	/*common*/
+	color: #555555;
+	background-color: inherit;
+	margin: 0px;
+	padding: 0px;
+	/*other*/
+	font-family: sans-serif;
+}
+
+input[type=username],
+input[type=password],
+input[type=text],
+select {
+	width: 100%;
+	padding: 10px 15px;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	display: inline-block;
+	border: 1px solid #555;
+	box-sizing: border-box;
+}
+
+input[type=submit] {
+	/*common*/
+	color: #FFF9D9;
+	background-color: #c8102e;
+	margin: 0px;
+	padding: 10px;
+	/*view*/
+	border: none;
+	cursor: pointer;
+	/*text*/
+	font: bold 14px sans-serif;
+	text-decoration: none;
+	text-transform: uppercase;
+}

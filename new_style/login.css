@@ -1,0 +1,146 @@
+main {
+	/*common*/
+	color: #333;
+	background-color: white;
+	margin: 0px;
+	padding: 50px 0px;
+	/*text*/
+	text-align: center;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 14px;
+	line-height: 1.42857143;
+}
+
+#bootstrap {
+	overflow: auto;
+}
+
+form {
+	border: 2px solid #f1f1f1;
+	margin-top: 10px;
+	padding: 15px;
+	font-family: Arial, sans-serif;
+	box-sizing: border-box;
+}
+
+.wrapper {
+	text-align: center;
+}
+
+#sign-in {
+	/*common*/
+	color: black;
+	background-color: white;
+	margin: 0px;
+	padding: 15px;
+	/*view*/
+	display: inline-block;
+	border: 2px solid #555555;
+	width: 340px;
+	/*text*/
+	font-family: sans-serif;
+	text-align: left;
+}
+
+	#sign-in h2 {
+		font-family: Arial, sans-serif;
+		font-size: 20px;
+		font-weight: 100;
+	}
+
+	#sign-in form {
+		/*common*/
+		margin: 10px 0px 0px 0px;
+		padding: 15px;
+		/*view*/
+		border: 2px solid #f1f1f1;
+		/*text*/
+		font-family: Arial, sans-serif;
+	}
+
+label {
+	padding-left: 4px;
+	padding-bottom: 4px;
+}
+
+.divider {
+	margin-bottom: 5px;
+	margin-top: 25px;
+	text-align: center;
+}
+
+	.divider hr {
+		width: 30%;
+	}
+
+.registerbutton {
+	box-sizing: border-box;
+	font-size: 16px;
+	width: 90%;
+	background-color: whitesmoke;
+	color: crimson;
+	cursor: pointer;
+}
+
+.btn-default {
+	color: #fff;
+	background-color: #9d9d9d;
+	border-color: #ccc;
+}
+
+.regbox {
+	text-align: center;
+}
+
+.hr {
+	border-top: 1px solid #999;
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+input[type=username], input[type=password], input[type=text], input[type=email], select {
+	width: 100%;
+	padding: 10px 15px;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	display: inline-block;
+	border: 1px solid #555;
+	box-sizing: border-box;
+}
+
+span.incorrect {
+	font-weight: bold;
+	padding-left: 5px;
+	padding-top: 10px;
+	color: #c8102e; /*lighter red*/
+}
+
+span.forgot {
+	float: right;
+	padding-top: 10px;
+}
+
+	span.forgot a {
+		text-decoration: none;
+		color: #960C22; /*darker red*/
+	}
+
+		span.forgot a:hover {
+			text-decoration: none;
+			color: #c8102e; /*lighter red*/
+		}
+
+main a {
+	color: #337ab7;
+	text-decoration: none
+}
+
+	main a:focus, main a:hover {
+		color: #23527c;
+		text-decoration: underline
+	}
+
+	main a:focus {
+		outline: 5px auto -webkit-focus-ring-color;
+		outline-offset: -2px
+	}

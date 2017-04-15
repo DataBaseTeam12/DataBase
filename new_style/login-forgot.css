@@ -1,0 +1,78 @@
+main {
+	/*common*/
+	color: black;
+	background-color: white;
+	margin: 0px;
+	padding: 50px 0px;
+	/*text*/
+	text-align: center;
+}
+
+	main section {
+		/*common*/
+		color: inherit;
+		background-color: inherit;
+		margin: 0px;
+		padding: 15px;
+		/*view*/
+		display: inline-block;
+		border: 2px solid #555555;
+		width: 340px;
+		/*text*/
+		font-family: sans-serif;
+		text-align: left;
+	}
+
+		main section h2 {
+			font-family: Arial, sans-serif;
+			font-size: 20px;
+			font-weight: 100;
+			text-align: center;
+		}
+
+		main section form {
+			/*common*/
+			color: inherit;
+			background-color: inherit;
+			margin: 10px 0px 0px 0px;
+			padding: 15px;
+			/*view*/
+			border: 2px solid #f1f1f1;
+			/*text*/
+			font-family: Arial, sans-serif;
+		}
+
+			main section form input[type=text],
+			main section form input[type=password] {
+				width: 100%;
+				margin: 0px;
+				height: 25px;
+				padding: 3px 7px;
+			}
+
+			main section form label {
+				margin: 0px;
+				padding: 0px 0px 4px 4px;
+			}
+
+			main section form button {
+				margin: 15px 0px 25px 0px;
+				width: 100%;
+				cursor: pointer;
+				font-size: 16px;
+			}
+
+			main section form .forgot button {
+				color: white;
+				background-color: #c8102e;
+			}
+
+	/*remove to make textboxes taller*/
+	main form input[type=text],
+	main form input[type=password],
+	main form input[type=email] {
+		width: 100%;
+		margin-right: 0;
+		height: 25px;
+		padding: 3px 7px;
+	}

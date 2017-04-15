@@ -1,0 +1,194 @@
+header {
+    background-color: #c8102e;
+    clear: left;
+    font-family: sans-serif;
+}
+
+.main {
+    padding: 15px;
+    color: white;
+    text-align: center;
+}
+
+.subhead {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 20px;
+    color: white;
+    background-color: #960C22;
+    clear: left;
+    text-align: right;
+}
+
+h1 {
+    font-family: sans-serif;
+    text-decoration: underline;
+    margin-bottom: 0;
+}
+
+h2 {
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 100;
+
+}
+h3 {
+    font-size: 1.5em;
+    font-weight: normal;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 0;
+}
+
+/* login/register/reset*/
+
+form {
+    border: 2px solid #f1f1f1;
+    padding: 15px;
+    margin-top: 10px;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+
+
+/* page login */
+
+main {
+    /*common*/
+    color: black;
+    background-color: white;
+    margin: 5px;
+    padding: 50px;
+    /*text*/
+    text-align: center;
+}
+
+.wrapper
+{
+    text-align: center;
+}
+
+#sign-in {
+    /*common*/
+    color: black;
+    background-color: white;
+    margin: 0px;
+    padding: 15px;
+    /*view*/
+    display: inline-block;
+    border: 2px solid #555555;
+    width: 340px;
+    /*text*/
+    font-family: sans-serif;
+    text-align: left;
+}
+
+#sign-in h2 {
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 100;
+}
+
+#sign-in form {
+    /*common*/
+    margin: 10px 0px 0px 0px;
+    padding: 15px;
+    /*view*/
+    border: 2px solid #f1f1f1;
+    /*text*/
+    font-family: Arial, sans-serif;
+}
+
+label {
+    padding-left: 4px;
+    padding-bottom: 4px;
+}
+
+.divider {
+    margin-bottom: 5px;
+    margin-top: 25px;
+    text-align: center;
+}
+
+.divider hr {
+    width: 30%;
+}
+
+.registerbutton {
+    box-sizing: border-box;
+    font-size: 16px;
+    width: 90%;
+    background-color: whitesmoke;
+    color: crimson;
+    cursor: pointer;
+}
+
+.btn-default {
+    color: #fff;
+    background-color: #9d9d9d;
+    border-color: #ccc;
+}
+
+.regbox {
+    text-align: center;
+}
+
+.hr {
+    border-top: 1px solid #999;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+/* page register */
+
+.register form {
+    border: 2px solid #f1f1f1;
+    padding: 15px;
+    margin-top: 10px;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+.container {
+    margin-top: 70px;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+label {
+    padding-left: 4px;
+    padding-bottom: 4px;
+}
+
+
+
+/* page forgot */
+
+.reset form {
+    border: 2px solid #f1f1f1;
+    padding: 10px;
+    margin-top: 10px;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+.innerboxForgotpassword {
+    border: 2px solid #f1f1f1;
+    padding: 5px;
+    min-height: 60px;
+    width: 450px;
+    margin: auto;
+}
+
+footer {
+    width: 100%;
+    padding: 5px;
+    color: white;
+    background-color: #54585A;
+    text-align: center;
+
+    position:fixed;
+    bottom:0;
+    left:0;
+}

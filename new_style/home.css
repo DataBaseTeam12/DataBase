@@ -1,0 +1,51 @@
+.bg-pic {
+	background-image: url("/background.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+aside {
+	/*common*/
+	color: black;
+	background-color: transparent;
+	margin: 5px;
+	padding: 0px;
+}
+
+	aside #drop-down-menu .item {
+		color: black;
+		background-color: white;
+	}
+
+		aside #drop-down-menu .item:hover .content {
+			color: black;
+			background-color: white;
+		}
+
+		aside #drop-down-menu .item:hover .content a {
+			color: black;
+			background-color: white;
+		}
+
+
+	main {
+		/*common*/
+	color: black;
+	background-color: white;
+	margin: 5px;
+	padding: 15px;
+	/*view*/
+	/*border: 2px solid #555555;*/
+	font-family: sans-serif;
+}
+
+	main h2 {
+		/*common*/
+		color: #555555;
+		background-color: inherit;
+		margin: 0px;
+		padding: 0px;
+		/*other*/
+		font-family: sans-serif;
+	}

@@ -1,17 +1,19 @@
-<?php
-	session_start();
-?>
+<?php include 'new_php/connectDB.php';
+session_start(); 
+$member_id = $_SESSION['user_id'];  ?>
+
 <!DOCTYPE html>
 
-<head>
-	<title>Details</title>
-	<link rel="stylesheet" href="/style/common.css">
-	<link rel="stylesheet" href="/style/home.css">
-	<link rel="stylesheet" href="/style/drop-down-menu.css">
-	<script src="/site/script/common.js"></script>
-	<!--Embedded code for Font Awesome icons-->
-	<script src="https://use.fontawesome.com/4f7fcc0d3d.js"></script>
-	<script>
+<title>Details</title>
+
+<link rel="stylesheet" href="/new_style/common.css">
+<link rel="stylesheet" href="/new_style/drop-down-menu.css">
+<link rel="stylesheet" href="/new_style/home.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="/site/script/common.js"></script>
+<!--Embedded code for Font Awesome icons-->
+<script src="https://use.fontawesome.com/4f7fcc0d3d.js"></script>
+<script>
 		// add functionality to individual elements
 		document.addEventListener("DOMContentLoaded", function (event) {
 			//var height_left =
@@ -22,107 +24,57 @@
 			//tag("main")[0].style.minHeight = (height_left - 40) + "px";
 		});
 	</script>
-	<style>
-	.detail_label {
-		width: 90px;
-		padding: 10px;
-		background-color: #c8102e;
-		color: #FFF9D9;
-	}
-	.details {
-		width: 95%;
-		margin-top: 5px;
-		padding: 10px;
-		background-color: #eee;
-		border: 1px solid #555;
-	}
-	main a {
-		padding: 10px;
-		border: none;
-		background-color: #c8102e;
-		color: #FFF9D9;
-		text-transform: uppercase;
-		text-decoration: none;
-		font: bold 14px sans-serif;
-		cursor: pointer;
-	}
-	main td {
-		padding: 5px;
-	}
-	</style>
-</head>
+<style>
+main a, button, input[type=submit] {
+	padding: 10px;
+	border: none;
+	background-color: #c8102e;
+	color: #FFF9D9;
+	text-transform: uppercase;
+	text-decoration: none;
+	font: bold 14px sans-serif;
+	cursor: pointer;
+}
 
-<body>
-	<header>
-		<h1>University of Houston</h1>
-		<h3>Libraries</h3>
-	</header>
-	<nav>
-		<a href="/index.php" style="float:left;">Home</a>
-		<a href="/login.php">Login</a>
-		<a href="/register.php">Register</a>
+main td {
+	padding: 5px;
+}
+
+input[type=search], input[type=text], select {
+	width: 100%;
+	display: inline-block;
+	padding: 10px 15px;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	border: 1px solid #555;
+	box-sizing: border-box;
+}
+</style>
+
+<?php include "new_page/common-header.html"; ?>
+
+<div class="flex">
+	<nav class="frow fill">
+		<a href="/index.php" class="fl">Home</a>
+		<?php if($_SESSION['logged_in'] == true): ?>
+		    <a href="/profile.php">Profile</a> 
+            <a href="/login/logout.php" style="margin:0px 5px;">Logout</a>
+		<?php else: ?>
+		    <a href="/login.php" style="margin:0px 5px;">Login</a>
+		    <a href="/register.php">Register</a>
+		<?php endif; ?>
 	</nav>
-	<!--custom html below-->
-	<aside id="drop-down-menu">
-		<!--if logged in member is faculty, display faculty menu-->
-		<?php if (isset($_SESSION["faculty"])) { ?>
-		<div class="item vgap">
-			Faculty Menu
-			<div class="content">
-				<a href="#">Add New Media</a>
-				<a href="#">Check Out Media</a>
-				<a href="#">Check In Media</a>
-				<a href="#">Search Member By Full Name</a>
-				<a href="#">Display Members By Last Name</a>
-				<a href="#">Display Members By ID</a>
-				<a href="#">Display Members By Username</a>
-				<a href="#">Display Members By Fines</a>
-				<a href="#">Search Rented Laptops By End Date</a>
-				<a href="#">Search Rented Laptops By Serial Number</a>
-				<a href="#">Search Rented Laptops By Member ID</a>
-				<a href="#">Search Rented Rooms By End Time</a>
-				<a href="#">By Room Number</a>
-				<a href="#">By Member ID</a>
-			</div>
-		</div>
-		<?php } ?>
-		<div class="item vgap">
-			Search Media
-			<div class="content">
-				<a href="http://www.databaseteam12.x10host.com/Search.php">Search</a>
-				<a href="http://www.databaseteam12.x10host.com/displayAll.php">Display All Media</a>
-				<a href="http://www.databaseteam12.x10host.com/displayAllBooks.php">Display All Books</a>
-				<a href="http://www.databaseteam12.x10host.com/displayAllCassettes.php">Display All Cassettes</a>
-				<a href="http://www.databaseteam12.x10host.com/displayAllCds.php">Display All CDs</a>
-				<a href="http://www.databaseteam12.x10host.com/displayAllDvds.php">Display All DVDs</a>
-				<a href="http://www.databaseteam12.x10host.com/displayAllVhs.php">Display All VHS</a>
-				
-			</div>
-		</div>
-		<div class="item vgap">
-			Laptop Rentals
-			<div class="content">
-				<a href="http://www.databaseteam12.x10host.com/displayAllLaptops.php">Display All Laptops</a>
-			</div>
-		</div>
-		<div class="item">
-			Room Reservations
-			<div class="content">
-				<a href="http://www.databaseteam12.x10host.com/displayAllRooms.php">Display All Rooms</a>
-			</div>
-		</div>
+</div>
+
+<div class="frow bg-pic" style="flex: 1 0 auto;">
+	<aside>
+		<?php if(isset($_SESSION['userAccount']) && $_SESSION['userAccount'] == 'Faculty') include "new_page/menu-faculty.html"; ?>
+		<?php include "new_page/menu-user.html"; ?>
 	</aside>
-	<main>
+	<main class="grow-row fill-col">
 		<!--Content-->
 		<?php
-		// Temporary test connection; will be removed and use connection in another file
-		$servername = "162.253.224.12";
-		$username = "databa39_user";
-		$password = "databa39team12";
-		$dbname = "databa39_library";
-
-		// Create connection (test)
-		$conn = new mysqli($servername, $username, $password, $dbname);
+		$conn = connect();
 		
 		// Check connection
 		if ($conn->connect_error) {
@@ -250,11 +202,17 @@
 					<b>available</b>. ";
 					
 				// If logged in, provide options to reserve or hold
-				if (session_status() == PHP_SESSION_ACTIVE) {
-					echo "<a href=\"\">Hold</a>
-					<a href=\"\" style=\"margin-left:5px;\">Reserve</a>
-					</p>";
-				}
+						if ($_SESSION['logged_in'] == true) {
+							echo "<form>
+								<input type='submit' class = 'hold' name='hold-$book-$copy' value='Hold'>
+								<input type='submit' class ='reserve' name='reserve-$book-$copy' value='Reserve'>
+								<input type='hidden' name='memberId' value = $member_id>
+								<input type='hidden' name='id' value=$book>
+								<input type='hidden' name='copy' value=$copy>
+								 
+								</form>
+								</p>";
+						}
 			}
 			// Else, display status of the book
 			else {
@@ -269,12 +227,42 @@
 		$conn->close();
 		?>
 	</main>
-	<!--custom html above-->
-	<footer>
-		&copy; Spring 2017 COSC 3380 Team 12
-		<br><br>
-		4333 University Drive
-		<br>
-		Houston, TX 77204-2000
-	</footer>
-</body>
+</div>
+
+<?php include "new_page/common-footer.html"; ?>
+
+<script>
+ $('.hold').click( function(){
+   
+       $('form').submit(function(){
+          // alert("enter form");
+          var data = $(this).serializeArray();
+           data = JSON.stringify(data);
+           var xmlhttp = new XMLHttpRequest();
+          xmlhttp.onreadystatechange = function() {
+              if (this.readyState == 4 && this.status == 200) {
+                  alert(this.responseText);
+ 
+              }
+          };
+           xmlhttp.open("GET", "hold_reserve.php"+"?t="+"hold"+"&data="+data , true);
+          xmlhttp.send();
+     });
+ });
+   $('.reserve').click( function(){
+        // alert("enter reserve");
+       $('form').submit(function(){
+          var data = $(this).serializeArray();
+           data = JSON.stringify(data);
+           var xmlhttp = new XMLHttpRequest();
+          xmlhttp.onreadystatechange = function() {
+              if (this.readyState == 4 && this.status == 200) {
+                  alert(this.responseText);
+ 
+              }
+          };
+           xmlhttp.open("GET", "hold_reserve.php"+"?t="+"reserve"+"&data="+data , true);
+          xmlhttp.send();
+     });
+ });
+ </script>

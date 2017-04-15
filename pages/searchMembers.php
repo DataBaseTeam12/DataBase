@@ -98,7 +98,7 @@
 				<a href="http://www.databaseteam12.x10host.com/displayAllCds.php">Display All CDs</a>
 				<a href="http://www.databaseteam12.x10host.com/displayAllDvds.php">Display All DVDs</a>
 				<a href="http://www.databaseteam12.x10host.com/displayAllVhs.php">Display All VHS</a>
-				
+
 			</div>
 		</div>
 		<div class="item vgap">

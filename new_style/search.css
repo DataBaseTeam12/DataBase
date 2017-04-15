@@ -1,0 +1,39 @@
+aside {
+	/*common*/
+	color: black;
+	background-color: transparent;
+	margin: 5px;
+	padding: 0px;
+}
+
+main {
+		/*common*/
+	color: black;
+	background-color: white;
+	margin: 5px;
+	padding: 15px;
+	/*view*/
+	/*border: 2px solid #555555;*/
+	font-family: sans-serif;
+}
+
+main a, button, input[type=submit] {
+	padding: 10px;
+	border: none;
+	background-color: #c8102e;
+	color: #FFF9D9;
+	text-transform: uppercase;
+	text-decoration: none;
+	font: bold 14px sans-serif;
+	cursor: pointer;
+}
+
+input[type=search], input[type=text], select {
+	width: 100%;
+	display: inline-block;
+	padding: 10px 15px;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	border: 1px solid #555;
+	box-sizing: border-box;
+}

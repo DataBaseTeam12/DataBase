@@ -1,0 +1,144 @@
+<?php session_start(); ?>
+
+<!DOCTYPE html>
+
+<title>Register Page</title>
+
+<link rel="stylesheet" href="style/common.css">
+<link rel="stylesheet" href="style/drop-down-menu.css">
+
+<link rel="stylesheet" href="style/login-register.css">
+
+<script>
+	document.addEventListener("DOMContentLoaded",
+		function (event) {
+			// make stuff happen after page loads
+		}
+	);
+</script>
+
+<?php include "page/common-header.html"; ?>
+
+<div class="flex">
+	<nav class="frow fill">
+		<a href="index.php" class="fl">Home</a>
+		<a href="login.php">Login</a>
+	</nav>
+</div>
+
+<div class="frow" style="flex: 1 0 auto;">
+	<main class="grow-row fill-col">
+		<section>
+			<h2> Create Account</h2>
+			<form method="post" action="#" role="form" class="form-horizontal">
+				<p>
+					<div>
+						<label>First name</label>
+						<input id="firstName"
+							   type="text"
+							   placeholder="Enter First Name"
+							   class="form-control input-md"
+							   required="">
+					</div><br>
+					<div>
+						<label>Middle Initial</label>
+						<input id="midInitial"
+							   type="text"
+							   placeholder="Enter Middle Initial"
+							   maxlength="1">
+					</div><br>
+					<div>
+						<label>Last Name</label>
+						<input id="lastName"
+							   type="text"
+							   maxlength="25"
+							   placeholder="Enter Last Name"
+							   required="">
+					</div><br>
+					<div>
+						<label>Password</label>
+						<input id="password"
+							   type="password"
+							   maxlength="25"
+							   placeholder="Enter Password"
+							   required="">
+					</div><br>
+					<div>
+						<label>Repeat Password</label>
+						<input id="passwordAgain"
+							   type="password"
+							   maxlength="25"
+							   placeholder="Enter Password Again"
+							   required="">
+					</div><br>
+					<div>
+						<label>Address</label>
+						<input id="address"
+							   type="text"
+							   maxlength="30"
+							   placeholder="Enter Address"
+							   required="">
+					</div><br>
+					<div>
+						<label>City</label>
+						<input id="city"
+							   type="text"
+							   maxlength="25"
+							   placeholder="Enter City"
+							   required="">
+					</div><br>
+					<div>
+						<label>State</label>
+						<input id="state"
+							   type="text"
+							   maxlength="25"
+							   placeholder="Enter State"
+							   required="">
+					</div><br>
+					<div>
+						<label>Zip Code</label>
+						<input id="password"
+							   type="text"
+							   maxlength="5"
+							   placeholder="Enter Zip Code"
+							   required="">
+					</div><br>
+					<div>
+						<label>Phone Number</label>
+						<input id="phone"
+							   type="text"
+							   maxlength="25"
+							   placeholder="Enter Phone Number"
+							   required="">
+					</div><br>
+					<div>
+						<label>SSN</label>
+						<input id="phone"
+							   type="text"
+							   maxlength="25"
+							   placeholder="Enter SSN"
+							   required="">
+					</div><br>
+					<div>
+						<label>Sex</label>
+						<input type="radio" name="gender" id="gender" tabindex="2"> Male
+						<input type="radio" name="gender" id="gender" tabindex="2"> Female
+					</div><br><br>
+					<div>
+						<label>Email</label>
+						<input id="email"
+							   type="email"
+							   maxlength="254"
+							   placeholder="Enter Email"
+							   required="">
+					</div>
+				</p>
+				<div class="register">
+					<button type="submit">Register</button>
+				</div>
+			</form>
+		</section>
+	</main>
+</div>
+
+<?php include "page/common-footer.html"; ?>
