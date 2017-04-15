@@ -9,17 +9,29 @@ if(isset($_POST['send'])){
     if($result->num_rows > 0)
     {
         $user = $result->fetch_assoc();
+        $first_name = $user['first_name'];
 
-        $subject = 'Forgotten Username';
-        $message = 'Your username is: '.$user['username'].'';
-        $header = 'Header';
+        $subject = 'Forgotten Username - website';
+        $message = '
+        Hello '.$first_name.',
+        
+        You have requested your username!
+        
+        Your username is: '.$user['username'].'';
 
-        mail($user['email'], $subject, $message, $header);
-        echo "<script>alert('Email was sent')</script>";
+        mail($user['email'], $subject, $message);
+
+        echo ("<SCRIPT LANGUAGE='JavaScript'>
+    window.alert('Email was sent!')
+    window.location.href='http://databaseteam12.x10host.com/login/login.php';
+    </SCRIPT>");
     }
     else
     {
-        echo "<script>alert('Email was sent')</script>";
+        echo ("<SCRIPT LANGUAGE='JavaScript'>
+    window.alert('Email was sent!')
+    window.location.href='http://databaseteam12.x10host.com/login/login.php';
+    </SCRIPT>");
     }
 }
 ?>
