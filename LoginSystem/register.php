@@ -31,14 +31,14 @@ if(isset($_POST['register']))
 
     $error = false;
 
-    if (!preg_replace("/[^A-Z]+/", "", $first_name)) {
+    if (!preg_match("/^[a-zA-Z]+$/", $first_name)) {
         $error = true;
         $firstName_error = "First name can only contain alphabets";
     }
 
     if(isset($_POST['midInitial']) && $middle_initial != "")
     {
-        if (!preg_replace("/[^A-Z]+/", "", $middle_initial)) {
+        if (!preg_match("/^[a-zA-Z]{1}$/", $middle_initial)) {
             $error = true;
             $middle_initial_error = "Middle initial can only contain alphabets";
         }
@@ -50,7 +50,7 @@ if(isset($_POST['register']))
         $gender_error = "Please select a gender.";
     }
 
-    if (!preg_replace("/[^A-Z]+/", "", $last_name)) {
+    if (!preg_match("/^[a-zA-Z]+$/", $last_name)) {
         $error = true;
         $lastName_error = "Last name can only contain alphabets";
     }
@@ -68,26 +68,32 @@ if(isset($_POST['register']))
     if (preg_match('#[^0-9]#',$phone) && strlen($phone) != 10)
     {
         $error = true;
-        $phone_error = "Phone number can only contain digits and must be 10 digits long.";
+        $phone_error = "Phone number must be 10 digits long.";
     }
     else
     {
         $formatted_phone = preg_replace("/^(\d{3})(\d{3})(\d{4})$/", "$1-$2-$3", $phone);
     }
 
-    if (preg_match('#[^0-9]#',$ssn) && strlen($phone) != 9)
+    if (preg_match('#[^0-9]#',$ssn) && strlen($ssn) != 9)
     {
         $error = true;
-        $snn_error = "SSN number can only contain digits and must be 9 digits long.";
+        $snn_error = "SSN number must be 9 digits long.";
     }
     else
     {
         $formatted_ssn = preg_replace("/^(\d{3})(\d{2})(\d{4})$/", "$1-$2-$3", $ssn);
     }
 
+    if(strlen($zip) != 5 && preg_match('#[^0-9]#',$zip) )
+    {
+        $error = true;
+        $zip_error = "Zip code must have 5 digits.";
+    }
+
     if (strlen($passAgain) < 6) {
         $error = true;
-        $shortPassword = "Password needs to be at least have a length of 6";
+        $shortPassword = "Password needs to at least have a length of 6";
     }
 
     $sql = "SELECT * FROM Member WHERE email = '$email'";
@@ -108,13 +114,12 @@ if(isset($_POST['register']))
 
     if (!($error)) // if there are no errors, then proceed to add the data to the database.
     {
-        echo "creating user";
         $sql = "INSERT INTO Member
     (
         first_name,
         middle_initial,
         last_name,
-        username
+        username,
         street_address,
         city,
         state,
@@ -123,7 +128,8 @@ if(isset($_POST['register']))
         ssn,
         email,
         sex,
-        password
+        password,
+        hash
     )
             VALUES
             (
@@ -139,12 +145,23 @@ if(isset($_POST['register']))
                 '$formatted_ssn',
                 '$email',
                 '$gender',
-                '$pass'
+                '$pass',
+                '$hash'
             )";
         if($con->query($sql))
         {
+            $user = $result->fetch_assoc();
             $successReg = "Successfully Registered!";
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['first_name'] = $user['first_name'];
+            $_SESSION['last_name'] = $user['last_name'];
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['userAccount'] = $user['userAccount'];
+            $_SESSION['total_fines'] = $user['total_fines'];
             $_SESSION['logged_in'] = true;
+            header("Location: http://www.databaseteam12.x10host.com/");
+
         }
         else
         {
@@ -163,23 +180,10 @@ if(isset($_POST['register']))
     <link rel="stylesheet" href="register.css">
     <link rel="stylesheet" href="drop-down-menu.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 </head>
 
 <body>
-
-<header>
-    <div class="main">
-        <h1><a href="http://www.databaseteam12.x10host.com"><font color="white">University of Houston</font></a></h1>
-        <h3><a href="http://www.databaseteam12.x10host.com"><font color="white">Libraries</font></a></h3>
-    </div>
-    <div class="subhead">
-
-    </div>
-</header>
-
+<?php include "../new_page/common-header.html"; ?>
 <nav>
 </nav>
 
@@ -210,28 +214,24 @@ if(isset($_POST['register']))
                     <label>Last Name</label>
                     <input name="lastName" type="text" maxlength="25" placeholder="Enter Last Name" class="form-control input-md" required value="<?php if($error) echo $last_name; ?>">
                     <span class="text-danger"><?php if(isset($lastName_error)) echo $lastName_error; ?> </span>
-
                 </div>
 
                 <div>
                     <label>Username</label>
-                    <input name="username" type="text" maxlength="25" placeholder="Enter Username" class="form-control input-md" required value="<?php if($error) echo $last_name; ?>">
+                    <input name="username" type="text" maxlength="25" placeholder="Enter Username" class="form-control input-md" required value="<?php if($error) echo $username; ?>">
                     <span class="text-danger"><?php if(isset($username_error)) echo $username_error; ?> </span>
-
                 </div>
 
                 <div>
                     <label>Password</label>
                     <input name="password" type="password" maxlength="25" placeholder="Enter Password" class="form-control input-md" required>
                     <span class="text-danger"><?php if(isset($shortPassword)) echo $shortPassword; ?> </span>
-
                 </div>
 
                 <div>
                     <label>Repeat Password</label>
                     <input name="passwordAgain" type="password" maxlength="25" placeholder="Enter Password Again" class="form-control input-md" required>
                     <span class="text-danger"><?php if(isset($passwordMatch_error)) echo $passwordMatch_error; ?> </span>
-
                 </div>
 
                 <div>
@@ -251,7 +251,8 @@ if(isset($_POST['register']))
 
                 <div>
                     <label>Zip Code</label>
-                    <input name="zip" type="text" maxlength="5" placeholder="Enter Zip Code" class="form-control input-md" required value="<?php if($error) echo $state; ?>">
+                    <input name="zip" type="text" maxlength="5" placeholder="Enter Zip Code" class="form-control input-md" required value="<?php if($error) echo $zip; ?>">
+                    <span class="text-danger"><?php if(isset($zip_error)) echo $zip_error; ?> </span>
                 </div>
 
                 <div>
@@ -268,8 +269,8 @@ if(isset($_POST['register']))
 
                 <div>
                     <label>Sex</label>
-                    <input type="radio" name="gender" id="gender" tabindex="4" > Male
-                    <input type="radio" name="gender" id="gender" tabindex="4" > Female
+                    <input type="radio" name="gender" value="Male" tabindex="4" > Male
+                    <input type="radio" name="gender" value="Female" tabindex="4" > Female
                     <span class="text-danger"><?php if(isset($gender_error)) echo $gender_error; ?> </span>
                 </div>
                 <br>
@@ -286,12 +287,6 @@ if(isset($_POST['register']))
         </form>
     </div>
 </div>
-<footer>
-    &copy; Spring 2017 COSC 3380 Team 12
-    <br><br>
-    4333 University Drive
-    <br>
-    Houston, TX 77204-2000
-</footer>
+<?php include "../new_page/common-footer.html"; ?>
 </body>
 </html>
