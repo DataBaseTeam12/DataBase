@@ -1,31 +1,18 @@
 <?php
 include_once 'connectDB.php';
-
 if (isset($_POST['send'])) {
     $email = mysqli_real_escape_string($con, $_POST['email']);
     $result = $con->query("SELECT * FROM Member WHERE email = '$email'");
-
-
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
-
-
         $first_name = $user['first_name'];
         $email = $user['email'];
         $hash = $user['hash'];
-
-
         $message = '
         Hello '.$first_name.',
-
         You have requested password reset!
-
         Please click this link to reset your password:
-
         http://www.databaseteam12.x10host.com/login/reset.php?email='.$email.'&hash='.$hash;
-
-
-
         $subject = 'Password Reset Link - website';
         mail($user['email'], $subject, $message);
         echo "<script>alert('Email was sent')</script>";
@@ -49,8 +36,8 @@ if (isset($_POST['send'])) {
 
 	<div>
 		<header>
-			    <?php include "../new_page/common-header.html"; ?>
-		</header>
+            <?php include "../new_page/common-header.html"; ?>
+        </header>
 	</div>
 	<div class="container">
 		<div class="innerboxForgotpassword">

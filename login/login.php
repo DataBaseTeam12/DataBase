@@ -7,44 +7,68 @@ if(isset($_SESSION['logged_in']))
 
 }
 $error = false;
-if(isset($_POST['log_in']))
+if(isset($_COOKIE['login']) > 5)
 {
-    // prevent sql injection.
-    $username = mysqli_real_escape_string($con, $_POST['username']);
-    $result = $con->query("SELECT * FROM Member WHERE username = '$username'");
-    if ($result->num_rows == 0) {
-        $error = true;
-        $error_message = "Incorrect Username or Password";
-
-    }
-    else
-    {
-        $user = $result->fetch_assoc();
-        if(password_verify($_POST['password'], $user['password']))
-        {
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['email'] = $user['email'];
-            $_SESSION['first_name'] = $user['first_name'];
-            $_SESSION['last_name'] = $user['last_name'];
-            $_SESSION['username'] = $user['username'];
-            $_SESSION['active'] = $user['active'];
-            $_SESSION['userAccount'] = $user['userAccount'];
-            $_SESSION['total_fines'] = $user['total_fines'];
-            $_SESSION['logged_in'] = true;
-            
-            if($user['total_fines'] > 0) {
-                echo "<script type='text/javascript'>alert('You have unpaid fines.');</script>";
-            }
-            
-            header("refresh: 1; location: http://www.databaseteam12.x10host.com/");
-            header("refresh: 0");
-            
-            
-        }
-        else
-        {
+    $error = true;
+    $error_message = "Incorrect Username or Password";
+}
+else {
+    if (isset($_POST['log_in'])) {
+        // prevent sql injection.
+        $username = mysqli_real_escape_string($con, $_POST['username']);
+        $result = $con->query("SELECT * FROM Member WHERE username = '$username'");
+        if ($result->num_rows == 0) {
             $error = true;
             $error_message = "Incorrect Username or Password";
+
+            if (isset($_COOKIE['login'])) {
+                if ($_COOKIE['login'] < 5) {
+                    $attempts = $_COOKIE['login'] + 1;
+                    setcookie('login', $attempts, time() + 60 * 10);
+                } else {
+                    $error_message = "Too many failed login attempts, try again in 10 minutes.";
+                }
+
+
+            } else {
+                setcookie('login', 1, time() + 60 * 10);
+            }
+
+
+        } else {
+            $user = $result->fetch_assoc();
+            if (password_verify($_POST['password'], $user['password'])) {
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['email'] = $user['email'];
+                $_SESSION['first_name'] = $user['first_name'];
+                $_SESSION['last_name'] = $user['last_name'];
+                $_SESSION['username'] = $user['username'];
+                $_SESSION['active'] = $user['active'];
+                $_SESSION['userAccount'] = $user['userAccount'];
+                $_SESSION['total_fines'] = $user['total_fines'];
+                $_SESSION['logged_in'] = true;
+
+                if ($user['total_fines'] > 0) {
+                    echo "<script type='text/javascript'>alert('You have unpaid fines.');</script>";
+                }
+
+                header("refresh: 1; location: http://www.databaseteam12.x10host.com/");
+                header("refresh: 0");
+            } else {
+                $error = true;
+                $error_message = "Incorrect Username or Password";
+
+                if (isset($_COOKIE['login'])) {
+                    if ($_COOKIE['login'] < 5) {
+                        $attempts = $_COOKIE['login'] + 1;
+                        setcookie('login', $attempts, time() + 60 * 10);
+                    } else {
+                        $error_message = "Too many failed login attempts, try again in 10 minutes.";
+                    }
+                } else {
+                    setcookie('login', 1, time() + 60 * 10);
+                }
+            }
         }
     }
 }
