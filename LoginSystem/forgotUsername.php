@@ -46,10 +46,12 @@ if(isset($_POST['send'])){
 </div>
 <div class="container">
     <div class="innerboxForgotpassword">
-        <h2>Enter your email</h2>
+        <div class="wrapper">
+            <h2>Enter your email</h2>
+        </div>
         <form class="form2" action="" method="POST" >   <!-- action="processData" sends the data that was inputed in the form to the. POST method is used for sensetive data. -->
             <p>
-                Enter your user associated with your account and we will send your username.
+                Enter your user associated with your account and we will send you your username.
             </p>
             <p>
                 <label>Email:</label>

@@ -31,14 +31,14 @@ if(isset($_POST['register']))
 
     $error = false;
 
-    if (!preg_replace("/[^A-Z]+/", "", $first_name)) {
+    if (!preg_match("/^[a-zA-Z]+$/", $first_name)) {
         $error = true;
         $firstName_error = "First name can only contain alphabets";
     }
 
     if(isset($_POST['midInitial']) && $middle_initial != "")
     {
-        if (!preg_match("/^[a-zA-Z]$/", $middle_initial)) {
+        if (!preg_match("/^[a-zA-Z]{1}$/", $middle_initial)) {
             $error = true;
             $middle_initial_error = "Middle initial can only contain alphabets";
         }
@@ -50,7 +50,7 @@ if(isset($_POST['register']))
         $gender_error = "Please select a gender.";
     }
 
-    if (!preg_replace("/[^A-Z]+/", "", $last_name)) {
+    if (!preg_match("/^[a-zA-Z]+$/", $last_name)) {
         $error = true;
         $lastName_error = "Last name can only contain alphabets";
     }
@@ -128,7 +128,8 @@ if(isset($_POST['register']))
         ssn,
         email,
         sex,
-        password
+        password,
+        hash
     )
             VALUES
             (
@@ -144,7 +145,8 @@ if(isset($_POST['register']))
                 '$formatted_ssn',
                 '$email',
                 '$gender',
-                '$pass'
+                '$pass',
+                '$hash'
             )";
         if($con->query($sql))
         {
@@ -218,7 +220,7 @@ if(isset($_POST['register']))
 
                 <div>
                     <label>Username</label>
-                    <input name="username" type="text" maxlength="25" placeholder="Enter Username" class="form-control input-md" required value="<?php if($error) echo $last_name; ?>">
+                    <input name="username" type="text" maxlength="25" placeholder="Enter Username" class="form-control input-md" required value="<?php if($error) echo $username; ?>">
                     <span class="text-danger"><?php if(isset($username_error)) echo $username_error; ?> </span>
                 </div>
 
@@ -269,8 +271,8 @@ if(isset($_POST['register']))
 
                 <div>
                     <label>Sex</label>
-                    <input type="radio" name="gender" id="gender" tabindex="4" > Male
-                    <input type="radio" name="gender" id="gender" tabindex="4" > Female
+                    <input type="radio" name="gender" value="Male" tabindex="4" > Male
+                    <input type="radio" name="gender" value="Female" tabindex="4" > Female
                     <span class="text-danger"><?php if(isset($gender_error)) echo $gender_error; ?> </span>
                 </div>
                 <br>
@@ -287,12 +289,6 @@ if(isset($_POST['register']))
         </form>
     </div>
 </div>
-<footer>
-    &copy; Spring 2017 COSC 3380 Team 12
-    <br><br>
-    4333 University Drive
-    <br>
-    Houston, TX 77204-2000
-</footer>
+<?php include "../new_page/common-footer.html"; ?>
 </body>
 </html>
