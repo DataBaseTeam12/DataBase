@@ -10,6 +10,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     if ($con->query($sql))
     {
-        echo "<script>alert('Password Reset Completed')</script>";
+        echo ("<SCRIPT LANGUAGE='JavaScript'>
+    window.alert('Password Reset Completed')
+    window.location.href='http://databaseteam12.x10host.com/login/login.php';
+    </SCRIPT>");
     }
 }

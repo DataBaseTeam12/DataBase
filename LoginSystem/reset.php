@@ -10,11 +10,20 @@ if( isset($_GET['email']) && !empty($_GET['email']) AND isset($_GET['hash']) && 
 
     if($result->num_rows == 0)
     {
-        echo "<script>alert('Invalid IRL for the password reset!')</script>";
+        echo ("<SCRIPT LANGUAGE='JavaScript'>
+    window.alert('Invalid URL for password reset link')
+    window.location.href='http://databaseteam12.x10host.com/login/login.php';
+    </SCRIPT>");
     }
 }
 else
-    echo "<script>alert('failed')</script>";
+{
+    echo ("<SCRIPT LANGUAGE='JavaScript'>
+    window.alert('Password reset failed, try again later')
+    window.location.href='http://databaseteam12.x10host.com/login/login.php';
+    </SCRIPT>");
+}
+
 ?>
 
 <!DOCTYPE html>
