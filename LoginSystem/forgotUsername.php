@@ -47,13 +47,7 @@ if(isset($_POST['send'])){
 
 <div>
     <header>
-        <div class="main">
-            <h1><a href="http://www.databaseteam12.x10host.com"><font color="white">University of Houston</font></a></h1>
-            <h3><a href="http://www.databaseteam12.x10host.com"><font color="white">Libraries</font></a></h3>
-        </div>
-        <div class="subhead">
-
-        </div>
+        <?php include "../new_page/common-header.html"; ?>
     </header>
 </div>
 <div class="container">

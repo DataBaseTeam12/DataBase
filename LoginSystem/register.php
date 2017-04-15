@@ -150,7 +150,15 @@ if(isset($_POST['register']))
             )";
         if($con->query($sql))
         {
+            $user = $result->fetch_assoc();
             $successReg = "Successfully Registered!";
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['first_name'] = $user['first_name'];
+            $_SESSION['last_name'] = $user['last_name'];
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['userAccount'] = $user['userAccount'];
+            $_SESSION['total_fines'] = $user['total_fines'];
             $_SESSION['logged_in'] = true;
             header("Location: http://www.databaseteam12.x10host.com/");
 
@@ -175,17 +183,7 @@ if(isset($_POST['register']))
 </head>
 
 <body>
-
-<header>
-    <div class="main">
-        <h1><a href="http://www.databaseteam12.x10host.com"><font color="white">University of Houston</font></a></h1>
-        <h3><a href="http://www.databaseteam12.x10host.com"><font color="white">Libraries</font></a></h3>
-    </div>
-    <div class="subhead">
-
-    </div>
-</header>
-
+<?php include "../new_page/common-header.html"; ?>
 <nav>
 </nav>
 
