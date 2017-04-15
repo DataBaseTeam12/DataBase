@@ -28,8 +28,15 @@ if(isset($_POST['log_in']))
             $_SESSION['username'] = $user['username'];
             $_SESSION['active'] = $user['active'];
             $_SESSION['userAccount'] = $user['userAccount'];
+            $_SESSION['total_fines'] = $user['total_fines'];
             $_SESSION['logged_in'] = true;
-            header("Location: http://www.databaseteam12.x10host.com/");
+
+            if($user['total_fines'] > 0) {
+                echo "<script type='text/javascript'>alert('You have unpaid fines.');</script>";
+            }
+
+            header("refresh:2; url= /index.php");
+            header("refresh:0");
         }
         else
         {
@@ -83,7 +90,7 @@ if(isset($_POST['log_in']))
             <p>
                 <label>Password:</label><br>
                 <input type="password" name="password" required="" class="form-control input-md" maxlength="25">
-                <a href="#" style="float:right;">
+                <a href="/login/forgotpass.php" style="float:right;">
                     Forgot your Password?
                 </a>
                 <br><br>
@@ -105,12 +112,6 @@ if(isset($_POST['log_in']))
     </section>
 </main>
 
-<footer>
-    &copy; Spring 2017 COSC 3380 Team 12
-    <br><br>
-    4333 University Drive
-    <br>
-    Houston, TX 77204-2000
-</footer>
+<?php include "../new_page/common-footer.html"; ?>
 </body>
 </html>
