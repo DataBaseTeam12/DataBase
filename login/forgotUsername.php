@@ -11,12 +11,10 @@ if(isset($_POST['send'])){
         $user = $result->fetch_assoc();
         $first_name = $user['first_name'];
 
-        $subject = 'Forgotten Username - website';
+        $subject = 'Forgotten Username - University Of "Excellence"';
         $message = '
         Hello '.$first_name.',
-        
         You have requested your username!
-        
         Your username is: '.$user['username'].'';
 
         mail($user['email'], $subject, $message);

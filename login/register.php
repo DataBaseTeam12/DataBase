@@ -28,7 +28,6 @@ if(isset($_POST['register']))
     $email = mysqli_real_escape_string($con, $_POST['email']);
     $hash = mysqli_real_escape_string($con, md5(rand(0, 1000)));
 
-
     $error = false;
 
     if (!preg_match("/^[a-zA-Z]+$/", $first_name)) {
@@ -65,7 +64,19 @@ if(isset($_POST['register']))
         $passwordMatch_error = "Password does not match";
     }
 
-    if (preg_match('#[^0-9]#',$phone) && strlen($phone) != 10)
+    if(!preg_match('#[^0-9]#',$city) )
+    {
+        $error = true;
+        $city_error = "City must cannot contain digits.";
+    }
+
+    if(!preg_match('#[^0-9]#',$state) )
+    {
+        $error = true;
+        $state_error = "State must cannot contain digits.";
+    }
+
+    if ( preg_match('#[^0-9]#',$phone) || strlen($phone) != 10)
     {
         $error = true;
         $phone_error = "Phone number must be 10 digits long.";
@@ -75,7 +86,7 @@ if(isset($_POST['register']))
         $formatted_phone = preg_replace("/^(\d{3})(\d{3})(\d{4})$/", "$1-$2-$3", $phone);
     }
 
-    if (preg_match('#[^0-9]#',$ssn) && strlen($ssn) != 9)
+    if ( preg_match('#[^0-9]#',$ssn) || strlen($ssn) != 9)
     {
         $error = true;
         $snn_error = "SSN number must be 9 digits long.";
@@ -85,7 +96,7 @@ if(isset($_POST['register']))
         $formatted_ssn = preg_replace("/^(\d{3})(\d{2})(\d{4})$/", "$1-$2-$3", $ssn);
     }
 
-    if(strlen($zip) != 5 && preg_match('#[^0-9]#',$zip) )
+    if(strlen($zip) != 5 || preg_match('#[^0-9]#',$zip) )
     {
         $error = true;
         $zip_error = "Zip code must have 5 digits.";
@@ -110,6 +121,14 @@ if(isset($_POST['register']))
     if ($result->num_rows > 0) {
         $error = true;
         $username_error = "Username already in use";
+    }
+
+    $sql = "SELECT * FROM Member WHERE ssn = '$formatted_ssn'";
+    $result = $con->query($sql);
+
+    if ($result->num_rows > 0) {
+        $error = true;
+        $social_inUse = "SSN already in use";
     }
 
     if (!($error)) // if there are no errors, then proceed to add the data to the database.
@@ -150,18 +169,10 @@ if(isset($_POST['register']))
             )";
         if($con->query($sql))
         {
-            $user = $result->fetch_assoc();
-            $successReg = "Successfully Registered!";
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['email'] = $user['email'];
-            $_SESSION['first_name'] = $user['first_name'];
-            $_SESSION['last_name'] = $user['last_name'];
-            $_SESSION['username'] = $user['username'];
-            $_SESSION['userAccount'] = $user['userAccount'];
-            $_SESSION['total_fines'] = $user['total_fines'];
-            $_SESSION['logged_in'] = true;
-            header("Location: http://www.databaseteam12.x10host.com/");
-
+            echo ("<SCRIPT LANGUAGE='JavaScript'>
+    window.alert('Account Created! You can now login.')
+    window.location.href='http://databaseteam12.x10host.com/login/login.php';
+    </SCRIPT>");
         }
         else
         {
@@ -242,11 +253,13 @@ if(isset($_POST['register']))
                 <div>
                     <label>City</label>
                     <input name="city" type="text" maxlength="25" placeholder="Enter City" class="form-control input-md" required value="<?php if($error) echo $city; ?>">
+                    <span class="text-danger"><?php if(isset($city_error)) echo $city_error; ?> </span>
                 </div>
 
                 <div>
                     <label>State</label>
-                    <input name="state" type="text" maxlength="25" placeholder="Enter State" class="form-control input-md" required value="<?php if($error) echo $state; ?>">
+                    <input name="state" type="text" maxlength="2" placeholder="Enter State" class="form-control input-md" required value="<?php if($error) echo $state; ?>">
+                    <span class="text-danger"><?php if(isset($state_error)) echo $state_error; ?> </span>
                 </div>
 
                 <div>
@@ -265,12 +278,13 @@ if(isset($_POST['register']))
                     <label>SSN</label>
                     <input name="ssn" type="text" maxlength="9" placeholder="Enter SSN" class="form-control input-md" required value="<?php if($error) echo $ssn; ?>">
                     <span class="text-danger"><?php if(isset($snn_error)) echo $snn_error; ?> </span>
+                    <span class="text-danger"><?php if(isset($social_inUse)) echo $social_inUse; ?> </span>
                 </div>
 
                 <div>
                     <label>Sex</label>
-                    <input type="radio" name="gender" value="Male" tabindex="4" > Male
-                    <input type="radio" name="gender" value="Female" tabindex="4" > Female
+                    <input type="radio" name="gender" value="M" tabindex="4" > Male
+                    <input type="radio" name="gender" value="F" tabindex="4" > Female
                     <span class="text-danger"><?php if(isset($gender_error)) echo $gender_error; ?> </span>
                 </div>
                 <br>

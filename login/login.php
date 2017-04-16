@@ -7,10 +7,10 @@ if(isset($_SESSION['logged_in']))
 
 }
 $error = false;
-if(isset($_COOKIE['login']) > 5)
+if(isset($_COOKIE['login']) >= 5)
 {
     $error = true;
-    $error_message = "Incorrect Username or Password";
+    $error_message = "Too many failed login attempts, try again in 10 minutes.";
 }
 else {
     if (isset($_POST['log_in'])) {
